@@ -1,7 +1,57 @@
 import { useMemo, useState } from 'react';
 import { searchQuestionCards } from '../data/questionCards.js';
+import { getLeetcodeProblemLesson } from '../data/leetcodeProblemLessons.js';
 
-function CapturedQuestions({ records, loaded, error, onOpenQuestion }) {
+function ProfileImport({ result, onImport }) {
+  const handleFile = async (event) => {
+    const [file] = event.target.files;
+    event.target.value = '';
+    if (file) await onImport(file);
+  };
+
+  return (
+    <section className="profile-import" aria-labelledby="profile-import-title">
+      <div>
+        <p className="eyebrow">Bulk profile import</p>
+        <h2 id="profile-import-title">Bring in every solved problem at once.</h2>
+        <p>
+          Use the extension on your signed-in LeetCode profile, then choose its
+          local JSON export here. One accepted solution per problem stays in
+          this browser.
+        </p>
+      </div>
+      <label className="profile-import-button">
+        <span>{result.status === 'loading' ? 'Importing profile…' : 'Choose profile export'}</span>
+        <input
+          type="file"
+          accept="application/json,.json"
+          disabled={result.status === 'loading'}
+          onChange={handleFile}
+        />
+      </label>
+      {result.status === 'saved' && (
+        <p className="profile-import-status" role="status">
+          Imported {result.imported} solved problems. {result.matched} connect
+          to an authored explanation; {result.unmatched} remain saved for the
+          next content pass.
+        </p>
+      )}
+      {result.status === 'error' && (
+        <p className="profile-import-status profile-import-error" role="alert">
+          {result.message}
+        </p>
+      )}
+    </section>
+  );
+}
+
+function CapturedQuestions({
+  records,
+  loaded,
+  error,
+  onOpenQuestion,
+  onOpenProblem,
+}) {
   return (
     <section className="captured-questions" aria-labelledby="captured-questions-title">
       <div className="index-heading">
@@ -20,8 +70,8 @@ function CapturedQuestions({ records, loaded, error, onOpenQuestion }) {
         <div className="question-notice">
           <strong>Your solved list starts locally.</strong>
           <p>
-            Open a solved problem on LeetCode and click the Leetcards Safe Capture
-            extension. No notes or account access are required.
+            Export your solved profile once, or capture one problem from its
+            LeetCode page. Both routes stay local.
           </p>
         </div>
       )}
@@ -30,19 +80,36 @@ function CapturedQuestions({ records, loaded, error, onOpenQuestion }) {
         <div className="captured-index">
           {records.map((record) => (
             <article key={record.slug}>
-              {record.questionId ? (
-                <button type="button" onClick={() => onOpenQuestion(record.questionId)}>
+              {getLeetcodeProblemLesson(record.slug) ? (
+                <button type="button" onClick={() => onOpenProblem(record.slug)}>
                   <span>
-                    <small>{record.difficulty}</small>
+                    <small>
+                      {record.language || record.difficulty}
+                      {record.code ? ' · accepted code saved' : ''}
+                    </small>
                     <strong>{record.title}</strong>
                   </span>
-                  <span className="captured-action">Study solution</span>
+                  <span className="captured-action">Open explanation</span>
+                </button>
+              ) : record.questionId ? (
+                <button type="button" onClick={() => onOpenQuestion(record.questionId)}>
+                  <span>
+                    <small>
+                      {record.language || record.difficulty}
+                      {record.code ? ' · accepted code saved' : ''}
+                    </small>
+                    <strong>{record.title}</strong>
+                  </span>
+                  <span className="captured-action">Open pattern lesson</span>
                 </button>
               ) : (
                 <div className="captured-copy">
-                  <small>{record.difficulty}</small>
+                  <small>
+                    {record.language || record.difficulty}
+                    {record.code ? ' · accepted code saved' : ''}
+                  </small>
                   <strong>{record.title}</strong>
-                  <span className="captured-action">Explanation not available</span>
+                  <span className="captured-action">Explanation pending</span>
                 </div>
               )}
               <a href={record.url} target="_blank" rel="noreferrer">
@@ -60,7 +127,10 @@ export default function QuestionsView({
   capturedQuestions,
   capturedLoaded,
   captureError,
+  onImportProfile,
+  profileImportResult,
   onOpenQuestion,
+  onOpenProblem,
   onBack,
 }) {
   const [query, setQuery] = useState('');
@@ -87,11 +157,14 @@ export default function QuestionsView({
         </p>
       </header>
 
+      <ProfileImport result={profileImportResult} onImport={onImportProfile} />
+
       <CapturedQuestions
         records={capturedQuestions}
         loaded={capturedLoaded}
         error={captureError}
         onOpenQuestion={onOpenQuestion}
+        onOpenProblem={onOpenProblem}
       />
 
       <label className="library-search questions-search">
@@ -126,7 +199,7 @@ export default function QuestionsView({
                       <strong>{card.title}</strong>
                       <small>{card.recognition}</small>
                     </span>
-                    <span className="question-open">How to solve</span>
+                    <span className="question-open">Study pattern</span>
                   </button>
                 ))}
               </div>

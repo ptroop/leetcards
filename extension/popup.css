@@ -73,6 +73,28 @@ button:disabled {
   opacity: 0.65;
 }
 
+.popup-actions {
+  display: grid;
+  gap: 9px;
+}
+
+button.secondary {
+  background: transparent;
+  border-color: #b9b1a4;
+  color: #24231f;
+}
+
+button.secondary:hover {
+  background: #ece6dc;
+}
+
+.privacy-note {
+  border-top: 1px solid #d8d1c5;
+  font-size: 11px;
+  margin: 18px 0 0;
+  padding-top: 15px;
+}
+
 output {
   color: #706c63;
   display: block;

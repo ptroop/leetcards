@@ -1,5 +1,6 @@
 import { allTopics } from './topics.js';
 import { visualForDsa } from './dsaVisuals.js';
+import { patternGuideForTopic } from './dsaPatternGuides.js';
 import { noteForTopic } from './topicNotes.js';
 import { deepProfileFor } from './deepProfiles.js';
 import {
@@ -17,6 +18,15 @@ import { cppProfileFor } from './cppLessonProfiles.js';
 import { cppConceptsFor } from './cppConcepts.js';
 import { linuxCppGuidanceFor } from './linuxCppGuidance.js';
 import { qualcommPrepProfileFor } from './qualcommPrep.js';
+import { dsaFocusedById } from './dsaFocusedSubtopics.js';
+import { focusedLinuxById } from './focusedCurriculum.js';
+import './coreLessons.js';
+import {
+  coreLessonByTopicId,
+  isProtectedTopic,
+  registerCoreLessons,
+} from './coreLessonRegistry.js';
+import { authoredLessonToBlocks, defineAuthoredLesson } from './authoredLessonSchema.js';
 
 const sentenceKeywords = (topic) => {
   const words = topic.keywords.slice(0, 4);
@@ -765,6 +775,76 @@ const dsaScope = {
   'dsa-dp': 'Define the state in one sentence, write the transition, prove the base case, choose an iteration order that satisfies dependencies, then reduce space only after identifying which previous states remain live.',
 };
 
+const foundationDsaRecords = allTopics
+  .filter((topic) => (
+    topic.sectionId === 'dsa'
+    && !isProtectedTopic(topic)
+    && !coreLessonByTopicId.has(topic.id)
+  ))
+  .map((topic) => {
+    const [clueOne, clueTwo, avoidWhen, complexity, cppTemplate] = dsaGuidance[topic.id];
+    const narrative = dsaNarrative[topic.id];
+    const cTemplate = dsaCImplementations[topic.id];
+    const visual = visualForDsa(topic.id);
+    const trace = visual.frames.map((frame) => frame.caption);
+    const application = realApplicationFor(topic);
+
+    return defineAuthoredLesson({
+      topicId: topic.id,
+      title: topic.title,
+      depth: 'deep',
+      definition: narrative.summary,
+      motivation: application,
+      mechanism: [
+        `Recognition: ${clueOne}.`,
+        `Invariant: ${narrative.invariant}`,
+        ...trace,
+      ],
+      workedExample: { setup: narrative.prediction, steps: trace },
+      realUse: application,
+      failureModes: [{
+        symptom: `The approach fails when ${avoidWhen}.`,
+        cause: 'The selected pattern cannot preserve its invariant for this input.',
+        check: 'Trace the smallest counterexample and stop at the first unjustified state update.',
+      }],
+      verification: [
+        `Prove the ${complexity} bound from state transitions rather than memorizing it.`,
+        'Compile and run the C and C++ variants on boundary and adversarial cases.',
+      ],
+      diagramSpec: { heading: 'State, invariant, update, and proof', sketchId: 'dsa-invariant-state' },
+      codeExamples: {
+        heading: `${topic.title} in C and C++`,
+        note: 'Both implementations preserve the same invariant and complexity.',
+        variants: [
+          { id: 'c', label: 'C', standard: 'C17', code: cTemplate },
+          { id: 'cpp', label: 'C++', standard: 'C++20', code: cppTemplate },
+        ],
+      },
+      additionalBlocks: [
+        { type: 'prose', heading: 'Recognition clues', body: `Use this when ${clueOne}, especially when ${clueTwo}.` },
+        { type: 'prose', heading: 'The invariant', body: narrative.invariant },
+        ...(dsaScope[topic.id] ? [{ type: 'prose', heading: 'What this includes', body: dsaScope[topic.id] }] : []),
+        { type: 'visual', heading: 'Trace the algorithm', invariant: narrative.invariant, prediction: narrative.prediction, guide: patternGuideForTopic(topic.id), ...visual },
+        { type: 'practice', heading: 'Transfer test', body: `State recognition, invariant, update, stopping condition, and ${complexity} before coding.` },
+      ],
+      lessonMetadata: {
+        recognition: [clueOne, clueTwo],
+        invariant: narrative.invariant,
+        avoidWhen,
+        complexity,
+        cTemplate,
+        cppTemplate,
+      },
+      recall: [
+        `Explain the ${topic.title.toLowerCase()} invariant.`,
+        'Connect every visual state to the update rule.',
+        'Reconstruct both implementations from the proof.',
+      ],
+    });
+  });
+
+registerCoreLessons(foundationDsaRecords);
+
 const dsaLesson = (topic) => {
   const [clueOne, clueTwo, avoidWhen, complexity, cppTemplate] = dsaGuidance[topic.id] ?? [
     `the state can be represented with ${sentenceKeywords(topic)}`,
@@ -802,6 +882,7 @@ const dsaLesson = (topic) => {
         heading: 'Trace the algorithm',
         invariant: narrative.invariant,
         prediction: narrative.prediction,
+        guide: patternGuideForTopic(topic.id),
         ...visual,
       },
       codePair({
@@ -813,6 +894,123 @@ const dsaLesson = (topic) => {
       { type: 'failure', heading: 'Do not force it', body: `Avoid this pattern when ${avoidWhen}. A memorized template cannot repair a false invariant.` },
       { type: 'practice', heading: 'Transfer test', body: `State the recognition clue, invariant, update rule, stopping condition, and ${complexity} cost before writing code.` },
       recall(`Explain the ${topic.title.toLowerCase()} invariant, connect it to each visual state change, and reconstruct both the C and C++ skeletons from that proof.`),
+    ],
+  };
+};
+
+const focusedDsaLesson = (topic) => {
+  const spec = dsaFocusedById.get(topic.id);
+  if (!spec) throw new Error(`Missing focused DSA lesson: ${topic.id}`);
+  const visual = visualForDsa(topic.id);
+
+  return {
+    topicId: topic.id,
+    title: topic.title,
+    section: topic.sectionTitle,
+    depth: 'deep',
+    contentSource: 'authored',
+    summary: spec.definition,
+    application: spec.application,
+    recognition: spec.recognition,
+    invariant: spec.invariant,
+    avoidWhen: spec.trap,
+    complexity: spec.complexity,
+    cTemplate: spec.c,
+    cppTemplate: spec.cpp,
+    blocks: [
+      { type: 'prediction', heading: 'Pause and predict', prompt: spec.prediction },
+      {
+        type: 'prose',
+        heading: 'How to recognize it',
+        body: `Use this lesson when ${spec.recognition[0]}, especially when ${spec.recognition[1]}.`,
+      },
+      { type: 'prose', heading: 'The rule that makes it work', body: spec.invariant },
+      ...(spec.techniques.length > 0 ? [{
+        type: 'concepts',
+        heading: 'Reusable linked-list technique',
+        items: spec.techniques,
+      }] : []),
+      {
+        type: 'steps',
+        heading: 'Follow the mechanism',
+        items: spec.trace,
+      },
+      {
+        type: 'visual',
+        heading: 'Run the complete trace',
+        invariant: spec.invariant,
+        prediction: spec.prediction,
+        guide: patternGuideForTopic(topic.id),
+        ...visual,
+      },
+      codePair({
+        heading: `${topic.title} in C and C++`,
+        c: spec.c,
+        cpp: spec.cpp,
+        note: 'Each tab contains only this operation or interview problem. The node model may repeat so the implementation can be read independently.',
+      }),
+      ...(spec.related.length > 0 ? [{
+        type: 'related-lessons',
+        heading: 'Problems built from the same move',
+        items: spec.related,
+      }] : []),
+      {
+        type: 'failure',
+        heading: 'The mistake to catch',
+        body: spec.trap,
+      },
+      {
+        type: 'practice',
+        heading: 'Prove it on boundaries',
+        body: `Trace the empty, one-element, and smallest non-trivial input. Then state why the invariant proves ${spec.complexity}.`,
+      },
+      recall(`Define ${topic.title.toLowerCase()}, state its invariant, replay every pointer or queue move, and reconstruct the C and C++ implementations without looking.`),
+    ],
+  };
+};
+
+const focusedLinuxLesson = (topic) => {
+  const spec = focusedLinuxById.get(topic.id);
+  if (!spec) throw new Error(`Missing focused Linux lesson: ${topic.id}`);
+  const states = spec.steps.map((_, index) => `state ${index + 1}`);
+
+  return {
+    topicId: topic.id,
+    title: topic.title,
+    section: topic.sectionTitle,
+    depth: 'deep',
+    contentSource: 'authored',
+    summary: spec.definition,
+    application: spec.application,
+    blocks: [
+      { type: 'prediction', heading: 'Predict the kernel-visible result', prompt: spec.prediction },
+      { type: 'prose', heading: 'How the mechanism works', body: spec.explanation },
+      { type: 'steps', heading: 'Follow the state changes', items: spec.steps },
+      {
+        type: 'visual',
+        heading: 'Trace one complete execution',
+        kind: 'timeline',
+        invariant: spec.definition,
+        frames: spec.steps.map((caption, index) => ({
+          caption: `${index + 1}. ${caption}${index + 1 === spec.steps.length ? ' — result complete' : ''}`,
+          values: states,
+          markers: [`step ${index + 1} / ${spec.steps.length}`],
+          active: [states[index]],
+        })),
+      },
+      codePair({
+        heading: `${topic.title} in C and C++`,
+        c: spec.c,
+        cpp: spec.cpp,
+        note: 'Both implementations cross the same Linux kernel boundary. The C++ version adds typed ownership or error propagation without hiding the underlying POSIX contract.',
+      }),
+      { type: 'failure', heading: 'What breaks first', body: spec.failure },
+      {
+        type: 'practice',
+        heading: 'Verify it on Linux',
+        body: `Compile both variants with warnings enabled, trace the relevant syscall with strace, and explain which state is owned by user space and which state is owned by the kernel.`,
+      },
+      recall(`Define ${topic.title.toLowerCase()}, trace its user-space and kernel states, then reconstruct both the C and C++ versions.`),
     ],
   };
 };
@@ -964,7 +1162,7 @@ const collegeCLabLesson = (topic, lab, platform) => {
   };
 };
 
-const lessonFor = (topic) => {
+const protectedLessonFor = (topic) => {
   if (topic.sectionId === 'qualcomm-prep') return qualcommLesson(topic);
   if (topic.group === 'Linux Systems Programming Labs') return linuxLabLesson(topic);
   if (topic.group === 'College MCU C Labs') {
@@ -973,15 +1171,10 @@ const lessonFor = (topic) => {
   if (topic.group === 'College DSA C Labs') {
     return collegeCLabLesson(topic, collegeDsaLabByTopicId.get(topic.id), 'host');
   }
-  if (topic.sectionId === 'cpp') return cppLesson(topic);
-  if (topic.sectionId === 'dsa') return dsaLesson(topic);
-  if (mechanismSpecs[topic.id]) return mechanismLesson(topic, mechanismSpecs[topic.id]);
-  if (topic.level === 'standard') return standardLesson(topic);
-  if (topic.level === 'deep') return expandedDeepLesson(topic);
-  return briefLesson(topic);
+  throw new Error(`Protected topic has no preserved lesson path: ${topic.id}`);
 };
 
-const withTeachingFoundation = (topic, lesson) => {
+const decorateProtectedLesson = (topic, lesson) => {
   const existingDefinition = lesson.blocks.find((block) => block.type === 'definition');
   const definition = existingDefinition?.body ?? lesson.summary;
   const application = {
@@ -1019,6 +1212,33 @@ const withTeachingFoundation = (topic, lesson) => {
   };
 };
 
-export const lessons = allTopics.map((topic) => withTeachingFoundation(topic, lessonFor(topic)));
+const authoredLessonFor = (topic) => {
+  const record = coreLessonByTopicId.get(topic.id);
+  if (!record) return null;
+
+  return {
+    topicId: record.topicId,
+    title: record.title,
+    section: topic.sectionTitle,
+    depth: record.depth,
+    contentSource: 'authored-record',
+    summary: record.definition,
+    ...(record.lessonMetadata ?? {}),
+    blocks: authoredLessonToBlocks(record),
+  };
+};
+
+const lessonForTopic = (topic) => {
+  if (isProtectedTopic(topic)) {
+    return decorateProtectedLesson(topic, protectedLessonFor(topic));
+  }
+  const authored = authoredLessonFor(topic);
+  if (!authored) {
+    throw new Error(`Missing authored core lesson: ${topic.id}`);
+  }
+  return authored;
+};
+
+export const lessons = allTopics.map(lessonForTopic);
 
 export const lessonByTopicId = new Map(lessons.map((lesson) => [lesson.topicId, lesson]));

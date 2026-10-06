@@ -1,4 +1,7 @@
 const MAX_CAPTURE_LENGTH = 16_000;
+const MAX_PROFILE_PROBLEMS = 5_000;
+const MAX_PROFILE_CODE_LENGTH = 500_000;
+const MAX_PROFILE_TOTAL_CODE_LENGTH = 25_000_000;
 const difficultyValues = new Set(['easy', 'medium', 'hard', 'unknown']);
 
 const encodeUtf8 = (value) => {
@@ -91,4 +94,72 @@ export function decodeCapturePayload(encoded) {
     if (error instanceof Error && error.message.startsWith('Capture ')) throw error;
     throw new Error('Capture payload could not be read');
   }
+}
+
+export function validateProfileImportPayload(value) {
+  if (!value || typeof value !== 'object') {
+    throw new Error('Profile import is missing');
+  }
+  if (
+    value.version !== 2
+    || value.provider !== 'leetcode'
+    || value.kind !== 'solved-profile'
+  ) {
+    throw new Error('Profile import has an unsupported source');
+  }
+  if (!Array.isArray(value.problems) || value.problems.length === 0) {
+    throw new Error('Profile import contains no solved problems');
+  }
+  if (value.problems.length > MAX_PROFILE_PROBLEMS) {
+    throw new Error(`Profile import exceeds ${MAX_PROFILE_PROBLEMS} problems`);
+  }
+
+  const slugs = new Set();
+  let totalCodeLength = 0;
+  const problems = value.problems.map((problem, index) => {
+    if (!problem || typeof problem !== 'object') {
+      throw new Error(`Profile problem ${index + 1} is invalid`);
+    }
+
+    const slug = cleanText(problem.slug, 160).toLowerCase();
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+      throw new Error(`Profile problem ${index + 1} has an invalid slug`);
+    }
+    if (slugs.has(slug)) {
+      throw new Error(`Profile import repeats ${slug}`);
+    }
+    slugs.add(slug);
+
+    const title = cleanText(problem.title, 140);
+    if (!title) throw new Error(`Profile problem ${slug} has no title`);
+
+    const language = cleanText(problem.language, 40);
+    if (!language) throw new Error(`Profile problem ${slug} has no language`);
+
+    if (typeof problem.code !== 'string' || problem.code.length === 0) {
+      throw new Error(`Profile problem ${slug} has no accepted code`);
+    }
+    if (problem.code.length > MAX_PROFILE_CODE_LENGTH) {
+      throw new Error(`Profile problem ${slug} exceeds the code safety limit`);
+    }
+
+    totalCodeLength += problem.code.length;
+    if (totalCodeLength > MAX_PROFILE_TOTAL_CODE_LENGTH) {
+      throw new Error('Profile import exceeds the total code safety limit');
+    }
+
+    return {
+      slug,
+      title,
+      language,
+      code: problem.code,
+    };
+  });
+
+  return {
+    version: 2,
+    provider: 'leetcode',
+    kind: 'solved-profile',
+    problems,
+  };
 }

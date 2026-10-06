@@ -1,3 +1,5 @@
+import { focusedCppConcepts } from './focusedCurriculum.js';
+
 const concept = (term, definition, example) => ({ term, definition, example });
 
 export const cppConcepts = {
@@ -208,6 +210,8 @@ export const cppConcepts = {
     concept('Data race', 'Conflicting unsynchronized accesses to one memory location, at least one being a write, which makes the C++ program undefined.', 'Reading a non-atomic flag while another thread writes it is a data race.'),
   ],
 };
+
+Object.assign(cppConcepts, focusedCppConcepts);
 
 export function cppConceptsFor(topicId) {
   const result = cppConcepts[topicId];

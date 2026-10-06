@@ -36,6 +36,7 @@ export default function LibraryView({
   onQueryChange,
   onOpenCategory,
   onOpenLesson,
+  onOpenAptitude,
   searchRef,
 }) {
   const qualcommPrep = curriculum.find((category) => category.id === 'qualcomm-prep');
@@ -69,6 +70,12 @@ export default function LibraryView({
         <SearchResults query={query} results={results} onOpenLesson={onOpenLesson} />
       ) : (
         <>
+          <section className="aptitude-entry-section" aria-labelledby="aptitude-entry-title">
+            <button className="aptitude-entry" type="button" onClick={onOpenAptitude}>
+              <span><small>OA & interview practice</small><strong id="aptitude-entry-title">Aptitude & puzzles</strong><span>Reported Qualcomm prompts, worked quant and logic practice, and classic interview puzzles.</span></span>
+              <span className="category-arrow" aria-hidden="true">→</span>
+            </button>
+          </section>
           {qualcommPrep && (
             <section className="qualcomm-entry-section" aria-labelledby="qualcomm-entry-title">
               <p className="eyebrow">Interview collection</p>

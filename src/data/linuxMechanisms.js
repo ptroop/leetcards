@@ -19,6 +19,108 @@ const spec = ({
 });
 
 export const linuxMechanismSpecs = {
+  'os-syscalls': spec({
+    summary: 'A Linux system call is a controlled user-to-kernel privilege transition: a wrapper places the syscall number and arguments in architecture-defined registers, the syscall instruction enters a validated kernel handler, and the return register carries a result or error back to user mode.',
+    prediction: 'Why can an ordinary unprivileged function call not directly read a disk controller register?',
+    steps: ['Place the syscall number and arguments in the ABI-defined registers.', 'Execute the syscall instruction and switch to the kernel entry path.', 'Validate pointers, lengths, credentials, and object state before performing or blocking the operation.', 'Return to user mode; libc converts a negative kernel error into -1 and errno when its API requires that convention.'],
+    failure: 'Bad user pointers return EFAULT, blocking calls may be interrupted, partial work is legal, and tracing only the wrapper can hide library retries.',
+    code: `#define _POSIX_C_SOURCE 200809L
+#include <errno.h>
+#include <unistd.h>
+
+int main(void) {
+  char byte;
+  ssize_t result;
+  do { result = read(STDIN_FILENO, &byte, 1); } while (result < 0 && errno == EINTR);
+  return result < 0 ? 1 : 0;
+}`,
+    practice: 'Run strace on the program and match the descriptor, buffer length, return value, and errno behavior to the wrapper call.',
+  }),
+  'os-virtual-memory': spec({
+    summary: 'Linux virtual memory gives each process protected page mappings and lets the kernel lazily allocate, share, load, reclaim, or swap physical backing as accesses generate translation hits or page faults.',
+    prediction: 'Why can reserving a large anonymous mapping succeed before physical RAM exists for every page?',
+    steps: ['Reserve a virtual range and record its mapping permissions and policy.', 'The first access to an absent page raises a fault.', 'The kernel supplies a zero page, file page, private copy, or access error.', 'Under pressure, clean pages can be dropped and anonymous contents may be reclaimed or swapped.'],
+    failure: 'Reservation is not proof of resident memory; overcommit delays failure, protection faults differ from missing-page faults, and reclaim adds latency.',
+    code: `#define _POSIX_C_SOURCE 200809L
+#include <sys/mman.h>
+#include <unistd.h>
+
+int main(void) {
+  long page = sysconf(_SC_PAGESIZE);
+  if (page <= 0) return 1;
+  void *memory = mmap(NULL, (size_t)page, PROT_READ | PROT_WRITE,
+                      MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+  if (memory == MAP_FAILED) return 1;
+  ((char *)memory)[0] = 42;
+  return munmap(memory, (size_t)page) == 0 ? 0 : 1;
+}`,
+    practice: 'Reserve and touch pages while watching virtual size, resident size, minor faults, and major faults in /proc and perf.',
+  }),
+  'os-virtual-translation': spec({
+    summary: 'Address translation splits a virtual address into a virtual page number and offset, checks a cached TLB mapping or walks page tables, enforces permissions, and combines the resulting physical frame with the unchanged offset.',
+    prediction: 'Can two processes use the same virtual address while reading different physical bytes?',
+    steps: ['Split the virtual address into page number and page offset.', 'Check the TLB for a matching address-space translation and permission.', 'On a miss, walk page-table levels to locate the physical frame.', 'A missing or forbidden mapping faults; otherwise combine frame and unchanged offset and retry the access.'],
+    failure: 'A numerically plausible pointer can be unmapped, forbidden, or outside a live object; TLB state also belongs to an address space rather than the number alone.',
+    code: `#include <stdint.h>
+#include <stddef.h>
+
+struct address_parts { uintptr_t page; size_t offset; };
+static struct address_parts split(uintptr_t address, size_t page_size) {
+  struct address_parts result = { address / page_size, address % page_size };
+  return result;
+}
+int main(void) { return split(0x4123u, 4096u).offset == 0x123u ? 0 : 1; }`,
+    practice: 'Split sample addresses by hand, then connect a fault address to its mapping and permissions in /proc/<pid>/maps.',
+  }),
+  'os-mmap-cow': spec({
+    summary: 'mmap installs file-backed or anonymous virtual mappings, while copy-on-write lets related mappings share read-only physical frames until a write fault creates a private copied frame for the writer.',
+    prediction: 'After fork, why are all writable pages not copied immediately?',
+    steps: ['Parent and child initially map the same frames with write permission removed.', 'Reads continue through the shared frames.', 'A write raises a protection fault recognized as copy-on-write.', 'The kernel copies the frame and remaps only the writer as writable.'],
+    failure: 'Confusing MAP_PRIVATE with MAP_SHARED loses expected updates, assuming mapped writes are durable ignores synchronization rules, and heavy post-fork writes remove sharing benefits.',
+    code: `#define _POSIX_C_SOURCE 200809L
+#include <sys/mman.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+int main(void) {
+  int *value = mmap(NULL, sizeof *value, PROT_READ | PROT_WRITE,
+                    MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+  if (value == MAP_FAILED) return 1;
+  *value = 7;
+  pid_t child = fork();
+  if (child < 0) return 1;
+  if (child == 0) { *value = 9; _exit(*value == 9 ? 0 : 1); }
+  int status;
+  if (waitpid(child, &status, 0) < 0) return 1;
+  return *value == 7 && WIFEXITED(status) && WEXITSTATUS(status) == 0 ? 0 : 1;
+}`,
+    practice: 'Compare private and shared mappings, observe minor page faults after fork, and verify which writes are visible to each process.',
+  }),
+  'os-sync': spec({
+    summary: 'Synchronization protects a shared invariant by making its complete state transition mutually exclusive or correctly atomic, defining memory visibility, and coordinating wait and wake behavior without deadlock.',
+    prediction: 'If two threads both load counter 0, add one, and store, which final value proves the update was not atomic?',
+    steps: ['Name every field in the shared invariant.', 'Protect the entire transition with one mutex or a proven atomic protocol.', 'Wait in a loop that rechecks its predicate after every wake.', 'Use one lock order and keep critical sections bounded.'],
+    failure: 'Protecting half an invariant leaves races, opposite lock order deadlocks, missing predicate loops fail after spurious wakes, and long lock holds create latency.',
+    code: `#include <pthread.h>
+
+static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+static int counter;
+static void *increment(void *unused) {
+  (void)unused;
+  pthread_mutex_lock(&lock);
+  ++counter;
+  pthread_mutex_unlock(&lock);
+  return NULL;
+}
+int main(void) {
+  pthread_t a, b;
+  if (pthread_create(&a, NULL, increment, NULL) != 0) return 1;
+  if (pthread_create(&b, NULL, increment, NULL) != 0) return 1;
+  pthread_join(a, NULL); pthread_join(b, NULL);
+  return counter == 2 ? 0 : 1;
+}`,
+    practice: 'Force the lost-update interleaving, then trace mutex ownership, waiter state, wake-up, and the happens-before edge.',
+  }),
   'os-syscall-contract': spec({
     summary: 'A libc wrapper translates a C or C++ call into the architecture syscall convention, while correct callers handle errors, partial I/O, short work, and EINTR rather than assuming one call completes the request.',
     prediction: 'If write(fd, buffer, 4096) returns 700 without errno, did it fail?',

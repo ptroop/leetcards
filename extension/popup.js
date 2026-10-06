@@ -1,6 +1,7 @@
-const LEETCARDS_CAPTURE_URL = 'https://rooptr.github.io/leetcards/#/capture/';
+const LEETCARDS_CAPTURE_URL = 'https://ptroop.github.io/leetcards/#/capture/';
 
 const captureButton = document.querySelector('#capture');
+const exportProfileButton = document.querySelector('#export-profile');
 const statusOutput = document.querySelector('#status');
 
 const setStatus = (message, kind = 'info') => {
@@ -69,6 +70,7 @@ const readCurrentProblem = () => {
 
 captureButton.addEventListener('click', async () => {
   captureButton.disabled = true;
+  exportProfileButton.disabled = true;
   setStatus('Checking the active tab.');
 
   try {
@@ -90,5 +92,26 @@ captureButton.addEventListener('click', async () => {
   } catch (error) {
     setStatus(error instanceof Error ? error.message : 'Capture failed.', 'error');
     captureButton.disabled = false;
+    exportProfileButton.disabled = false;
+  }
+});
+
+exportProfileButton.addEventListener('click', async () => {
+  captureButton.disabled = true;
+  exportProfileButton.disabled = true;
+  setStatus('Opening the private local export.');
+
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (!tab?.id) throw new Error('No active browser tab was found.');
+
+    const page = new URL(chrome.runtime.getURL('profile-import.html'));
+    page.searchParams.set('sourceTab', String(tab.id));
+    await chrome.tabs.create({ url: page.href });
+    window.close();
+  } catch (error) {
+    setStatus(error instanceof Error ? error.message : 'Could not start the export.', 'error');
+    captureButton.disabled = false;
+    exportProfileButton.disabled = false;
   }
 });

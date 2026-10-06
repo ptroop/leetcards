@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "provider": "leetcode",
+  "kind": "solved-profile",
+  "problems": [
+    {
+      "slug": "maximum-subarray",
+      "title": "Maximum Subarray",
+      "language": "C++",
+      "code": "class Solution {\npublic:\n    int maxSubArray(std::vector<int>& nums) {\n        int best = nums[0];\n        int endingHere = nums[0];\n        for (std::size_t index = 1; index < nums.size(); ++index) {\n            endingHere = std::max(nums[index], endingHere + nums[index]);\n            best = std::max(best, endingHere);\n        }\n        return best;\n    }\n};"
+    },
+    {
+      "slug": "design-a-number-container-system",
+      "title": "Design a Number Container System",
+      "language": "C++",
+      "code": "class NumberContainers {\npublic:\n    void change(int index, int number);\n    int find(int number);\n};"
+    }
+  ]
+}

@@ -2,6 +2,8 @@ import { linuxLabs } from './linuxLabs.js';
 import { collegeMcuLabs } from './collegeMcuLabs.js';
 import { collegeDsaLabs } from './collegeDsaLabs.js';
 import { qualcommPrepTopics } from './qualcommPrepTopics.js';
+import { dsaFocusedSubtopics } from './dsaFocusedSubtopics.js';
+import { focusedCppSubtopics, focusedLinuxSubtopics } from './focusedCurriculum.js';
 
 const topic = (id, title, keywords = [], level = 'brief', group = null) => ({
   id,
@@ -42,6 +44,36 @@ const collegeDsaLabTopics = collegeDsaLabs.map((lab) => topic(
   'College DSA C Labs',
 ));
 
+const focusedDsaTopics = dsaFocusedSubtopics.filter((entry) => (
+  !entry.id.startsWith('dsa-tree-')
+  && !['dsa-bst-kth-smallest', 'dsa-bst-lca'].includes(entry.id)
+)).map((entry) => topic(
+  entry.id,
+  entry.title,
+  entry.keywords,
+  entry.level,
+  entry.group,
+));
+
+const focusedCppTopics = focusedCppSubtopics.map((entry) => topic(
+  entry.id,
+  entry.title,
+  entry.keywords,
+  entry.level,
+  entry.group,
+));
+
+const focusedLinuxTopics = focusedLinuxSubtopics.map((entry) => topic(
+  entry.id,
+  entry.title,
+  entry.keywords,
+  entry.level,
+  entry.group,
+));
+
+const focusedCppGroup = (group) => focusedCppTopics.filter((entry) => entry.group === group);
+const focusedLinuxGroup = (group) => focusedLinuxTopics.filter((entry) => entry.group === group);
+
 const curriculumUnordered = [
   section('c', 'C and C Tricks', 'Understand the machine-facing rules that make C powerful, predictable, and occasionally dangerous.', [
     topic('c-types', 'Types and representations', ['integer', 'floating point', 'character', 'boolean'], 'standard'),
@@ -72,31 +104,40 @@ const curriculumUnordered = [
     topic('cpp-object-model', 'Object lifetime and value semantics', ['object', 'lifetime', 'value'], 'standard', 'C++ language and object semantics'),
     topic('cpp-encapsulation', 'Classes, encapsulation, and data hiding', ['public', 'private', 'protected', 'getter', 'setter', 'invariant'], 'standard', 'C++ language and object semantics'),
     topic('cpp-constructors', 'Constructors, destructors, and initialization', ['default constructor', 'parameterized constructor', 'copy constructor', 'move constructor', 'delegating constructor', 'conversion constructor', 'explicit', 'delete', 'default', 'virtual destructor'], 'deep', 'C++ language and object semantics'),
+    ...focusedCppGroup('Construction and destruction'),
     topic('cpp-const', 'Const correctness and mutable state', ['const', 'mutable', 'member function'], 'standard', 'C++ language and object semantics'),
     topic('cpp-references', 'References, value categories, and perfect forwarding', ['lvalue', 'rvalue', 'reference collapsing', 'perfect forwarding', 'std::forward'], 'deep', 'C++ language and object semantics'),
+    ...focusedCppGroup('Move semantics and generic forwarding'),
     topic('cpp-overload', 'Overload resolution and conversions', ['overload', 'conversion', 'ambiguity'], 'standard', 'C++ language and object semantics'),
     topic('cpp-operators', 'Operator overloading', ['operator', 'comparison', 'stream operator'], 'standard', 'C++ language and object semantics'),
     topic('cpp-copy-move', 'Special members, copy and move semantics', ['rule of three', 'rule of five', 'rule of zero', 'copy assignment', 'move assignment', 'std::move'], 'deep', 'C++ language and object semantics'),
+    ...focusedCppGroup('Ownership and value semantics'),
     topic('cpp-raii', 'RAII and resource ownership', ['destructor', 'resource', 'scope'], 'deep', 'C++ OOP and ownership'),
     topic('cpp-smart-pointers', 'Smart pointers and ownership graphs', ['unique_ptr', 'shared_ptr', 'weak_ptr', 'make_unique', 'make_shared', 'use_count', 'cycle'], 'deep', 'C++ OOP and ownership'),
     topic('cpp-composition', 'Composition and class invariants', ['class', 'invariant'], 'brief', 'C++ OOP and ownership'),
     topic('cpp-inheritance', 'Inheritance and the diamond problem', ['inheritance', 'base', 'derived', 'diamond', 'virtual inheritance'], 'deep', 'C++ OOP and ownership'),
     topic('cpp-polymorphism', 'Runtime polymorphism, vtables, and object slicing', ['virtual', 'vtable', 'vptr', 'override', 'final', 'object slicing'], 'deep', 'C++ OOP and ownership'),
+    ...focusedCppGroup('Inheritance and runtime polymorphism'),
     topic('cpp-exceptions', 'Exception handling and exception safety', ['try', 'throw', 'catch', 'catch all', 'noexcept', 'stack unwinding', 'exception guarantee'], 'deep', 'C++ reliability and concurrency'),
+    ...focusedCppGroup('Exceptions and failure guarantees'),
     topic('cpp-templates', 'Function and class templates, concepts, and generic structures', ['function template', 'class template', 'template instantiation', 'generic stack', 'generic queue', 'swap', 'concept'], 'deep', 'C++ templates and STL'),
     topic('cpp-template-specialization', 'Template specialization, variadic templates, and instantiation', ['specialization', 'partial specialization', 'variadic template', 'fold expression', 'explicit instantiation'], 'deep', 'C++ templates and STL'),
     topic('cpp-constexpr', 'constexpr, consteval, and type traits', ['constexpr variable', 'constexpr function', 'consteval', 'type trait'], 'standard', 'C++ templates and STL'),
     topic('cpp-stl', 'STL containers, algorithms, and function objects', ['vector', 'map', 'unordered_map', 'stack', 'queue', 'algorithm', 'function object'], 'deep', 'C++ templates and STL'),
     topic('cpp-iterators', 'Iterators and ranges', ['begin', 'end', 'cbegin', 'cend', 'rbegin', 'rend', 'iterator invalidation'], 'standard', 'C++ templates and STL'),
     topic('cpp-lambdas', 'Lambdas and algorithm callbacks', ['lambda', 'capture by value', 'capture by reference', 'generic lambda', 'algorithm'], 'deep', 'C++ templates and STL'),
+    ...focusedCppGroup('Templates, STL, and callable code'),
     topic('cpp-errors', 'Type-safe result and utility types', ['optional', 'variant', 'visit', 'any', 'expected'], 'standard', 'C++ reliability and concurrency'),
+    ...focusedCppGroup('Type-safe results and utilities'),
     topic('cpp-testing', 'Testing modern C++', ['sanitizer', 'test', 'fixture'], 'standard', 'C++ reliability and concurrency'),
     topic('cpp-concurrency', 'C++ concurrency and atomics', ['thread', 'atomic', 'mutex', 'memory order'], 'deep', 'C++ reliability and concurrency'),
+    ...focusedCppGroup('Concurrency and memory ordering'),
   ]),
   section('os-linux', 'Operating Systems and Linux', 'Follow processes, memory, files, privilege, scheduling, and Linux tools from user space into the kernel.', [
     topic('os-purpose', 'What an operating system provides', ['kernel', 'protection', 'resource'], 'brief', 'Linux and OS foundations'),
     topic('os-environment', 'Linux toolchain, manuals, errno, and Make', ['gcc', 'make', 'man', 'errno'], 'standard', 'Linux and OS foundations'),
     topic('os-cli', 'Linux commands and shell pipelines', ['shell', 'pipe', 'redirection'], 'brief', 'Linux and OS foundations'),
+    topic('os-shell-scripting', 'Shell scripting and safe text processing', ['shell', 'sh', 'grep', 'sed', 'awk', 'cut', 'find', 'quoting'], 'deep', 'Linux and OS foundations'),
     topic('os-user-kernel', 'User mode and kernel mode', ['privilege', 'ring', 'protection'], 'standard', 'Linux and OS foundations'),
     topic('os-syscalls', 'System-call transitions', ['syscall', 'trap', 'kernel register', 'errno'], 'deep', 'Linux and OS foundations'),
     topic('os-syscall-contract', 'Syscall wrappers, partial work, and EINTR', ['syscall', 'libc', 'partial I/O', 'EINTR'], 'deep', 'Linux and OS foundations'),
@@ -107,6 +148,7 @@ const curriculumUnordered = [
     topic('os-file-io', 'File I/O and metadata in C and C++', ['open', 'read', 'write', 'lseek', 'stat'], 'deep', 'Files and descriptors'),
     topic('os-fd-dup', 'dup, dup2, dup3, and descriptor inheritance', ['dup', 'dup2', 'dup3', 'redirection'], 'deep', 'Files and descriptors'),
     topic('os-fcntl', 'fcntl, descriptor flags, locks, and ioctl', ['fcntl', 'FD_CLOEXEC', 'O_NONBLOCK', 'ioctl'], 'deep', 'Files and descriptors'),
+    ...focusedLinuxGroup('Files and descriptors: focused mechanisms'),
     ...linuxLabTopics.slice(0, 4),
 
     topic('os-processes', 'Processes and address spaces', ['process', 'PID', 'address space'], 'standard', 'Processes and virtual memory'),
@@ -129,6 +171,7 @@ const curriculumUnordered = [
     ...linuxLabTopics.slice(8, 13),
 
     topic('os-signals', 'Signals, masks, timers, and safe handlers', ['signal', 'sigaction', 'sigprocmask', 'SIGALRM'], 'deep', 'Signals and asynchronous events'),
+    ...focusedLinuxGroup('Signals: focused mechanisms'),
     ...linuxLabTopics.slice(13, 17),
 
     topic('os-linux-sockets', 'TCP and UDP sockets in C and C++', ['socket', 'TCP', 'UDP', 'partial I/O'], 'deep', 'Linux networking'),
@@ -140,10 +183,15 @@ const curriculumUnordered = [
     topic('os-pthreads', 'POSIX thread lifecycle and shared state', ['pthread_create', 'pthread_join', 'thread-local'], 'deep', 'Threads and synchronization'),
     topic('os-mutex', 'pthread mutexes, condition variables, and futex internals', ['pthread_mutex', 'condition variable', 'futex'], 'deep', 'Threads and synchronization'),
     topic('os-semaphores', 'POSIX semaphores and Linux wait/wake internals', ['sem_wait', 'sem_post', 'named semaphore', 'futex'], 'deep', 'Threads and synchronization'),
+    ...focusedLinuxGroup('Threads and synchronization: focused mechanisms'),
     ...linuxLabTopics.slice(19, 22),
 
     topic('os-boot', 'Boot, init, and systemd', ['bootloader', 'init', 'systemd'], 'standard', 'System lifecycle and isolation'),
     topic('os-proc', '/proc, /sys, namespaces, and cgroups', ['proc', 'sys', 'namespace', 'cgroup'], 'standard', 'System lifecycle and isolation'),
+    topic('os-driver-model', 'Linux driver model and device file path', ['driver', 'probe', 'remove', 'character device', 'file operations'], 'deep', 'Linux drivers'),
+    topic('os-driver-interrupts', 'Driver interrupts and DMA ownership', ['driver', 'IRQ', 'threaded interrupt', 'DMA', 'cache coherency'], 'deep', 'Linux drivers'),
+    topic('os-driver-debugging', 'Debugging a Linux device driver', ['strace', 'dmesg', 'ftrace', 'tracepoint', 'kernel oops'], 'deep', 'Linux drivers'),
+    ...focusedLinuxGroup('System lifecycle and isolation: focused mechanisms'),
   ]),
   section('architecture', 'Computer Architecture', 'Follow instructions and data through the CPU, memory hierarchy, interconnects, and measurement tools.', [
     topic('arch-binary', 'Binary, hexadecimal, and two’s complement', ['binary', 'hex', 'signed'], 'standard', 'Digital foundations'),
@@ -202,6 +250,8 @@ const curriculumUnordered = [
     topic('electronics-kcl-kvl', 'KCL, KVL, and circuit loops', ['Kirchhoff', 'node', 'loop'], 'standard'),
     topic('electronics-passives', 'Series, parallel, capacitors, and inductors', ['series', 'parallel', 'capacitor', 'inductor'], 'deep'),
     topic('electronics-digital', 'Digital and analog signals', ['logic level', 'analog', 'digital'], 'standard'),
+    topic('electronics-logic-levels', 'Logic thresholds and noise margins', ['VIH', 'VIL', 'VOH', 'VOL', 'noise margin', 'hysteresis'], 'deep'),
+    topic('electronics-setup-hold', 'Setup, hold, and sampling at a clock edge', ['setup time', 'hold time', 'flip-flop', 'metastability'], 'deep'),
     topic('electronics-pullups', 'Pull-ups and open-drain buses', ['pull-up', 'open-drain', 'I2C'], 'deep'),
     topic('electronics-debounce', 'Switch debouncing and RC filters', ['debounce', 'RC', 'filter'], 'standard'),
     topic('electronics-decoupling', 'Decoupling and power integrity', ['capacitor', 'decoupling', 'noise'], 'deep'),
@@ -291,10 +341,7 @@ const curriculumUnordered = [
     topic('dsa-stack-queue', 'Stacks, queues, circular buffers, and deques', ['stack', 'queue', 'ring buffer', 'deque'], 'deep'),
     topic('dsa-hash', 'Hash tables and collision handling', ['hash', 'chaining', 'open addressing', 'tombstone'], 'deep'),
     topic('dsa-heap', 'Heaps and priority queues', ['heap', 'priority', 'sift'], 'deep'),
-    topic('dsa-binary-tree', 'Binary trees and traversals', ['tree', 'preorder', 'inorder', 'postorder'], 'deep'),
     topic('dsa-bst', 'Binary search trees', ['BST', 'insert', 'delete'], 'deep'),
-    topic('dsa-avl', 'AVL trees', ['AVL', 'height', 'rotation'], 'deep'),
-    topic('dsa-red-black', 'Red-black trees', ['red-black', 'recolor', 'rotation'], 'deep'),
     topic('dsa-sorting', 'Sorting algorithms and partitioning', ['insertion', 'merge sort', 'quicksort', 'heap sort'], 'deep'),
     topic('dsa-search', 'Binary search on indexes and answers', ['binary search', 'first true', 'answer space'], 'deep'),
     topic('dsa-two-pointers', 'Two pointers', ['opposite ends', 'pair', 'invariant'], 'deep'),
@@ -329,6 +376,7 @@ const curriculumUnordered = [
     topic('dsa-edit-distance', 'Edit distance', ['edit distance', 'insert', 'delete', 'replace'], 'deep'),
     topic('dsa-dp-compression', 'DP state compression and rolling storage', ['rolling array', 'space optimization', 'dependency'], 'deep'),
     topic('dsa-bitwise', 'Bitwise patterns and bitmasks', ['bitmask', 'shift', 'XOR'], 'deep'),
+    ...focusedDsaTopics,
     ...collegeDsaLabTopics,
   ]),
   section(

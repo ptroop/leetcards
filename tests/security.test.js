@@ -129,3 +129,11 @@ test('Pages workflow uses locked installs, tests, audits, and least-privilege jo
   assert.match(workflow, /run: npm run build/);
   assert.doesNotMatch(workflow, /pull_request_target|contents: write|actions: write/);
 });
+
+test('one command runs the complete local delivery gate', async () => {
+  const pkg = JSON.parse(await readFile(join(projectRoot, 'package.json'), 'utf8'));
+  assert.equal(
+    pkg.scripts.verify,
+    'npm run audit:curriculum && npm run audit:writing && npm run audit:code && npm run verify:dsa-snippets && npm run verify:college-dsa && npm test && npm run build',
+  );
+});

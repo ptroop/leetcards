@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import MechanismVisual from './MechanismVisual.jsx';
+import TechnicalSketch from './TechnicalSketch.jsx';
+import { routeForLesson } from '../data/routes.js';
 
 function RecallBlock({ block }) {
   const [revealed, setRevealed] = useState(false);
@@ -77,6 +79,62 @@ export default function LessonBlock({ block }) {
 
   if (block.type === 'code-pair') return <CodePairBlock block={block} />;
 
+  if (block.type === 'technical-sketch') {
+    return (
+      <section className="lesson-block technical-sketch-block">
+        <h2>{block.heading}</h2>
+        <TechnicalSketch sketchId={block.sketchId} />
+      </section>
+    );
+  }
+
+  if (block.type === 'worked-example') {
+    return (
+      <section className="lesson-block worked-example-block">
+        <p className="eyebrow">Worked example</p>
+        <h2>{block.heading}</h2>
+        <ol className="worked-example-steps">
+          {block.items.map((item, index) => (
+            <li key={`${index}-${item}`}>
+              <span>{index + 1}</span>
+              <p>{item}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+    );
+  }
+
+  if (block.type === 'failure-table') {
+    return (
+      <section className="lesson-block failure-table-block">
+        <p className="eyebrow">Failure modes</p>
+        <h2>{block.heading}</h2>
+        <div className="failure-table">
+          {block.items.map((item) => (
+            <article key={`${item.symptom}-${item.cause}`}>
+              <strong>{item.symptom}</strong>
+              <p><b>Cause:</b> {item.cause}</p>
+              <p><b>Check:</b> {item.check}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  if (block.type === 'recall-list') {
+    return (
+      <section className="lesson-block recall-list-block">
+        <p className="eyebrow">Keep these facts</p>
+        <h2>{block.heading}</h2>
+        <ul>
+          {block.items.map((item) => <li key={item}>{item}</li>)}
+        </ul>
+      </section>
+    );
+  }
+
   if (block.type === 'visual') {
     return (
       <section className="lesson-block visual-block">
@@ -140,6 +198,24 @@ export default function LessonBlock({ block }) {
         <ul className="source-prompt-list">
           {block.items.map((item) => <li key={item}>{item}</li>)}
         </ul>
+      </section>
+    );
+  }
+
+  if (block.type === 'related-lessons') {
+    return (
+      <section className="lesson-block related-lessons-block">
+        <p className="eyebrow">Pattern connections</p>
+        <h2>{block.heading}</h2>
+        <div className="related-lessons-list">
+          {block.items.map((item) => (
+            <a href={routeForLesson(item.id)} key={item.id}>
+              <strong>{item.title}</strong>
+              <span>{item.reason}</span>
+              <i aria-hidden="true">→</i>
+            </a>
+          ))}
+        </div>
       </section>
     );
   }

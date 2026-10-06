@@ -4,14 +4,16 @@ import {
   qualcommIndiaWebAudit,
   qualcommIndiaWebSourceById,
   qualcommIndiaWebSources,
-} from '../data/qualcommIndiaWebQuestions.js';
+} from '../data/qualcommInternetCollection.js';
+import { completeQualcommAnswer } from '../data/qualcommInterviewAnswers.js';
 import { topicById } from '../data/curriculum.js';
+import LessonBlock from './LessonBlock.jsx';
 
 const areaDefinitions = [
   {
     id: 'c',
     label: 'C',
-    matches: (topicId) => topicId.startsWith('qualcomm-c-'),
+    matches: (topicId) => topicId.startsWith('qualcomm-c-') || topicId.startsWith('c-'),
   },
   {
     id: 'cpp',
@@ -21,7 +23,11 @@ const areaDefinitions = [
   {
     id: 'dsa',
     label: 'DSA',
-    matches: (topicId) => topicId.includes('-dsa-') || topicId.includes('-problem-'),
+    matches: (topicId) => (
+      topicId.includes('-dsa-')
+      || topicId.includes('-problem-')
+      || topicId.startsWith('dsa-')
+    ),
   },
   {
     id: 'linux',
@@ -31,12 +37,21 @@ const areaDefinitions = [
   {
     id: 'architecture',
     label: 'Architecture & DSP',
-    matches: (topicId) => topicId.includes('-arch-') || topicId.includes('multimedia-dsp'),
+    matches: (topicId) => (
+      topicId.includes('-arch-')
+      || topicId.includes('multimedia-dsp')
+      || topicId.startsWith('arch-')
+    ),
   },
   {
     id: 'embedded',
     label: 'MCU, embedded & RTOS',
-    matches: (topicId) => topicId.includes('-embedded-'),
+    matches: (topicId) => topicId.includes('-embedded-') || topicId.startsWith('embedded-'),
+  },
+  {
+    id: 'electronics',
+    label: 'Electronics',
+    matches: (topicId) => topicId.startsWith('electronics-') || topicId.startsWith('schematic-'),
   },
   {
     id: 'networking',
@@ -59,11 +74,6 @@ const areaDefinitions = [
   },
 ];
 
-const lessonFallbacks = {
-  'qualcomm-c-memory-routines': 'c-tricks',
-  'qualcomm-linux-kernel-memory-dma': 'arch-dma',
-};
-
 const areaForQuestion = (question) => (
   areaDefinitions.find((area) => area.matches(question.topicId)) ?? {
     id: 'other',
@@ -71,23 +81,19 @@ const areaForQuestion = (question) => (
   }
 );
 
-const lessonForQuestion = (question) => {
-  const topicId = topicById.has(question.topicId)
-    ? question.topicId
-    : lessonFallbacks[question.topicId];
-  return topicId ? topicById.get(topicId) : null;
-};
-
 const sourceLabel = (source) => (
   source.reportType === 'firsthand'
     ? 'First-person report'
     : source.reportType === 'firsthand-republication'
       ? 'Republished report'
+      : source.reportType === 'community-firsthand'
+        ? 'First-person community report'
       : 'Candidate aggregate'
 );
 
 function QuestionItem({ question, onOpenLesson }) {
-  const lessonTopic = lessonForQuestion(question);
+  const answer = completeQualcommAnswer(question);
+  const lessonTopic = answer.lessonId ? topicById.get(answer.lessonId) : null;
   const sources = question.sources
     .map((sourceId) => qualcommIndiaWebSourceById.get(sourceId))
     .filter(Boolean);
@@ -101,8 +107,35 @@ function QuestionItem({ question, onOpenLesson }) {
         </span>
       </summary>
       <div className="internet-answer">
-        <p className="eyebrow">Answer map</p>
-        <p>{question.answerFocus}</p>
+        <section className="internet-answer-section">
+          <p className="eyebrow">Direct answer</p>
+          <p>{answer.direct}</p>
+        </section>
+        {answer.foundation !== answer.direct && (
+          <section className="internet-answer-section">
+            <h3>What is happening underneath</h3>
+            <p>{answer.foundation}</p>
+          </section>
+        )}
+        {answer.mechanism.length > 0 && (
+          <section className="internet-answer-section">
+            <h3>Reason through it in this order</h3>
+            <ol>
+              {answer.mechanism.map((step) => <li key={step}>{step}</li>)}
+            </ol>
+          </section>
+        )}
+        {answer.failure && (
+          <aside className="internet-answer-trap">
+            <strong>What weak answers miss</strong>
+            <p>{answer.failure}</p>
+          </aside>
+        )}
+        {answer.implementation && (
+          <div className="internet-answer-code">
+            <LessonBlock block={answer.implementation} />
+          </div>
+        )}
         <div className="internet-answer-actions">
           {lessonTopic && (
             <button type="button" onClick={() => onOpenLesson(lessonTopic.id)}>
@@ -118,7 +151,7 @@ function QuestionItem({ question, onOpenLesson }) {
                 rel="noreferrer"
                 title={`${source.title} — ${sourceLabel(source)}`}
               >
-                {source.publisher}
+                {source.publisher}{source.reportedAt ? ` · ${source.reportedAt}` : ''}
                 <span aria-hidden="true"> ↗</span>
               </a>
             ))}
@@ -157,7 +190,13 @@ export default function InternetPrepView({ onBack, onOpenLesson }) {
       if (!groups.has(area.id)) groups.set(area.id, { ...area, questions: [] });
       groups.get(area.id).questions.push(question);
     }
-    return [...groups.values()];
+    return [...groups.values()].map((group) => ({
+      ...group,
+      questions: [...group.questions].sort((left, right) => (
+        right.sources.length - left.sources.length
+        || left.prompt.localeCompare(right.prompt)
+      )),
+    }));
   }, [visibleQuestions]);
 
   return (
@@ -169,9 +208,9 @@ export default function InternetPrepView({ onBack, onOpenLesson }) {
           <p className="eyebrow">India · public candidate reports</p>
           <h1>Questions reported from Qualcomm interviews.</h1>
           <p>
-            A source-linked archive for embedded and systems roles in India. Wording is
-            normalized for clarity; every question remains tied to the report that
-            mentioned it.
+            A source-linked archive for embedded and systems roles in India. Each card
+            gives the direct answer, the mechanism, the usual trap, and an implementation
+            when the question calls for code.
           </p>
         </div>
         <dl className="internet-audit">
@@ -187,6 +226,10 @@ export default function InternetPrepView({ onBack, onOpenLesson }) {
             <dt>{qualcommIndiaWebAudit.highConfidenceSourceCount}</dt>
             <dd>first-person reports</dd>
           </div>
+          <div>
+            <dt>{qualcommIndiaWebAudit.repeatedQuestionCount}</dt>
+            <dd>reported repeatedly</dd>
+          </div>
         </dl>
       </header>
 
@@ -194,9 +237,11 @@ export default function InternetPrepView({ onBack, onOpenLesson }) {
         <strong>What this collection is</strong>
         <p>
           Publicly indexed reports from established interview platforms, reviewed
-          through 29 July 2026. These are candidate recollections, not official
-          Qualcomm questions, and no report can guarantee what a future team will ask.
-          Community speculation and unknown question-dump sites are excluded.
+          through {qualcommIndiaWebAudit.reviewedThrough}. These are candidate
+          recollections, not official Qualcomm questions, and no public search can reveal
+          a private question pool. First-person community posts are included only when
+          they describe an interview the author personally attended; speculation and
+          unknown question-dump sites are excluded.
         </p>
       </aside>
 
@@ -268,7 +313,10 @@ export default function InternetPrepView({ onBack, onOpenLesson }) {
             <a key={source.id} href={source.url} target="_blank" rel="noreferrer">
               <span>
                 <strong>{source.title}</strong>
-                <small>{source.publisher} · {source.location} · {source.role}</small>
+                <small>
+                  {source.publisher} · {source.location} · {source.role}
+                  {source.reportedAt ? ` · ${source.reportedAt}` : ''}
+                </small>
               </span>
               <span>{sourceLabel(source)} ↗</span>
             </a>

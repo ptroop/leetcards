@@ -3,6 +3,12 @@ import { lessonByTopicId } from './lessonCatalog.js';
 export const LESSON_DEPTHS = Object.freeze(['brief', 'standard', 'deep']);
 
 const requiredDeepBlocks = ['prediction', 'visual', 'failure', 'practice', 'recall'];
+const requiredAuthoredDeepBlocks = [
+  'worked-example',
+  'technical-sketch',
+  'failure-table',
+  'recall-list',
+];
 
 export function validateLesson(lesson) {
   const errors = [];
@@ -34,11 +40,21 @@ export function validateLesson(lesson) {
 
   if (lesson?.depth === 'deep') {
     const types = new Set(lesson.blocks?.map((block) => block.type));
-    for (const type of requiredDeepBlocks) {
+    const authoredSemanticLesson = types.has('worked-example')
+      || types.has('technical-sketch')
+      || types.has('failure-table')
+      || types.has('recall-list');
+    const requiredBlocks = authoredSemanticLesson
+      ? requiredAuthoredDeepBlocks
+      : requiredDeepBlocks;
+
+    for (const type of requiredBlocks) {
       if (!types.has(type)) errors.push(`block:${type}`);
     }
     const visual = lesson.blocks?.find((block) => block.type === 'visual');
-    const hasTrace = types.has('steps') || visual?.frames?.length >= 2;
+    const hasTrace = types.has('steps')
+      || types.has('worked-example')
+      || visual?.frames?.length >= 2;
     if (!hasTrace) errors.push('trace');
   }
 

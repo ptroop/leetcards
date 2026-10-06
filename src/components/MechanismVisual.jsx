@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useReducer } from 'react';
+import { useEffect, useMemo, useReducer, useState } from 'react';
 import { createSimulationState, simulationReducer } from '../data/simulation.js';
 
 const isMatrix = (values) => Array.isArray(values?.[0]);
@@ -313,8 +313,18 @@ export default function MechanismVisual({ block }) {
   const frames = block.frames?.length ? block.frames : [{ caption: 'No simulation data.', values: [] }];
   const initial = useMemo(() => createSimulationState(frames.length), [frames.length]);
   const [state, dispatch] = useReducer(simulationReducer, initial);
+  const [reasonRevealed, setReasonRevealed] = useState(false);
   const currentFrame = frames[state.step];
   const nextFrame = frames[state.step + 1];
+  const guide = block.guide;
+  const phase = currentFrame.phase ?? (
+    state.step === 0 ? 'Model' : state.step === frames.length - 1 ? 'Prove' : 'Update'
+  );
+  const nextPrompt = nextFrame?.question
+    ?? block.prediction
+    ?? 'Which state changes next, and which part of the invariant permits it?';
+  const reason = currentFrame.reason ?? currentFrame.proof ?? block.invariant;
+  const asksForPrediction = Boolean(currentFrame.question && reason);
   const hasWindow = Boolean(currentFrame.window ?? currentFrame.bounds);
   const legendItems = [
     currentFrame.active?.length > 0 && ['is-active', 'active decision'],
@@ -329,6 +339,10 @@ export default function MechanismVisual({ block }) {
   }, [block, frames.length]);
 
   useEffect(() => {
+    setReasonRevealed(false);
+  }, [state.step, block]);
+
+  useEffect(() => {
     if (!state.playing) return undefined;
     const timer = window.setInterval(() => dispatch({ type: 'tick' }), 950);
     return () => window.clearInterval(timer);
@@ -336,9 +350,29 @@ export default function MechanismVisual({ block }) {
 
   return (
     <figure className="mechanism-visual" data-kind={block.kind}>
+      {guide && (
+        <div className="pattern-brief">
+          <div className="pattern-brief-heading">
+            <span>Pattern model</span>
+            <strong>{guide.name}</strong>
+          </div>
+          <div>
+            <span>Reach for it when</span>
+            <p>{guide.recognition}</p>
+          </div>
+          <div>
+            <span>State that must stay true</span>
+            <p>{block.invariant ?? guide.invariant}</p>
+          </div>
+          <div>
+            <span>Core move</span>
+            <p>{guide.method[0]} {guide.method[1]}</p>
+          </div>
+        </div>
+      )}
       <div className="simulator-stage">
         <div className="simulator-header">
-          <span>State trace</span>
+          <span>{phase} · state trace</span>
           <output aria-live="polite">Step {state.step + 1} / {frames.length}</output>
         </div>
         <div className="visual-frame">
@@ -346,6 +380,12 @@ export default function MechanismVisual({ block }) {
           {currentFrame.markers?.length > 0 && (
             <div className="visual-markers">
               {currentFrame.markers.map((marker) => <code key={marker}>{marker}</code>)}
+            </div>
+          )}
+          {currentFrame.codeLine && (
+            <div className="active-code-line">
+              <span>Code executing</span>
+              <code>{currentFrame.codeLine}</code>
             </div>
           )}
           {legendItems.length > 0 && (
@@ -359,17 +399,22 @@ export default function MechanismVisual({ block }) {
         <div className="simulator-reasoning">
           <div>
             <span>What changed</span>
-            <p aria-live="polite">{currentFrame.caption}</p>
+            <p aria-live="polite">{currentFrame.decision ?? currentFrame.caption}</p>
           </div>
-          {block.invariant && (
+          {reason && (
             <div>
-              <span>Rule being preserved</span>
-              <p>{block.invariant}</p>
+              <span>Why this move is safe · Rule being preserved</span>
+              {asksForPrediction && !reasonRevealed ? (
+                <div className="reason-prompt">
+                  <p>{currentFrame.question}</p>
+                  <button type="button" onClick={() => setReasonRevealed(true)}>Reveal reasoning</button>
+                </div>
+              ) : <p>{reason}</p>}
             </div>
           )}
           <div>
             <span>{nextFrame ? 'Next move' : 'Result'}</span>
-            <p>{nextFrame?.caption ?? 'The trace is complete. Recheck the invariant against the final state.'}</p>
+            <p>{nextFrame ? nextPrompt : currentFrame.result ?? guide?.correctness ?? 'The trace is complete. Recheck the invariant against the final state.'}</p>
           </div>
         </div>
       </div>
@@ -399,7 +444,7 @@ export default function MechanismVisual({ block }) {
           Next
         </button>
       </div>
-      <figcaption>Advance only after you can explain why the highlighted state makes the next move safe.</figcaption>
+      <figcaption>Do not memorize the motion. Predict the update, name the invariant that permits it, then reveal the reason.</figcaption>
     </figure>
   );
 }

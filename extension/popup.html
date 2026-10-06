@@ -17,11 +17,23 @@
       </header>
 
       <p>
-        Open a solved LeetCode problem, then capture its public metadata.
-        No account, cookies, or notes are read.
+        Capture one problem, or open your signed-in LeetCode profile or problem
+        library and export every uniquely solved problem.
       </p>
 
-      <button id="capture" type="button">Capture this problem</button>
+      <div class="popup-actions">
+        <button id="export-profile" type="button">
+          Export all solved problems
+        </button>
+        <button id="capture" class="secondary" type="button">
+          Capture this problem only
+        </button>
+      </div>
+      <p class="privacy-note">
+        Bulk export includes one accepted solution per problem. It stays in a
+        local JSON file and never includes cookies, tokens, runtime, memory,
+        dates, or failed submissions.
+      </p>
       <output id="status" aria-live="polite"></output>
     </main>
     <script src="popup.js"></script>

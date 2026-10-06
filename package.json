@@ -9,7 +9,12 @@
     "icons:pwa": "node scripts/generate-pwa-icons.mjs",
     "preview": "vite preview",
     "test": "node --test",
-    "verify:college-dsa": "node scripts/verify-college-dsa.mjs"
+    "verify:college-dsa": "node scripts/verify-college-dsa.mjs",
+    "verify:dsa-snippets": "node scripts/verify-dsa-snippets.mjs",
+    "audit:curriculum": "node scripts/audit-authored-curriculum.mjs",
+    "audit:writing": "node scripts/audit-writing-quality.mjs",
+    "audit:code": "node scripts/audit-code-quality.mjs",
+    "verify": "npm run audit:curriculum && npm run audit:writing && npm run audit:code && npm run verify:dsa-snippets && npm run verify:college-dsa && npm test && npm run build"
   },
   "dependencies": {
     "react": "19.2.8",

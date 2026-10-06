@@ -20,6 +20,36 @@ function FlashcardDeck({ cards }) {
   );
 }
 
+function AcceptedSolutions({ captures }) {
+  const accepted = captures.filter((capture) => capture.code);
+  if (accepted.length === 0) return null;
+
+  return (
+    <section className="accepted-solutions" aria-labelledby="accepted-solutions-title">
+      <header>
+        <p className="eyebrow">Your accepted code</p>
+        <h2 id="accepted-solutions-title">Read your implementation against the invariant.</h2>
+        <p>
+          The explanation above supplies the reasoning model. Expand your saved
+          solution and identify where its state, movement, boundary checks, and
+          complexity express that model.
+        </p>
+      </header>
+      <div>
+        {accepted.map((capture) => (
+          <details key={capture.slug}>
+            <summary>
+              <span>{capture.title}</span>
+              <small>{capture.language}</small>
+            </summary>
+            <pre><code>{capture.code}</code></pre>
+          </details>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export default function QuestionReader({
   question,
   captures,
@@ -45,46 +75,63 @@ export default function QuestionReader({
           <p>{question.summary}</p>
         </header>
 
-        <section className="how-to-solve" aria-labelledby="how-to-solve-title">
-          <header>
-            <h2 id="how-to-solve-title">How to solve it</h2>
-            <p>{question.prediction}</p>
-          </header>
+        <section className="pattern-definition question-pattern-definition" aria-labelledby="question-pattern-title">
+          <p className="eyebrow">Pattern definition</p>
+          <h2 id="question-pattern-title">{question.teachingPattern.name}</h2>
+          <p>{question.teachingPattern.definition}</p>
+          <dl>
+            <div>
+              <dt>When the question is pointing here</dt>
+              <dd>{question.recognition}</dd>
+            </div>
+            <div>
+              <dt>The state you must be able to say aloud</dt>
+              <dd>{question.invariant}</dd>
+            </div>
+            <div>
+              <dt>When this pattern is the wrong tool</dt>
+              <dd>{question.boundary}</dd>
+            </div>
+          </dl>
+        </section>
 
-          <div className="solve-map">
-            <article>
-              <h3>Recognize</h3>
-              <p>{question.recognition}</p>
-            </article>
-            <article>
-              <h3>Carry the state</h3>
-              <p>{question.invariant}</p>
-            </article>
-            <article>
-              <h3>Make the move</h3>
-              <p>{question.move}</p>
-            </article>
-            <article>
-              <h3>Check the boundary</h3>
-              <p>{question.boundary}</p>
-            </article>
-            <article>
-              <h3>Defend the cost</h3>
-              <p>{question.complexity}</p>
-            </article>
-          </div>
+        <section className="pattern-derivation" aria-labelledby="pattern-derivation-title">
+          <p className="eyebrow">Derive it</p>
+          <h2 id="pattern-derivation-title">The code follows these decisions.</h2>
+          <ol>
+            {question.derivation.map((step, index) => (
+              <li key={step}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <p>{step}</p>
+              </li>
+            ))}
+          </ol>
         </section>
 
         <section className="question-trace" aria-labelledby="question-trace-title">
-          <h2 id="question-trace-title">Trace the reasoning</h2>
-          <MechanismVisual block={{ ...question.visual, type: 'visual' }} />
+          <p className="eyebrow">Interactive trace</p>
+          <h2 id="question-trace-title">Move through one complete execution.</h2>
+          <MechanismVisual block={{
+            ...question.visual,
+            type: 'visual',
+            guide: question.teachingPattern,
+            invariant: question.teachingPattern?.invariant,
+            prediction: question.patternQuestion,
+          }} />
+        </section>
+
+        <section className="problem-proof question-proof" aria-labelledby="question-proof-title">
+          <p className="eyebrow">Why it works</p>
+          <h2 id="question-proof-title">Name what cannot be skipped.</h2>
+          <p>{question.correctness}</p>
+          <p>{question.invariant}</p>
         </section>
 
         <CodePairBlock
           className="question-code"
           block={{
             heading: 'Implementation shape',
-            note: 'Read each update against the invariant above. The code is the final expression of the reasoning, not the starting point.',
+            note: `Target: ${question.complexity}. Read each update against the invariant above; the code is the final expression of the argument.`,
             variants: [
               {
                 id: 'c',
@@ -101,6 +148,16 @@ export default function QuestionReader({
             ],
           }}
         />
+
+        <AcceptedSolutions captures={solvedCopies} />
+
+        <section className="question-pitfalls" aria-labelledby="question-pitfalls-title">
+          <p className="eyebrow">Failure checks</p>
+          <h2 id="question-pitfalls-title">Mistakes that reveal a memorized pattern.</h2>
+          <ul>
+            {[...question.pitfalls, question.boundary].map((item) => <li key={item}>{item}</li>)}
+          </ul>
+        </section>
 
         <FlashcardDeck cards={question.flashcards} />
 

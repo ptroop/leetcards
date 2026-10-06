@@ -1,3 +1,5 @@
+import { focusedLinuxGuidance } from './focusedCurriculum.js';
+
 const conceptGuidance = {
   'os-purpose': 'C++ does not replace the operating system boundary. A C++ program still receives processes, virtual memory, files, sockets, and protection from the Linux kernel; classes and RAII only make ownership of those kernel resources easier to express.',
   'os-environment': 'Compile Linux C++ with g++ -std=c++20 -Wall -Wextra -Wpedantic. The same man-page sections and errno values apply, while std::system_error can attach the captured errno value to a typed exception or error object.',
@@ -64,7 +66,7 @@ const labGuidance = {
 };
 
 export function linuxCppGuidanceFor(topic) {
-  const guidance = conceptGuidance[topic.id] ?? labGuidance[topic.id];
+  const guidance = conceptGuidance[topic.id] ?? labGuidance[topic.id] ?? focusedLinuxGuidance[topic.id];
   if (!guidance) {
     throw new Error(`Missing Linux C++ guidance: ${topic.id}`);
   }
@@ -74,4 +76,5 @@ export function linuxCppGuidanceFor(topic) {
 export const linuxCppGuidance = {
   ...conceptGuidance,
   ...labGuidance,
+  ...focusedLinuxGuidance,
 };

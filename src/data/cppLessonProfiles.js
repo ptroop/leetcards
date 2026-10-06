@@ -1,3 +1,5 @@
+import { focusedCppProfiles } from './focusedCurriculum.js';
+
 const profile = ({
   definition,
   explanation,
@@ -1130,6 +1132,8 @@ int main() {
 }`,
   }),
 };
+
+Object.assign(cppLessonProfiles, focusedCppProfiles);
 
 export function cppProfileFor(topicId) {
   const result = cppLessonProfiles[topicId];

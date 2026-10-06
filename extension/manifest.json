@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Leetcards Safe Capture",
-  "version": "1.0.0",
-  "description": "Capture the current LeetCode problem after you solve it and open the matching Leetcards explanation.",
+  "version": "1.1.0",
+  "description": "Capture one LeetCode problem or export your accepted problems for local Leetcards study.",
   "action": {
     "default_title": "Capture for Leetcards",
     "default_popup": "popup.html",

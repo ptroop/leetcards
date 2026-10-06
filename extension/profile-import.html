@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Export solved problems · Leetcards</title>
+    <link rel="stylesheet" href="profile-import.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <img src="icon.svg" alt="" aria-hidden="true" />
+        <span>Leetcards private import</span>
+      </header>
+
+      <section class="hero">
+        <p class="eyebrow">One-click profile export</p>
+        <h1>Gathering your solved problems.</h1>
+        <p>
+          Keep the original LeetCode tab open. This page reads accepted
+          submissions through that signed-in tab and creates one local file.
+        </p>
+      </section>
+
+      <section class="progress-card" aria-labelledby="progress-title">
+        <div>
+          <p class="eyebrow">Current step</p>
+          <h2 id="progress-title">Connecting to LeetCode</h2>
+        </div>
+        <p id="progress-detail" aria-live="polite">
+          Checking that the source tab is still available.
+        </p>
+        <progress id="progress" max="1" value="0"></progress>
+        <div class="progress-counts">
+          <span id="progress-count">0 / 0</span>
+          <span id="solved-count">0 unique accepted problems</span>
+        </div>
+      </section>
+
+      <section class="privacy">
+        <h2>Exactly what leaves LeetCode</h2>
+        <ul>
+          <li>Problem title and slug</li>
+          <li>Language and one accepted solution</li>
+        </ul>
+        <p>
+          Cookies, session tokens, profile identity, dates, runtime, memory,
+          failed submissions, and submission URLs are excluded.
+        </p>
+      </section>
+
+      <section id="result" class="result" hidden>
+        <p class="eyebrow">Export ready</p>
+        <h2 id="result-title">Your local file is ready.</h2>
+        <p id="result-detail"></p>
+        <div class="result-actions">
+          <button id="download" type="button">Download import file</button>
+          <a href="https://ptroop.github.io/leetcards/#/questions" target="_blank" rel="noreferrer">
+            Open Leetcards Questions
+          </a>
+        </div>
+      </section>
+
+      <section id="error" class="error" role="alert" hidden>
+        <p class="eyebrow">Export stopped</p>
+        <h2>Nothing private was saved.</h2>
+        <p id="error-message"></p>
+        <button id="retry" type="button">Try again</button>
+      </section>
+    </main>
+    <script src="profile-import.js"></script>
+  </body>
+</html>

@@ -7,6 +7,7 @@ const source = (
   role,
   reportType,
   confidence,
+  reportedAt = null,
 ) => ({
   id,
   publisher,
@@ -16,6 +17,7 @@ const source = (
   role,
   reportType,
   confidence,
+  reportedAt,
 });
 
 // Public, readable reports only. Aggregators are retained but labelled lower
@@ -330,6 +332,83 @@ export const qualcommIndiaWebSources = [
     'Software engineer',
     'firsthand',
     'medium',
+  ),
+  source(
+    'leetcode-associate-2026',
+    'LeetCode Discuss',
+    'Qualcomm Associate Engineer Interview Experience',
+    'https://leetcode.com/discuss/post/7518816/',
+    'India (city not stated)',
+    'Associate engineer, embedded / systems',
+    'firsthand',
+    'high',
+    '2026 (publication date not shown)',
+  ),
+  source(
+    'jointaro-firmware-hyd-2025',
+    'Jointaro',
+    'Qualcomm Firmware Engineer Hyderabad',
+    'https://www.jointaro.com/interviews/companies/qualcomm/experiences/firmware-engineer-hyderabad-telangana-november-13-2025-no-offer-negative-370ef842/',
+    'Hyderabad, India',
+    'Firmware engineer',
+    'firsthand-republication',
+    'medium',
+    '13 November 2025',
+  ),
+  source(
+    'oahelper-campus-2025',
+    'OAHelper',
+    'Qualcomm SWE On-Campus Interview Experience',
+    'https://www.oahelper.in/interview-experience/MjMyOA',
+    'India',
+    'Software / systems engineer, campus',
+    'firsthand-republication',
+    'medium',
+    '22 September 2025',
+  ),
+  source(
+    'glassdoor-india-2026',
+    'Glassdoor',
+    'Qualcomm India Interview Questions',
+    'https://www.glassdoor.co.in/Interview/Qualcomm-India-Interview-Questions-E6576079.htm',
+    'Hyderabad, India',
+    'Assistant, associate, engineer, and systems roles',
+    'candidate-aggregate',
+    'medium',
+    'Updated 19 September 2026',
+  ),
+  source(
+    'reddit-embedded-2025',
+    'Reddit r/qualcomm',
+    'Qualcomm Embedded Interview Experience',
+    'https://www.reddit.com/r/qualcomm/comments/1iew5tm/qualcomm_embedded_interview_experience/',
+    'India (city not stated)',
+    'Embedded intern',
+    'community-firsthand',
+    'medium',
+    '24 January 2025',
+  ),
+  source(
+    'reddit-power-blr-2026',
+    'Reddit r/qualcomm',
+    'Qualcomm Bengaluru Power and Performance Interview Report',
+    'https://www.reddit.com/r/qualcomm/comments/1t0sx4e/joining_qualcomm_bengaluru_as_eng_power_and/',
+    'Bengaluru, India',
+    'Engineer, power and performance / chip validation',
+    'community-firsthand',
+    'medium',
+    'May 2026',
+  ),
+  source(
+    'leetcode-pune-cpp-2026',
+    'LeetCode Discuss',
+    'Qualcomm Pune Hiring Drive: C++ and Systems',
+    'https://leetcode.com/discuss/post/8338035/',
+    'Pune, India',
+    'C++ / AI systems engineer',
+    'firsthand',
+    'high',
+    '2026',
   ),
 ];
 
@@ -702,6 +781,77 @@ export const qualcommIndiaReportedQuestions = [
     ['Correctly label three boxes when every label is wrong.', 'Draw from the box whose label claims a mixed pair; one observation collapses the remaining assignments.'],
     ['Solve the 100-bulb toggle puzzle.', 'Bulb n is toggled once per divisor, so only perfect squares have an odd number of toggles.'],
   ]),
+
+  // Recent reports reviewed in September 2026. When a report names only a
+  // subject rather than exact wording, the prompt says so instead of inventing
+  // a supposedly verbatim interview question.
+  ...batch('dsa-matrix', ['leetcode-associate-2026'], [
+    ['Traverse an N×M matrix in spiral order.', 'Maintain top, bottom, left, and right boundaries. Emit the top row, right column, bottom row in reverse, and left column in reverse, checking whether rows or columns remain before the reverse passes. Each cell is visited once: O(rows × columns) time and O(1) auxiliary space.'],
+  ]),
+  ...batch('dsa-linked', ['leetcode-associate-2026', 'glassdoor-india-2026'], [
+    ['Prove why Floyd’s fast and slow pointers detect a linked-list cycle.', 'If slow moves one edge and fast moves two, their distance modulo the cycle length increases by one after both enter the cycle, so they must meet. If head-to-entry distance is μ and the meeting offset is x, the meeting equation implies μ ≡ cycle_length − x; resetting one pointer to head and moving both one step makes them meet at the entry.'],
+    ['Swap adjacent linked-list nodes pairwise without swapping their stored values.', 'Use a dummy head. For each pair a→b, save the node after b, connect predecessor→b, b→a, and a→next, then advance predecessor to a. Saving next before rewiring preserves the unprocessed suffix. Time is O(n), space is O(1).'],
+    ['Merge two sorted linked lists and state the invariant.', 'Use a dummy tail. At every step, the output prefix is sorted and contains exactly the consumed nodes; append the smaller current node, advance only that input, then attach the remaining suffix. Time is O(n+m), auxiliary space is O(1).'],
+  ]),
+  ...batch('os-reclamation', ['leetcode-associate-2026'], [
+    ['What is memory thrashing, and how would you recognize it?', 'Thrashing occurs when a workload’s active pages do not fit in available memory, so the system spends most of its time faulting and reclaiming instead of executing. Evidence includes a high major-fault rate, heavy swap I/O, low useful CPU progress, and rapid page replacement. Reduce the working set, add memory, or change admission and reclamation policy.'],
+    ['How does fragmentation differ from paging and compaction?', 'External fragmentation leaves free physical regions split into unusable holes; compaction moves allocations to combine those holes. Paging avoids external fragmentation for ordinary virtual memory by allocating fixed-size frames, but still has internal waste in the last page and fragmentation concerns in contiguous physical allocators.'],
+  ]),
+  ...batch('os-scheduling', ['leetcode-associate-2026', 'oahelper-campus-2025'], [
+    ['Explain Multi-Level Feedback Queue scheduling.', 'MLFQ keeps several priority queues. New or interactive tasks start high; using an entire time slice usually lowers priority, blocking quickly preserves responsiveness, and periodic boosts prevent starvation. It approximates short-job preference without knowing burst lengths, but its behavior depends on queue count, quantum sizes, promotion, demotion, and boost policy.'],
+    ['Compare preemptive and non-preemptive scheduling.', 'A preemptive scheduler may interrupt a running task when a higher-priority task becomes ready or a quantum expires, improving responsiveness at the cost of context-switch and synchronization complexity. A non-preemptive scheduler changes tasks only when the current task blocks, exits, or yields, making reasoning simpler but allowing one task to delay others.'],
+  ]),
+  ...batch('rtos-inversion', ['oahelper-campus-2025'], [
+    ['Trace priority inversion and explain priority inheritance.', 'A low-priority task holds a mutex needed by a high-priority task; a medium-priority task then preempts the low task, indirectly delaying the high task. Priority inheritance temporarily raises the owner to the highest waiting priority so it can release the mutex, after which its original priority is restored. Bound critical sections and use a protocol supported by the RTOS.'],
+  ]),
+  ...batch('c-tricks', ['oahelper-campus-2025'], [
+    ['Implement memcpy and state why a “buffer-overflow check” cannot be inferred inside standard memcpy.', 'Copy n bytes through unsigned-char pointers because every object representation may be inspected as bytes. Standard memcpy receives no destination capacity, so it cannot discover whether n fits; the caller must validate sizes. It also has undefined behavior for overlapping ranges—use memmove when overlap is possible.'],
+  ]),
+  ...batch('cpp-concurrency', ['leetcode-associate-2026'], [
+    ['Implement a thread-safe Singleton in modern C++ and explain initialization.', 'Use a function-local static object: C++11 guarantees its initialization occurs exactly once even with concurrent callers. Return a reference, delete copying and assignment, and avoid manual double-checked locking. The harder design question is whether global lifetime and hidden dependencies justify a Singleton at all.'],
+  ]),
+  ...batch('cpp-smart-pointers', ['leetcode-pune-cpp-2026'], [
+    ['Implement a minimal smart pointer and explain its ownership invariant.', 'For unique ownership, store one raw pointer, delete it in the destructor, delete copy operations, and implement move construction and move assignment by transferring the pointer and nulling the source. The invariant is that at most one live owner deletes the resource. A shared pointer additionally needs a control block and atomic reference accounting; a weak pointer observes without extending object lifetime.'],
+  ]),
+  ...batch('qualcomm-dsa-hashing-distinct', ['leetcode-associate-2026'], [
+    ['Find the missing and repeating values when an array should contain 1 through n.', 'Use a frequency or sign-marking method for the clearest O(n)-time solution, or derive two equations from the sum and sum of squares with overflow-safe arithmetic. XOR alone needs a second partition step to distinguish the missing value from the duplicate. State whether modifying the input is allowed.'],
+  ]),
+  ...batch('debug-memory', ['leetcode-associate-2026'], [
+    ['Design a C++ memory-leak analyzer at a high level.', 'Intercept allocations and deallocations, record address, size, call site, timestamp, and optional stack trace in a thread-safe table, then report live entries at shutdown or snapshot time. Prevent the tracker from recursively allocating through itself, define behavior for realloc and aligned allocation, and distinguish a leak from intentionally retained process-lifetime memory.'],
+  ]),
+  ...batch('qualcomm-c-pointers-arrays', ['reddit-embedded-2025', 'glassdoor-india-2026'], [
+    ['Explain how a function pointer is declared, called, and used for an embedded callback.', 'A function pointer type includes the return and parameter types, for example void (*handler)(uint32_t). Store only functions with a compatible type and call through the pointer. Firmware uses this for interrupt dispatch tables, driver callbacks, state-machine actions, and test substitution; lifetime applies to captured context data even though the function itself has static storage.'],
+  ]),
+  ...batch('qualcomm-c-storage-lifetime', ['reddit-power-blr-2026', 'glassdoor-india-2026'], [
+    ['Compare extern and static at file scope in C.', 'extern declares an object or function with external linkage that is defined elsewhere. file-scope static gives internal linkage, restricting the name to that translation unit. Both file-scope objects have static storage duration; linkage and lifetime are separate properties.'],
+  ]),
+  ...batch('embedded-interrupts', ['reddit-power-blr-2026'], [
+    ['Trace what happens from an interrupt assertion to return on a microcontroller.', 'The peripheral asserts a pending condition; the interrupt controller compares enable, mask, and priority state; the core finishes or aborts the current instruction as architecturally defined, saves context, loads the vector, runs a short non-blocking ISR, clears or acknowledges the source, restores context, and resumes or tail-chains. Latency includes masking, higher-priority work, stacking, and memory stalls.'],
+  ]),
+  ...batch('embedded-mcu', ['reddit-power-blr-2026'], [
+    ['Draw and explain the blocks of a microcontroller architecture.', 'Start with the CPU and bus fabric, then flash, SRAM, clock/reset, interrupt controller, DMA, GPIO, timers, serial peripherals, analog blocks, debug port, and power domains. Explain one data path end to end—for example a timer-triggered ADC sample moved by DMA into SRAM and consumed by firmware.'],
+  ]),
+  ...batch('embedded-i2c', ['reddit-power-blr-2026'], [
+    ['Explain I2C at the electrical and transaction levels.', 'SCL and SDA are open-drain lines raised by pull-ups. A controller issues START, address plus direction, samples ACK, transfers bytes with one ACK/NACK bit each, and finishes with STOP or repeated START. Correctness depends on address format, rise time, clock stretching support, timeout, and recovery from a stuck-low bus.'],
+  ]),
+  ...batch('embedded-uart', ['reddit-power-blr-2026'], [
+    ['Explain a UART receive path from the wire to application code.', 'The receiver detects the falling start edge, samples data near each bit center using its baud clock, checks optional parity and stop bits, then places the byte in a register or FIFO. An interrupt or DMA moves data into a software buffer, where framing, overflow, timeout, and message-boundary policy belong.'],
+  ]),
+  ...batch('dsa-stack-queue', ['reddit-power-blr-2026', 'jointaro-firmware-hyd-2025'], [
+    ['Implement a queue and explain how a circular buffer avoids shifting elements.', 'Store head, tail, and either count or an explicit full-state rule. Enqueue writes at tail and advances modulo capacity; dequeue reads at head and advances modulo capacity. Define empty and full unambiguously, and never confuse index wraparound with data loss. Both operations are O(1).'],
+  ]),
+  ...batch('dsa-heap', ['reddit-power-blr-2026'], [
+    ['Implement a binary heap and explain how to optimize repeated priority removal.', 'Represent the complete tree in an array. Insertion appends then sifts up; removal swaps the root with the last element, shrinks the live range, then sifts down. Build-heap is O(n), each push or pop is O(log n), and reading the root is O(1).'],
+  ]),
+  ...batch('dsa-binary-tree', ['jointaro-firmware-hyd-2025'], [
+    ['A recent firmware report mentions a BST question without preserving exact wording. Which operations must you be ready to implement?', 'Be ready to search, insert, delete, find minimum or maximum, compute height, count nodes, and traverse. The invariant is that every key in the left subtree compares lower and every key in the right compares higher under the chosen duplicate policy. Deletion has leaf, one-child, and two-child cases; the two-child case replaces with an inorder successor or predecessor, then removes that moved key.'],
+  ]),
+  ...batch('c-memory', ['glassdoor-india-2026', 'leetcode-pune-cpp-2026'], [
+    ['Explain the memory layout of a C or C++ process and the lifetime represented by each region.', 'Code and read-only data hold instructions and constants; initialized and zero-initialized static objects live in data and BSS; dynamic allocations come from allocator-managed mappings or the heap; automatic objects usually occupy thread stacks. These are conventional mappings, not language guarantees. Object storage duration, ownership, and virtual-memory placement must not be treated as the same concept.'],
+  ]),
+  ...batch('arch-performance', ['glassdoor-india-2026'], [
+    ['Differentiate latency and throughput with an embedded example.', 'Latency is time for one operation from request to completion; throughput is completed work per unit time. DMA batching may improve UART throughput while increasing the first byte’s latency. Measure both under a defined load because optimizing one can worsen the other.'],
+  ]),
 ];
 
 for (const item of qualcommIndiaReportedQuestions) {
@@ -735,5 +885,9 @@ export const qualcommIndiaWebAudit = {
   highConfidenceSourceCount: qualcommIndiaWebSources.filter(
     (item) => item.confidence === 'high',
   ).length,
+  repeatedQuestionCount: qualcommIndiaReportedQuestions.filter(
+    (item) => item.sources.length > 1,
+  ).length,
   locations: [...new Set(qualcommIndiaWebSources.map((item) => item.location))],
+  reviewedThrough: '22 September 2026',
 };

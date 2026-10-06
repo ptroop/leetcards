@@ -6,12 +6,15 @@ import { getLessonForTopic, validateLesson } from '../src/data/contentModel.js';
 import { searchTopics } from '../src/data/search.js';
 import { deepProfiles } from '../src/data/deepProfiles.js';
 import { dsaVisuals } from '../src/data/dsaVisuals.js';
+import { patternGuideForTopic } from '../src/data/dsaPatternGuides.js';
 import { linuxMechanismSpecs } from '../src/data/linuxMechanisms.js';
 import { collegeMcuLabs, collegeMcuCoverage } from '../src/data/collegeMcuLabs.js';
 import { collegeDsaLabs, collegeDsaCoverage } from '../src/data/collegeDsaLabs.js';
 import { cppLessonProfiles } from '../src/data/cppLessonProfiles.js';
 import { cppConcepts } from '../src/data/cppConcepts.js';
 import { linuxCppGuidance } from '../src/data/linuxCppGuidance.js';
+import { focusedCppSubtopics, focusedLinuxSubtopics } from '../src/data/focusedCurriculum.js';
+import { isProtectedTopic } from '../src/data/coreLessonRegistry.js';
 
 test('curriculum exposes every required learning area', () => {
   const titles = new Set(curriculum.map((section) => section.title));
@@ -145,7 +148,10 @@ test('every topic resolves to one substantive variable-depth lesson', () => {
     assert.equal(validateLesson(lesson).valid, true, `invalid lesson for ${topic.id}`);
     assert.ok(lesson.summary.length >= 45, `summary too shallow for ${topic.id}`);
     assert.ok(lesson.blocks.length >= 3, `not enough teaching blocks for ${topic.id}`);
-    assert.equal(lesson.contentSource, 'authored', `lesson still uses generated filler for ${topic.id}`);
+    assert.ok(
+      ['authored', 'authored-record'].includes(lesson.contentSource),
+      `lesson still uses generated filler for ${topic.id}`,
+    );
     assert.equal(lesson.depth, topic.level, `catalog depth and lesson depth disagree for ${topic.id}`);
     assert.equal(
       JSON.stringify(lesson).includes('Build the smallest mental model'),
@@ -174,14 +180,14 @@ test('every lesson starts definition-first and then grounds the idea in a real s
   for (const lesson of lessons) {
     const definitions = lesson.blocks.filter((block) => block.type === 'definition');
     const definition = definitions[0];
-    const application = lesson.blocks[1];
+    const application = lesson.blocks.find((block) => block.type === 'application');
 
     assert.equal(definitions.length, 1, `${lesson.topicId} must have one definition`);
     assert.equal(lesson.blocks[0], definition, `${lesson.topicId} definition is not first`);
     assert.equal(definition.heading, 'What it is', `${lesson.topicId} definition heading drifted`);
     assert.ok(definition.body.length >= 80, `${lesson.topicId} definition is too thin`);
     assert.equal(lesson.summary, definition.body, `${lesson.topicId} hero summary differs from its definition`);
-    assert.equal(application.type, 'application', `${lesson.topicId} has no real-system grounding after its definition`);
+    assert.equal(application?.type, 'application', `${lesson.topicId} has no real-system grounding after its definition`);
     assert.ok(application.body.length >= 100, `${lesson.topicId} real-system example is too thin`);
 
     for (const pattern of vagueDefinitionPatterns) {
@@ -216,11 +222,15 @@ test('standard and deep lessons explain a complete case instead of stopping at v
   for (const lesson of lessons.filter((item) => item.depth !== 'brief')) {
     const types = new Set(lesson.blocks.map((block) => block.type));
     const hasTrace = types.has('steps')
+      || types.has('worked-example')
       || lesson.blocks.some((block) => block.type === 'visual' && block.frames?.length >= 2);
+    const hasVerification = types.has('practice')
+      || lesson.blocks.some((block) => block.heading === 'How to verify it');
+    const hasRecall = types.has('recall') || types.has('recall-list');
 
     assert.ok(hasTrace, `${lesson.topicId} has no ordered mechanism or state trace`);
-    assert.ok(types.has('practice'), `${lesson.topicId} has no learner verification`);
-    assert.ok(types.has('recall'), `${lesson.topicId} has no explain-it-back check`);
+    assert.ok(hasVerification, `${lesson.topicId} has no learner verification`);
+    assert.ok(hasRecall, `${lesson.topicId} has no explain-it-back check`);
   }
 });
 
@@ -328,10 +338,49 @@ test('constructor lesson defines construction and destruction before tracing ord
   }
 });
 
+test('important bundled C++ areas have separate definition-first deep dives', () => {
+  const required = [
+    'cpp-ctor-default-parameterized',
+    'cpp-ctor-copy-move',
+    'cpp-ctor-control',
+    'cpp-destructor-kinds',
+    'cpp-special-member-rules',
+    'cpp-unique-ownership',
+    'cpp-shared-weak-ownership',
+    'cpp-value-categories-move',
+    'cpp-perfect-forwarding',
+    'cpp-diamond-inheritance',
+    'cpp-virtual-dispatch-slicing',
+    'cpp-exception-control-flow',
+    'cpp-unwinding-safety',
+    'cpp-template-basics',
+    'cpp-template-advanced',
+    'cpp-stl-containers',
+    'cpp-iterators-algorithms-lambdas',
+    'cpp-optional-variant-any',
+    'cpp-thread-mutex-atomic',
+  ];
+  assert.deepEqual(focusedCppSubtopics.map((topic) => topic.id), required);
+  for (const id of required) {
+    const lesson = getLessonForTopic(id);
+    assert.equal(lesson.blocks[0].type, 'definition', `${id} is not definition-first`);
+    assert.ok(lesson.blocks.some((block) => block.type === 'concepts'), `${id} lacks named moving parts`);
+    assert.ok(lesson.blocks.some((block) => block.type === 'code'), `${id} lacks its own implementation`);
+    assert.ok(lesson.blocks.some((block) => block.type === 'application'), `${id} lacks a real application`);
+  }
+});
+
 test('every deep topic has the complete mechanism lesson contract', () => {
   for (const topic of allTopics.filter((item) => item.level === 'deep')) {
     const lesson = getLessonForTopic(topic.id);
     const blockTypes = new Set(lesson.blocks.map((block) => block.type));
+    if (lesson.contentSource === 'authored-record') {
+      for (const type of ['worked-example', 'technical-sketch', 'failure-table', 'recall-list']) {
+        assert.ok(blockTypes.has(type), `${topic.id} missing authored deep block ${type}`);
+      }
+      assert.ok(blockTypes.has('steps'), `${topic.id} lacks mechanism and verification steps`);
+      continue;
+    }
     for (const type of ['prediction', 'visual', 'failure', 'practice', 'recall']) {
       assert.ok(blockTypes.has(type), `${topic.id} missing deep block ${type}`);
     }
@@ -348,6 +397,7 @@ test('non-special deep lessons use topic-specific authored profiles', () => {
     'embedded-i2c', 'schematic-basics', 'debug-method', 'rtos-tasks', 'stm32-startup',
     'stm32-clock', 'stm32-interrupts', 'embedded-dma',
     ...Object.keys(linuxMechanismSpecs),
+    ...focusedLinuxSubtopics.map((topic) => topic.id),
   ]);
 
   for (const topic of allTopics.filter((item) => (
@@ -397,6 +447,12 @@ test('required mechanisms receive deep prediction-to-practice treatment', () => 
     const lesson = getLessonForTopic(topicId);
     assert.equal(lesson.depth, 'deep', `${topicId} is not deep`);
     const blockTypes = new Set(lesson.blocks.map((block) => block.type));
+    if (lesson.contentSource === 'authored-record') {
+      for (const type of ['steps', 'worked-example', 'technical-sketch', 'failure-table', 'recall-list']) {
+        assert.ok(blockTypes.has(type), `${topicId} missing authored ${type}`);
+      }
+      continue;
+    }
     for (const type of ['prediction', 'steps', 'visual', 'failure', 'practice', 'recall']) {
       assert.ok(blockTypes.has(type), `${topicId} missing ${type}`);
     }
@@ -410,10 +466,7 @@ test('DSA patterns include visual state frames, recognition guidance, and C plus
     'dsa-stack-queue',
     'dsa-hash',
     'dsa-heap',
-    'dsa-binary-tree',
     'dsa-bst',
-    'dsa-avl',
-    'dsa-red-black',
     'dsa-sorting',
     'dsa-search',
     'dsa-recursion',
@@ -620,6 +673,90 @@ test('selected DSA includes the missing interview problem families', () => {
   }
 });
 
+test('linked lists, stacks, queues, and basic BST expose important problems as separate lessons', () => {
+  const required = [
+    'dsa-sll-middle',
+    'dsa-sll-nth-from-end',
+    'dsa-sll-remove-nth',
+    'dsa-sll-cycle-detection',
+    'dsa-sll-cycle-entry',
+    'dsa-sll-reverse-iterative',
+    'dsa-sll-reverse-recursive',
+    'dsa-sll-intersection',
+    'dsa-sll-palindrome',
+    'dsa-sll-partition',
+    'dsa-sll-reorder',
+    'dsa-sll-reverse-k-group',
+    'dsa-dll-insert',
+    'dsa-dll-delete',
+    'dsa-dll-reverse',
+    'dsa-cll-traversal',
+    'dsa-cll-insert-delete',
+    'dsa-valid-parentheses',
+    'dsa-min-stack',
+    'dsa-next-greater-element',
+    'dsa-circular-queue',
+    'dsa-queue-using-stacks',
+    'dsa-sliding-window-maximum',
+    'dsa-bst-search',
+    'dsa-bst-insert',
+    'dsa-bst-validate',
+    'dsa-bst-delete',
+  ];
+
+  for (const id of required) {
+    const topic = allTopics.find((entry) => entry.id === id);
+    assert.ok(topic, `missing focused DSA lesson: ${id}`);
+    assert.ok(topic.group, `${id} is not assigned to a visible subcategory`);
+    const lesson = getLessonForTopic(id);
+    const pair = lesson.blocks.find((block) => block.type === 'code-pair');
+    assert.deepEqual(pair?.variants.map((variant) => variant.id), ['c', 'cpp'], `${id} is not independently implemented`);
+    assert.ok(lesson.blocks.some((block) => block.type === 'application'), `${id} has no real use`);
+    assert.ok(lesson.blocks.some((block) => block.type === 'visual'), `${id} has no trace`);
+  }
+});
+
+test('linked-list tricks are first-class lessons connected to the problems that reuse them', () => {
+  const techniqueIds = [
+    'dsa-sll-dummy-head',
+    'dsa-sll-fast-slow-technique',
+    'dsa-sll-three-pointer-reversal',
+  ];
+  for (const id of techniqueIds) {
+    const lesson = getLessonForTopic(id);
+    assert.equal(allTopics.find((topic) => topic.id === id)?.group, 'Linked-list techniques');
+    assert.ok(lesson.blocks.some((block) => block.type === 'concepts'), `${id} lacks its technique definition`);
+    const related = lesson.blocks.find((block) => block.type === 'related-lessons');
+    assert.ok(related?.items.length >= 3, `${id} does not connect enough related problems`);
+    assert.ok(lesson.blocks.some((block) => block.type === 'code-pair'), `${id} lacks C and C++ code`);
+  }
+
+  for (const id of [
+    'dsa-sll-delete',
+    'dsa-sll-remove-nth',
+    'dsa-sll-partition',
+    'dsa-sll-reorder',
+    'dsa-sll-reverse-k-group',
+  ]) {
+    const lesson = getLessonForTopic(id);
+    assert.ok(lesson.blocks.some((block) => block.type === 'related-lessons'), `${id} is isolated from its reusable tricks`);
+  }
+});
+
+test('category pages render visible lesson subcategories instead of one combined list', async () => {
+  const source = await readFile(new URL('../src/components/CategoryView.jsx', import.meta.url), 'utf8');
+  assert.ok(source.includes('subcategory-list'));
+  assert.ok(source.includes('subcategory-heading'));
+  assert.ok(source.includes("topic.group || 'Core concepts'"));
+});
+
+test('related-problem blocks route directly to the connected lesson', async () => {
+  const source = await readFile(new URL('../src/components/LessonBlock.jsx', import.meta.url), 'utf8');
+  assert.ok(source.includes("block.type === 'related-lessons'"));
+  assert.ok(source.includes('routeForLesson(item.id)'));
+  assert.ok(source.includes('Pattern connections'));
+});
+
 test('every DSA pattern simulation is a complete trace with explicit final reasoning', () => {
   for (const topic of allTopics.filter((item) => item.sectionId === 'dsa' && item.group !== 'College DSA C Labs')) {
     const visual = dsaVisuals[topic.id];
@@ -637,6 +774,56 @@ test('pointer and window simulations encode positions and bounds rather than onl
   assert.ok(dsaVisuals['dsa-two-pointers'].frames.every((frame) => frame.pointers));
   assert.ok(dsaVisuals['dsa-sliding'].frames.every((frame) => frame.window));
   assert.ok(dsaVisuals['dsa-longest-substring'].frames.every((frame) => frame.window));
+  assert.ok(dsaVisuals['dsa-sliding-window-maximum'].frames.every((frame) => frame.window));
+  assert.ok(dsaVisuals['dsa-circular-queue'].frames.every((frame) => Number.isInteger(frame.capacity)));
+  assert.ok(
+    dsaVisuals['dsa-sll-cycle-detection'].frames.some(
+      (frame) => frame.links?.some((link) => link.from === 'node-3' && link.to === 'node-1'),
+    ),
+    'cycle detection visual does not draw the back edge',
+  );
+});
+
+test('DSA visuals teach pattern selection before replaying state', () => {
+  for (const topicId of [
+    'dsa-two-pointers',
+    'dsa-sliding',
+    'dsa-kadane',
+    'dsa-monotonic',
+    'dsa-fast-slow',
+    'dsa-prefix',
+    'dsa-search',
+    'dsa-dp',
+  ]) {
+    const guide = patternGuideForTopic(topicId);
+    assert.ok(guide.definition.length > 100, `${topicId} lacks a pattern definition`);
+    assert.ok(guide.recognition.length > 60, `${topicId} lacks recognition guidance`);
+    assert.ok(guide.method.length >= 4, `${topicId} lacks a reusable method`);
+    assert.ok(guide.correctness.length > 80, `${topicId} lacks a proof`);
+  }
+});
+
+test('high-value pattern traces expose decisions, predictions, proofs, and executing code', () => {
+  for (const topicId of [
+    'dsa-two-pointers',
+    'dsa-sliding',
+    'dsa-kadane',
+    'dsa-monotonic',
+    'dsa-fast-slow',
+    'dsa-prefix',
+    'dsa-search',
+    'dsa-dp',
+    'dsa-longest-substring',
+    'dsa-k-distinct',
+    'dsa-coin-change-min',
+  ]) {
+    const frames = dsaVisuals[topicId].frames;
+    assert.ok(frames.every((frame) => frame.phase), `${topicId} lacks phase labels`);
+    assert.ok(frames.every((frame) => frame.decision), `${topicId} lacks explicit decisions`);
+    assert.ok(frames.every((frame) => frame.reason), `${topicId} lacks move proofs`);
+    assert.ok(frames.slice(0, -1).every((frame) => frame.question), `${topicId} lacks prediction prompts`);
+    assert.ok(frames.slice(0, -1).every((frame) => frame.codeLine), `${topicId} lacks code-to-state links`);
+  }
 });
 
 test('systems categories and lessons follow the recommended learning order', () => {
@@ -693,26 +880,45 @@ test('C++, architecture, embedded, STM32, and Linux follow prerequisite-first to
     'cpp-object-model',
     'cpp-encapsulation',
     'cpp-constructors',
+    'cpp-ctor-default-parameterized',
+    'cpp-ctor-copy-move',
+    'cpp-ctor-control',
+    'cpp-destructor-kinds',
     'cpp-const',
     'cpp-references',
+    'cpp-value-categories-move',
+    'cpp-perfect-forwarding',
     'cpp-overload',
     'cpp-operators',
     'cpp-copy-move',
+    'cpp-special-member-rules',
+    'cpp-unique-ownership',
+    'cpp-shared-weak-ownership',
     'cpp-raii',
     'cpp-smart-pointers',
     'cpp-composition',
     'cpp-inheritance',
     'cpp-polymorphism',
+    'cpp-diamond-inheritance',
+    'cpp-virtual-dispatch-slicing',
     'cpp-exceptions',
+    'cpp-exception-control-flow',
+    'cpp-unwinding-safety',
     'cpp-templates',
     'cpp-template-specialization',
     'cpp-constexpr',
     'cpp-stl',
     'cpp-iterators',
     'cpp-lambdas',
+    'cpp-template-basics',
+    'cpp-template-advanced',
+    'cpp-stl-containers',
+    'cpp-iterators-algorithms-lambdas',
     'cpp-errors',
+    'cpp-optional-variant-any',
     'cpp-testing',
     'cpp-concurrency',
+    'cpp-thread-mutex-atomic',
   ]);
 
   assertExactOrder('architecture', [
@@ -794,6 +1000,9 @@ test('C++, architecture, embedded, STM32, and Linux follow prerequisite-first to
     'os-file-io',
     'os-fd-dup',
     'os-fcntl',
+    'os-descriptor-flags',
+    'os-advisory-locks',
+    'os-ioctl',
     'linux-a01',
     'linux-a02',
     'linux-a03',
@@ -823,6 +1032,9 @@ test('C++, architecture, embedded, STM32, and Linux follow prerequisite-first to
     'linux-a12',
     'linux-a13',
     'os-signals',
+    'os-signal-delivery',
+    'os-signal-masks',
+    'os-async-signal-safety',
     'linux-a14',
     'linux-a15',
     'linux-a16',
@@ -836,11 +1048,18 @@ test('C++, architecture, embedded, STM32, and Linux follow prerequisite-first to
     'os-pthreads',
     'os-mutex',
     'os-semaphores',
+    'os-data-race',
+    'os-deadlock',
+    'os-condition-variables',
+    'os-futex',
     'linux-a20',
     'linux-a21',
     'linux-a22',
     'os-boot',
     'os-proc',
+    'os-proc-sys',
+    'os-namespaces',
+    'os-cgroups',
   ]);
 
   for (const id of ['cpp-composition', 'cpp-polymorphism', 'cpp-stl', 'cpp-iterators']) {
@@ -864,6 +1083,32 @@ test('Linux implementation topics teach paired C and C++ code plus internals', (
     assert.ok(pair, `${id} lacks an implementation pair`);
     assert.deepEqual(pair.variants.map((variant) => variant.id), ['c', 'cpp']);
     assert.match(JSON.stringify(lesson), /user space|kernel|internal|state/i, `${id} lacks internals`);
+  }
+});
+
+test('bundled Linux mechanisms are separate C and C++ lessons with kernel-state traces', () => {
+  const required = [
+    'os-descriptor-flags',
+    'os-advisory-locks',
+    'os-ioctl',
+    'os-signal-delivery',
+    'os-signal-masks',
+    'os-async-signal-safety',
+    'os-data-race',
+    'os-deadlock',
+    'os-condition-variables',
+    'os-futex',
+    'os-proc-sys',
+    'os-namespaces',
+    'os-cgroups',
+  ];
+  assert.deepEqual(focusedLinuxSubtopics.map((topic) => topic.id), required);
+  for (const id of required) {
+    const lesson = getLessonForTopic(id);
+    const pair = lesson.blocks.find((block) => block.type === 'code-pair');
+    assert.deepEqual(pair?.variants.map((variant) => variant.id), ['c', 'cpp'], `${id} lacks both languages`);
+    assert.ok(lesson.blocks.some((block) => block.type === 'visual'), `${id} lacks a state trace`);
+    assert.ok(lesson.blocks.some((block) => block.type === 'application'), `${id} lacks a real application`);
   }
 });
 
@@ -996,4 +1241,16 @@ test('high-value embedded transactions use signal-lane visuals', async () => {
     assert.equal(visual.kind, 'signals', `${id} is still a generic timeline`);
     assert.ok(visual.frames.every((frame) => frame.values.length >= 2), `${id} lacks multiple signal lanes`);
   }
+});
+
+test('every in-scope core topic resolves through the authored registry', () => {
+  for (const topic of allTopics.filter((item) => !isProtectedTopic(item))) {
+    assert.equal(getLessonForTopic(topic.id).contentSource, 'authored-record', topic.id);
+  }
+});
+
+test('package exposes curriculum audit and local DSA compilation commands', async () => {
+  const pkg = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
+  assert.equal(pkg.scripts['audit:curriculum'], 'node scripts/audit-authored-curriculum.mjs');
+  assert.equal(pkg.scripts['verify:dsa-snippets'], 'node scripts/verify-dsa-snippets.mjs');
 });

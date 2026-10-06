@@ -45,10 +45,36 @@ const withStore = async (mode, run) => {
 
 export const loadCapturedQuestions = async () => {
   const records = await withStore('readonly', (store) => store.getAll());
-  return records.sort((left, right) => right.capturedAt.localeCompare(left.capturedAt));
+  return records.sort((left, right) => {
+    const leftTime = typeof left.capturedAt === 'string' ? left.capturedAt : '';
+    const rightTime = typeof right.capturedAt === 'string' ? right.capturedAt : '';
+    if (leftTime !== rightTime) return rightTime.localeCompare(leftTime);
+    return left.title.localeCompare(right.title);
+  });
 };
 
 export const saveCapturedQuestion = async (record) => {
   await withStore('readwrite', (store) => store.put(record));
   return record;
+};
+
+export const saveCapturedQuestions = async (records) => {
+  const database = await openDatabase();
+  try {
+    await new Promise((resolve, reject) => {
+      const transaction = database.transaction(STORE_NAME, 'readwrite');
+      const store = transaction.objectStore(STORE_NAME);
+      for (const record of records) store.put(record);
+      transaction.oncomplete = () => resolve();
+      transaction.onerror = () => reject(
+        transaction.error ?? new Error('Could not save the profile import'),
+      );
+      transaction.onabort = () => reject(
+        transaction.error ?? new Error('Profile import storage was cancelled'),
+      );
+    });
+  } finally {
+    database.close();
+  }
+  return records;
 };

@@ -21,8 +21,17 @@ export function parseRoute(hash = '') {
   if (parts[0] === 'internet' && parts.length === 1) {
     return { view: 'internet' };
   }
+  if (parts[0] === 'common-interviews' && parts.length === 1) {
+    return { view: 'common-interviews' };
+  }
+  if (parts[0] === 'aptitude' && parts.length === 1) {
+    return { view: 'aptitude' };
+  }
   if (parts[0] === 'question' && parts.length === 2) {
     return { view: 'question', questionId: clean(parts[1]) };
+  }
+  if (parts[0] === 'problem' && parts.length === 2) {
+    return { view: 'problem', slug: clean(parts[1]) };
   }
   if (parts[0] === 'capture' && parts.length === 2) {
     return { view: 'capture', payload: clean(parts[1]) };
@@ -35,5 +44,8 @@ export const routeForCategory = (sectionId) => `#/category/${encodeURIComponent(
 export const routeForLesson = (topicId) => `#/lesson/${encodeURIComponent(topicId)}`;
 export const routeForQuestions = () => '#/questions';
 export const routeForInternet = () => '#/internet';
+export const routeForCommonInterviews = () => '#/common-interviews';
+export const routeForAptitude = () => '#/aptitude';
 export const routeForQuestion = (questionId) => `#/question/${encodeURIComponent(questionId)}`;
+export const routeForProblem = (slug) => `#/problem/${encodeURIComponent(slug)}`;
 export const routeForCapture = (payload) => `#/capture/${encodeURIComponent(payload)}`;

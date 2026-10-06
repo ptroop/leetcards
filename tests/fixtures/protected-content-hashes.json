@@ -1,0 +1,14 @@
+{
+  "src/data/qualcommPrep.js": "bcedeeed6a29a51669146dcbbd05afeac5689b400154b81863358196034af2f1",
+  "src/data/qualcommPrepProfilesC.js": "f7414503a93eccc60df346fe7904e257d512a49b22acab57c9bad3635f609819",
+  "src/data/qualcommPrepProfilesDsa.js": "ff9fd6e217ad88a522407e65556907435cf16fbd040bb0ec3652510da796b7f5",
+  "src/data/qualcommPrepProfilesEmbedded.js": "c70d86099bb0c6872d7b86821dc707cbc3f1a9107dd96660fcb3238cefa976cf",
+  "src/data/qualcommPrepProfilesInterview.js": "4b3461f70ee7f09e253730183d3ca698555dd8e1e16d02bc4d2a8a6eff2f5079",
+  "src/data/qualcommPrepProfilesLinux.js": "632e0d0340eb143149f5449d873e0c40f56cc4ee3c068686f6a03092823017cd",
+  "src/data/qualcommIndiaWebQuestions.js": "e3cf0bcbfea11d5649290d1933ac9e6f429d4401d0e186213c7b3812ef69cae3",
+  "src/data/qualcommSourceCoverage.js": "a74ec6bf768fffdd72c33bef02a43814b6ac549359e469015106ac6d83a5adf9",
+  "src/data/linuxLabs.js": "72f144a55e88a6808d16c81bb9a4bf4acadeda6321b0327f81b69c68fb8e3e7e",
+  "src/data/collegeMcuLabs.js": "1f021aa7e62dc45a8097947a0d4aa52a26fb83ae375e0029f7ef4dd1afb5292a",
+  "src/data/collegeDsaLabs.js": "065864912a0696673c567b06631f01c16c634f64b8c8f8c0ba68a5318aacfdb0",
+  "src/data/stm32CollegeMcuSources.js": "d286fb845171e601a9cbfe8ce82866551fffe06998a12e274cab3df0126ea94a"
+}

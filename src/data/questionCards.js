@@ -1,6 +1,7 @@
 import { topicById } from './curriculum.js';
 import { dsaCImplementations } from './dsaCImplementations.js';
 import { problemFamilySpecs } from './dsaProblemFamilies.js';
+import { patternFor } from './problemTeachingPatterns.js';
 
 const questionGroups = {
   'dsa-sequence-terms': 'Reading the question',
@@ -28,6 +29,34 @@ const questionGroups = {
   'dsa-lcs': 'Dynamic programming',
   'dsa-edit-distance': 'Dynamic programming',
   'dsa-dp-compression': 'Dynamic programming',
+};
+
+const teachingPatternIds = {
+  'dsa-sequence-terms': 'parsing',
+  'dsa-frequency-anagram': 'counting',
+  'dsa-palindrome': 'two-pointers',
+  'dsa-two-pointers': 'two-pointers',
+  'dsa-sliding': 'window',
+  'dsa-longest-substring': 'window',
+  'dsa-k-distinct': 'window',
+  'dsa-kadane': 'kadane',
+  'dsa-longest-consecutive': 'counting',
+  'dsa-cyclic-placement': 'running-state',
+  'dsa-top-k': 'heap',
+  'dsa-quickselect': 'two-pointers',
+  'dsa-k-way-merge': 'heap',
+  'dsa-subsets': 'simulation',
+  'dsa-permutations': 'simulation',
+  'dsa-combination-sum': 'simulation',
+  'dsa-dp-take-skip': 'dp',
+  'dsa-dp-grid': 'dp',
+  'dsa-knapsack': 'dp',
+  'dsa-coin-change-min': 'dp',
+  'dsa-coin-change-ways': 'dp',
+  'dsa-lis': 'dp',
+  'dsa-lcs': 'dp',
+  'dsa-edit-distance': 'dp',
+  'dsa-dp-compression': 'dp',
 };
 
 const leetcodeAliases = {
@@ -103,6 +132,7 @@ const buildFlashcards = (spec) => [
 export const questionCards = Object.entries(problemFamilySpecs).map(([id, spec]) => {
   const topic = topicById.get(id);
   if (!topic) throw new Error(`Question card ${id} has no curriculum topic`);
+  const teachingPattern = patternFor(teachingPatternIds[id]);
 
   return {
     id,
@@ -123,6 +153,16 @@ export const questionCards = Object.entries(problemFamilySpecs).map(([id, spec])
     visual: spec.visual,
     flashcards: buildFlashcards(spec),
     lessonTopicId: id,
+    teachingPattern,
+    derivation: [
+      `Recognition: ${spec.guidance[0]}`,
+      `State meaning: ${spec.invariant}`,
+      `Transition: ${spec.guidance[1]}`,
+      `Boundary: ${spec.guidance[2]}`,
+      `Cost: ${spec.guidance[3]}`,
+    ],
+    correctness: teachingPattern.correctness,
+    pitfalls: teachingPattern.pitfalls,
   };
 });
 

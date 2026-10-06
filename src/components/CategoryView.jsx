@@ -9,6 +9,20 @@ export default function CategoryView({
   onBack,
   searchRef,
 }) {
+  const topicGroups = category.topics.reduce((groups, topic) => {
+    const label = topic.group || 'Core concepts';
+    const group = groups.find((entry) => entry.label === label);
+    if (group) {
+      group.topics.push(topic);
+    } else {
+      groups.push({ label, topics: [topic] });
+    }
+    return groups;
+  }, []);
+  const lessonNumberById = new Map(
+    topicGroups.flatMap((group) => group.topics).map((topic, index) => [topic.id, index + 1]),
+  );
+
   return (
     <main className="category-view">
       <button className="text-back" type="button" onClick={onBack}>← All categories</button>
@@ -38,17 +52,28 @@ export default function CategoryView({
             <h2 id="category-lessons-title">Lessons in learning order</h2>
             <span>{category.topics.length} lessons</span>
           </div>
-          <div className="lesson-index">
-            {category.topics.map((topic, index) => (
-              <button type="button" key={topic.id} onClick={() => onOpenLesson(topic.id)}>
-                <span className="lesson-order">{String(index + 1).padStart(2, '0')}</span>
-                <span className="lesson-index-copy">
-                  {topic.group && <small>{topic.group}</small>}
-                  <strong>{topic.title}</strong>
-                  <span>{topic.keywords.slice(0, 4).join(', ')}</span>
-                </span>
-                <span className="lesson-depth">{topic.level}</span>
-              </button>
+          <div className="subcategory-list">
+            {topicGroups.map((group) => (
+              <section className="subcategory-section" key={group.label}>
+                <header className="subcategory-heading">
+                  <h3>{group.label}</h3>
+                  <span>{group.topics.length} {group.topics.length === 1 ? 'lesson' : 'lessons'}</span>
+                </header>
+                <div className="lesson-index">
+                  {group.topics.map((topic) => (
+                    <button type="button" key={topic.id} onClick={() => onOpenLesson(topic.id)}>
+                      <span className="lesson-order">
+                        {String(lessonNumberById.get(topic.id)).padStart(2, '0')}
+                      </span>
+                      <span className="lesson-index-copy">
+                        <strong>{topic.title}</strong>
+                        <span>{topic.keywords.slice(0, 4).join(', ')}</span>
+                      </span>
+                      <span className="lesson-depth">{topic.level}</span>
+                    </button>
+                  ))}
+                </div>
+              </section>
             ))}
           </div>
         </section>

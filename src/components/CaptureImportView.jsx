@@ -1,6 +1,7 @@
 export default function CaptureImportView({
   result,
   onOpenQuestion,
+  onOpenProblem,
   onOpenQuestions,
 }) {
   if (result.status === 'loading' || result.status === 'idle') {
@@ -19,13 +20,20 @@ export default function CaptureImportView({
         <p className="eyebrow">Saved locally</p>
         <h1>{result.capture.title}</h1>
         <p>
-          Matched to {result.question.title}. Its solution path and recall cards
-          are ready.
+          {result.problemLesson
+            ? `Its dedicated ${result.problemLesson.pattern.name} explanation is ready.`
+            : `Matched to ${result.question.title}. Its pattern lesson and recall cards are ready.`}
         </p>
         <div className="capture-actions">
-          <button type="button" onClick={() => onOpenQuestion(result.question.id)}>
-            Study solution
-          </button>
+          {result.problemLesson ? (
+            <button type="button" onClick={() => onOpenProblem(result.problemLesson.slug)}>
+              Open explanation
+            </button>
+          ) : (
+            <button type="button" onClick={() => onOpenQuestion(result.question.id)}>
+              Study pattern
+            </button>
+          )}
           <button type="button" onClick={onOpenQuestions}>All questions</button>
         </div>
       </main>
