@@ -10,6 +10,7 @@ import { electronicsInterviewLessons } from './lessons/electronicsInterviewLesso
 import { networkingLessons } from './lessons/networkingLessons.js';
 import { linuxLessons } from './lessons/linuxLessons.js';
 import { linuxInterviewLessons } from './lessons/linuxInterviewLessons.js';
+import { linuxCppGuidance } from './linuxCppGuidance.js';
 import { rtosLessons } from './lessons/rtosLessons.js';
 import { stm32Lessons } from './lessons/stm32Lessons.js';
 
@@ -18,7 +19,17 @@ export const coreLessons = Object.freeze([
   ...cppLessons,
   ...architectureLessons,
   ...linuxLessons,
-  ...linuxInterviewLessons,
+  ...linuxInterviewLessons.map((lesson) => ({
+    ...lesson,
+    additionalBlocks: [
+      ...(lesson.additionalBlocks ?? []),
+      {
+        type: 'prose',
+        heading: 'The same Linux contract in C++',
+        body: linuxCppGuidance[lesson.topicId],
+      },
+    ],
+  })),
   ...networkingLessons,
   ...engineeringLessons,
   ...electronicsLessons,

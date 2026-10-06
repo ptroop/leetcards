@@ -392,6 +392,9 @@ test('every deep topic has the complete mechanism lesson contract', () => {
 
 test('non-special deep lessons use topic-specific authored profiles', () => {
   const special = new Set([
+    'os-shell-scripting',
+    'os-driver-model', 'os-driver-interrupts', 'os-driver-debugging',
+    'electronics-logic-levels', 'electronics-setup-hold',
     'c-stack-heap', 'cpp-concurrency', 'os-sync', 'arch-cache', 'os-virtual-translation',
     'os-virtual-memory', 'os-mmap-cow', 'os-syscalls', 'embedded-uart', 'embedded-spi',
     'embedded-i2c', 'schematic-basics', 'debug-method', 'rtos-tasks', 'stm32-startup',
@@ -991,6 +994,7 @@ test('C++, architecture, embedded, STM32, and Linux follow prerequisite-first to
     'os-purpose',
     'os-environment',
     'os-cli',
+    'os-shell-scripting',
     'os-user-kernel',
     'os-syscalls',
     'os-syscall-contract',
@@ -1057,6 +1061,9 @@ test('C++, architecture, embedded, STM32, and Linux follow prerequisite-first to
     'linux-a22',
     'os-boot',
     'os-proc',
+    'os-driver-model',
+    'os-driver-interrupts',
+    'os-driver-debugging',
     'os-proc-sys',
     'os-namespaces',
     'os-cgroups',
@@ -1141,10 +1148,18 @@ test('Linux programming labs are language-paired rather than labeled as C-only',
   }
 });
 
-test('every code-bearing lesson outside C++, except explicit college C labs, exposes both implementations', () => {
+test('shell scripting keeps its POSIX shell implementation and documents the C++ boundary', () => {
+  const lesson = getLessonForTopic('os-shell-scripting');
+  const codeBlock = lesson.blocks.find((block) => block.type === 'code-pair');
+  assert.deepEqual(codeBlock?.variants.map((variant) => variant.id), ['sh']);
+  assert.ok(lesson.blocks.some((block) => block.heading === 'The same Linux contract in C++'));
+});
+
+test('every code-bearing lesson outside C++, except explicit language-specific lessons, exposes both implementations', () => {
   for (const topic of allTopics.filter((item) => (
     item.sectionId !== 'cpp'
     && item.sectionId !== 'qualcomm-prep'
+    && item.id !== 'os-shell-scripting'
     && item.group !== 'College MCU C Labs'
     && item.group !== 'College DSA C Labs'
   ))) {

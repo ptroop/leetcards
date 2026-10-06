@@ -32,6 +32,10 @@ export const linuxInterviewLessons = Object.freeze([
       'Run the supplied ls sample through cut and awk and compare exact columns.',
       'Use shellcheck when available and run scripts with empty input, special characters, and deliberate command failures.',
     ],
+    diagramSpec: {
+      heading: 'Follow text, arguments, bytes, and status through a shell pipeline',
+      sketchId: 'shell-pipeline-flow',
+    },
     codeExamples: {
       heading: 'The fixed-format folder exercise in POSIX shell',
       note: 'This deliberately parses only the supplied ls display sample. It is not a general directory-listing parser.',
@@ -76,6 +80,7 @@ awk 'NF >= 8 && $1 ~ /^[bcdlps-]/ { print $1, $2, $6, $7 }' "$input" > "$output"
         'Removal first stops new hardware work and waits for pending IRQ/work references; a stale file descriptor must not reach freed state.',
       ],
     },
+    diagramSpec: { heading: 'Follow a userspace operation into a driver and back', sketchId: 'linux-kernel-transition' },
     realUse: 'The model separates a hardware controller, its Linux driver, and a user application. When read returns EIO, you can check which boundary failed instead of blaming the application parser.',
     failureModes: [{
       symptom: 'The device node exists but reads time out or removal triggers a use-after-free.',
@@ -109,6 +114,7 @@ awk 'NF >= 8 && $1 ~ /^[bcdlps-]/ { print $1, $2, $6, $7 }' "$input" > "$output"
         'Only after validating length and status does the driver publish the frame to waiting readers.',
       ],
     },
+    diagramSpec: { heading: 'Transfer a DMA buffer between device and CPU ownership', sketchId: 'architecture-dma-ownership' },
     realUse: 'A network or sensor driver that works on one board can return stale data on another if cache and DMA ownership were assumed rather than established.',
     failureModes: [{
       symptom: 'Repeated interrupt storms, stale data, or sporadic frame corruption under load.',
@@ -139,6 +145,7 @@ awk 'NF >= 8 && $1 ~ /^[bcdlps-]/ { print $1, $2, $6, $7 }' "$input" > "$output"
         'A logic analyzer shows a valid bus transaction but no IRQ edge; the next test targets the sensor interrupt configuration, not the userspace buffer.',
       ],
     },
+    diagramSpec: { heading: 'Narrow a driver fault with the next discriminating measurement', sketchId: 'debug-hypothesis-loop' },
     realUse: 'This evidence ladder avoids patching the driver’s read callback when the actual fault is a missing device clock or an electrical level mismatch.',
     failureModes: [{
       symptom: 'Adding printk appears to fix a race, or a kernel oops is dismissed as an application bug.',

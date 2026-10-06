@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { electronicsLessons } from '../src/data/lessons/electronicsLessons.js';
+import { electronicsInterviewLessons } from '../src/data/lessons/electronicsInterviewLessons.js';
 import { cLessons } from '../src/data/lessons/cLessons.js';
 import { engineeringLessons } from '../src/data/lessons/engineeringLessons.js';
 import { architectureLessons } from '../src/data/lessons/architectureLessons.js';
@@ -9,7 +10,8 @@ import { getLessonForTopic } from '../src/data/contentModel.js';
 import { allTopics } from '../src/data/topics.js';
 import { technicalSketchById } from '../src/data/technicalSketches.js';
 
-const lessonById = new Map(electronicsLessons.map((lesson) => [lesson.topicId, lesson]));
+const allElectronicsLessons = [...electronicsLessons, ...electronicsInterviewLessons];
+const lessonById = new Map(allElectronicsLessons.map((lesson) => [lesson.topicId, lesson]));
 const text = (id) => JSON.stringify(lessonById.get(id));
 const cLessonById = new Map(cLessons.map((lesson) => [lesson.topicId, lesson]));
 const cText = (id) => JSON.stringify(cLessonById.get(id));
@@ -47,7 +49,7 @@ test('the pull-resistor topic uses the authored record in the application catalo
 test('every electronics and schematic topic has an authored record at its intended depth', () => {
   const topics = allTopics.filter((topic) => topic.sectionId === 'electronics');
 
-  assert.equal(electronicsLessons.length, topics.length);
+  assert.equal(allElectronicsLessons.length, topics.length);
   for (const topic of topics) {
     const record = lessonById.get(topic.id);
     assert.ok(record, topic.id);
@@ -73,7 +75,7 @@ test('schematic reading follows nets from symbols to expected measurements', () 
 });
 
 test('every deep electronics lesson references a validated explanatory sketch', () => {
-  for (const lesson of electronicsLessons.filter((record) => record.depth === 'deep')) {
+  for (const lesson of allElectronicsLessons.filter((record) => record.depth === 'deep')) {
     assert.ok(lesson.diagramSpec?.sketchId, `${lesson.topicId}: sketch`);
     assert.ok(
       technicalSketchById.has(lesson.diagramSpec.sketchId),

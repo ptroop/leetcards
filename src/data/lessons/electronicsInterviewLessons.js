@@ -17,6 +17,7 @@ export const electronicsInterviewLessons = Object.freeze([
       setup: 'A driver guarantees VOH ≥ 2.7 V and VOL ≤ 0.4 V; a receiver needs VIH ≥ 2.0 V or VIL ≤ 0.8 V.',
       steps: ['High noise margin is 2.7 − 2.0 = 0.7 V.', 'Low noise margin is 0.8 − 0.4 = 0.4 V.', 'A scope trace crossing 2.0 V is not enough by itself; verify the guaranteed driver level at the real load and the edge timing.'],
     },
+    diagramSpec: { heading: 'Compare guaranteed output levels with receiver thresholds', sketchId: 'electronics-noise-margin' },
     realUse: 'When a UART receive line works on a short bench lead but fails over a longer cable, measure levels and edges before rewriting the parser.',
     failureModes: [{
       symptom: 'Intermittent bit errors or a pin that reads high on one board but low on another.',
@@ -42,6 +43,7 @@ export const electronicsInterviewLessons = Object.freeze([
       setup: 'A receiver needs data stable 8 ns before and 2 ns after its rising edge.',
       steps: ['If data last changes 12 ns before the edge, setup has 4 ns of margin.', 'If the next data change occurs 1 ns after the edge, hold fails by 1 ns.', 'A lower clock frequency lengthens the period but does not automatically repair that 1 ns hold violation.'],
     },
+    diagramSpec: { heading: 'Mark the stable-data window around the capture edge', sketchId: 'electronics-setup-hold-window' },
     realUse: 'Use this timing picture when matching an MCU SPI mode and clock rate to a sensor’s data-sheet timing diagram, or when interpreting a logic-analyzer capture that decodes the wrong bit.',
     failureModes: [{
       symptom: 'A peripheral occasionally captures the previous or next bit, especially at high speed or after temperature changes.',

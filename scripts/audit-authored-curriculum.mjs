@@ -40,7 +40,11 @@ for (const topic of allTopics) {
 
   for (const pair of lesson.blocks.filter((block) => block.type === 'code-pair')) {
     const ids = pair.variants.map((variant) => variant.id);
-    if (topic.sectionId !== 'cpp' && (!ids.includes('c') || !ids.includes('cpp'))) {
+    if (topic.id === 'os-shell-scripting') {
+      if (ids.length !== 1 || ids[0] !== 'sh') {
+        failures.push(`${topic.id}: shell lesson must retain its POSIX shell implementation`);
+      }
+    } else if (topic.sectionId !== 'cpp' && (!ids.includes('c') || !ids.includes('cpp'))) {
       failures.push(`${topic.id}: code pair must include C and C++`);
     }
   }
