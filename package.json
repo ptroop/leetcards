@@ -17,7 +17,7 @@
     "verify": "npm run audit:curriculum && npm run audit:writing && npm run audit:code && npm run verify:dsa-snippets && npm run verify:college-dsa && npm test && npm run build"
   },
   "dependencies": {
-    "react": "19.2.8",
+    "react": "19.3.0",
     "react-dom": "19.2.8"
   },
   "devDependencies": {
