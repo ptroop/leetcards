@@ -3762,3 +3762,32 @@ kbd {
     transition: none;
   }
 }
+
+/* Folder interview collections share the reader's typography and surfaces. */
+.folder-interview-view { width: min(100% - 48px, 1080px); margin: 0 auto; padding: 40px 0 80px; }
+.folder-company-switch { display: flex; gap: 12px; margin: 20px 0; }
+.folder-company-switch button, .folder-category-link button { padding: 10px 16px; border: 1px solid currentColor; background: transparent; color: inherit; border-radius: 6px; cursor: pointer; font: inherit; }
+.folder-company-switch [aria-current="page"] { background: #342b26; color: #fffaf4; }
+.folder-method { max-width: 80ch; line-height: 1.7; margin-bottom: 24px; }
+.folder-filters { display: flex; flex-wrap: wrap; gap: 14px; align-items: end; margin: 18px 0; }
+.folder-filters label { display: grid; gap: 6px; font-size: 13px; flex: 1 1 170px; min-width: 0; }
+.folder-filters select { max-width: 100%; width: 100%; padding: 10px; font: inherit; color: inherit; background: #fffaf4; border: 1px solid #cbbfb2; border-radius: 4px; }
+.folder-filters button { padding: 10px; cursor: pointer; }
+.folder-question { border-top: 1px solid #d8cdc1; scroll-margin-top: 100px; }
+.folder-question > summary { cursor: pointer; padding: 20px 24px 20px 0; }
+.folder-question > summary .eyebrow { display: block; font-size: 10px; margin-bottom: 8px; }
+.folder-question-title { font-size: 17px; line-height: 1.6; font-weight: 600; overflow-wrap: anywhere; }
+.folder-question-body { padding: 0 0 24px; max-width: 85ch; line-height: 1.8; overflow-wrap: anywhere; }
+.folder-question-body h2 { font-size: 16px; margin: 18px 0 8px; }
+.folder-question-body pre { overflow-x: auto; padding: 18px; background: #f0eae1; font-size: 14px; line-height: 1.6; white-space: pre; }
+.folder-clarification { border-left: 3px solid #a6543c; padding-left: 16px; }
+.folder-provenance { font-size: 12px; margin-top: 18px; }
+.folder-provenance summary, .folder-source-index > summary { cursor: pointer; }
+.folder-source-index { margin-top: 36px; border-top: 1px solid #d8cdc1; padding-top: 20px; line-height: 1.8; overflow-wrap: anywhere; }
+.folder-category-link { margin: 20px 0; }
+.folder-category-link p { font-size: 13px; }
+@media (max-width: 600px) { .folder-interview-view { width: calc(100% - 32px); padding-top: 24px; } .folder-question-title { font-size: 16px; } .folder-filters label { flex-basis: 100%; } }
+.folder-examples { width: 100%; border-collapse: collapse; font-size: 13px; margin: 18px 0; }
+.folder-examples th, .folder-examples td { padding: 10px; border: 1px solid #d8cdc1; text-align: left; }
+.folder-examples caption { text-align: left; margin-bottom: 8px; }
+.folder-question-body svg { display: block; max-width: 360px; width: 100%; margin: 16px 0; }

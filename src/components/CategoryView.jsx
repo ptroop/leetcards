@@ -2,6 +2,7 @@ import { SearchResults } from './LibraryView.jsx';
 
 export default function CategoryView({
   category,
+  onOpenFolderQuestions,
   query,
   results,
   onQueryChange,
@@ -32,6 +33,7 @@ export default function CategoryView({
         <p>{category.description}</p>
       </header>
 
+      {category.id === 'qualcomm-prep' && <div className="folder-category-link"><button type="button" onClick={onOpenFolderQuestions}>Browse every question from the Qualcomm folder ↗</button><p>Individual prompts, source references, code questions and clarification notes.</p></div>}
       <label className="library-search category-search">
         <span className="sr-only">Search lessons</span>
         <input
