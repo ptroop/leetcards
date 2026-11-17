@@ -1681,7 +1681,6 @@
         "practice-88090a73cfbd",
         "practice-1617667e2e18",
         "practice-a7db3087d6b4",
-        "practice-a07de1730991",
         "practice-26f1195b6a66",
         "practice-ad436e821035",
         "practice-4969ad2ccf13",
@@ -1735,7 +1734,19 @@
         "practice-9c394109d0db",
         "practice-7b46ccd96426",
         "practice-dbbf455e31ff",
-        "practice-463b4a6677d8"
+        "practice-463b4a6677d8",
+        "practice-d4224fb9fb2c",
+        "practice-06c4f83de80e",
+        "practice-b45c4c53d18d",
+        "practice-4e641a2eda7c",
+        "practice-a832868c4ee8",
+        "practice-cc863acf1ae0",
+        "practice-f053521e3626",
+        "practice-b776966e2030",
+        "practice-d5cf9a89ddb7",
+        "practice-c25658753643",
+        "practice-0421d47aef2e",
+        "practice-ce77500097bc"
       ]
     },
     {
@@ -5361,7 +5372,8 @@
           "location": "Line 19"
         }
       ],
-      "status": "reported"
+      "status": "clarify",
+      "clarification": "A base address alone is insufficient. Obtain element representation/size, dimensions and stride before computing an offset. Casting an unknown address does not recover the missing layout."
     },
     {
       "id": "qualcomm-50abdbe040c1",
@@ -5869,7 +5881,8 @@
           "location": "Line 18"
         }
       ],
-      "status": "reported"
+      "status": "clarify",
+      "clarification": "The source says memory queue. Confirm whether this means a POSIX/System V message queue, a shared-memory queue, or a different data structure; their APIs and synchronization contracts differ."
     },
     {
       "id": "qualcomm-7bfd22bb6ab1",
@@ -6141,7 +6154,8 @@
           "location": "Line 15"
         }
       ],
-      "status": "reported"
+      "status": "clarify",
+      "clarification": "The four protocols are not named in this line. Ask which interfaces are intended and which comparison is required; do not assume a universal set of four."
     },
     {
       "id": "qualcomm-bf39eacf33f7",
@@ -6336,7 +6350,7 @@
         }
       ],
       "status": "reported",
-      "answer": "For n≥2: three faces=8 corners; two=12(n−2); one=6(n−2)²; zero=(n−2)³. They sum to n³. Handle n=1 separately: its single cube has six painted faces."
+      "answer": "A cube of side n cm cut into 1 cm cubes gives n³ cubes: 27 when n=3 and 1000 when n=10. Painted-face counting is a separate extension and assumes all six outer faces were painted before cutting. For n≥2, counts with three, two, one and zero painted faces are 8, 12(n−2), 6(n−2)² and (n−2)³. For n=1, the single cube has six painted faces."
     },
     {
       "id": "qualcomm-d602a17007ca",
@@ -7003,7 +7017,7 @@
         }
       ],
       "status": "reported",
-      "answer": "For n≥2: three faces=8 corners; two=12(n−2); one=6(n−2)²; zero=(n−2)³. They sum to n³. Handle n=1 separately: its single cube has six painted faces."
+      "answer": "A cube of side n cm cut into 1 cm cubes gives n³ cubes: 27 when n=3 and 1000 when n=10. Painted-face counting is a separate extension and assumes all six outer faces were painted before cutting. For n≥2, counts with three, two, one and zero painted faces are 8, 12(n−2), 6(n−2)² and (n−2)³. For n=1, the single cube has six painted faces."
     },
     {
       "id": "qualcomm-e77c44a9e3de",
@@ -7260,7 +7274,7 @@
         }
       ],
       "status": "reported",
-      "answer": "For n≥2: three faces=8 corners; two=12(n−2); one=6(n−2)²; zero=(n−2)³. They sum to n³. Handle n=1 separately: its single cube has six painted faces."
+      "answer": "There are 4³=64 unit cubes. Since the six outside faces were painted before cutting, 8 cubes have three painted faces, 24 have two, 24 have one and 8 have none."
     },
     {
       "id": "qualcomm-a05ee938c130",
@@ -7346,7 +7360,7 @@
         }
       ],
       "status": "reported",
-      "answer": "Five tyres supply 500 tyre-km and four are used simultaneously, so the upper bound is 125 km. Equal rotation can attain it. For a two-wheeler with one spare, the corresponding bound is 150 km. Assume interchangeable tyres, uniform wear and unrestricted rotations."
+      "answer": "Three tyres supply 300 tyre-km; a two-wheeler uses two tyres simultaneously, so the upper bound is 150 km. Attain it by riding three 50 km stages, using each possible tyre pair once. Assume interchangeable tyres, uniform wear and unrestricted rotations."
     },
     {
       "id": "qualcomm-439025406e2f",
@@ -10435,7 +10449,9 @@
           "location": "Reviewed source text or visual"
         }
       ],
-      "status": "reported"
+      "status": "reported",
+      "code": "1\n1 2\n1 2 3\n1 2 3 4\n1 2 3\n1 2\n1\n\n1\n1 2\n1 2 4\n1 2 4 8\n1 2 4\n1 2\n1",
+      "answer": "For n rows ascending and n-1 descending, row length is min(row,2*n-row). Emit j or 2^(j-1) respectively; bound n to avoid overflow."
     },
     {
       "id": "qualcomm-f244754d8fd6",
@@ -11664,7 +11680,7 @@
       "id": "practice-3df63c41a156",
       "company": "shared",
       "prompt": "Two threads increment a volatile counter. Why can the final value be too small?",
-      "answer": "Volatile provides neither atomic read-modify-write nor interthread synchronization. Use an atomic operation or a mutex and establish the required memory ordering.",
+      "answer": "In C11, unsynchronized conflicting accesses to this non-atomic counter constitute a data race and undefined behavior; a smaller count is only one possible symptom. volatile supplies neither atomic increment nor interthread synchronization. Use a mutex or an appropriate atomic operation.",
       "followUp": "Distinguish a lost update from a C data race.",
       "area": "Linux & OS",
       "status": "practice",
@@ -12124,7 +12140,7 @@
       "id": "practice-7a165b4a5352",
       "company": "shared",
       "prompt": "Why is passing a stack buffer to an asynchronous device operation unsafe?",
-      "answer": "The operation can outlive the function and the stack object. Allocate storage whose lifetime covers completion and cancellation, then release it only after users are quiescent.",
+      "answer": "There are two independent problems: an asynchronous operation may outlive the stack object, and Linux DMA APIs do not accept kernel-stack memory as a DMA buffer even if its lifetime is extended. Use DMA-suitable allocation/mapping APIs and keep the storage valid until completion or cancellation has quiesced every user.",
       "followUp": "What must cancellation guarantee before freeing the buffer?",
       "area": "Embedded & electronics",
       "status": "practice",
@@ -12306,8 +12322,8 @@
     {
       "id": "practice-d6df3b226ec3",
       "company": "shared",
-      "prompt": "Find the shortest subarray with exactly k distinct values. How does it differ from at least k?",
-      "answer": "Track frequencies and shrink only while preserving the required distinct count; discard excess distinct values first. The invariant must distinguish exactly k from at least k.",
+      "prompt": "For nonempty contiguous windows and k ≥ 1, can the minimum length with exactly k distinct values differ from the minimum with at least k?",
+      "answer": "Their minimum lengths are equal whenever a solution exists. If a shortest at-least-k window had more than k distinct values, deleting its first element would leave at least k, contradicting minimality. Valid windows differ, but their optimal lengths do not. Return -1 if the array has fewer than k distinct values; reject k<1. Use a frequency-map sliding window, removing excess distinct values and redundant leading duplicates.",
       "followUp": "What is the result when k exceeds the array's distinct count?",
       "area": "DSA & programming",
       "status": "practice",
@@ -12318,7 +12334,8 @@
           "location": "Related practice"
         }
       ],
-      "tag": "External practice"
+      "tag": "External practice",
+      "code": "def shortest_exact_k(values, k):\n    if k < 1:\n        raise ValueError(\"k must be positive\")\n    counts = {}\n    left = 0\n    best = len(values) + 1\n    for right, value in enumerate(values):\n        counts[value] = counts.get(value, 0) + 1\n        while len(counts) > k:\n            old = values[left]\n            counts[old] -= 1\n            if counts[old] == 0:\n                del counts[old]\n            left += 1\n        if len(counts) == k:\n            while counts[values[left]] > 1:\n                counts[values[left]] -= 1\n                left += 1\n            best = min(best, right - left + 1)\n    return -1 if best > len(values) else best\n"
     },
     {
       "id": "practice-57c7695b6e44",
@@ -13210,7 +13227,7 @@
       "status": "practice",
       "tag": "External practice",
       "prompt": "A NAPI poll consumes its entire receive budget. When may it complete?",
-      "answer": "If more work remains, return the budget and stay scheduled. At the exact-budget boundary, distinguish drained from pending work and follow the documented completion/return convention.",
+      "answer": "For positive budget: if work remains, return budget and stay scheduled. If all work finished but exactly budget packets were processed, either leave polling scheduled or complete with napi_complete_done and return budget-1 as documented. A zero budget must not call napi_complete_done; it permits only the documented Tx-completion path.",
       "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
       "sources": [
         {
@@ -13537,23 +13554,6 @@
       "area": "Testing & debugging"
     },
     {
-      "id": "practice-a07de1730991",
-      "company": "shared",
-      "status": "practice",
-      "tag": "External practice",
-      "prompt": "Nine coins contain one heavier counterfeit. Can two balance weighings identify it?",
-      "answer": "Weigh three against three. The heavier group, or the unweighed group after balance, contains the coin. Weigh one against one from that group. There are three outcomes per weighing and nine candidates.",
-      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
-      "sources": [
-        {
-          "sourceId": "P001",
-          "location": "External practice derived from technical references"
-        }
-      ],
-      "references": [],
-      "area": "Logic & puzzles"
-    },
-    {
       "id": "practice-26f1195b6a66",
       "company": "shared",
       "status": "practice",
@@ -13753,8 +13753,8 @@
       "company": "shared",
       "status": "practice",
       "tag": "External practice",
-      "prompt": "Five pirates divide 100 coins; a proposal passes with at least half the living pirates voting yes, including the proposer. What does the strongest pirate offer?",
-      "answer": "Assume survival first, coins second, and rejecting on equal payoff. Backward induction gives offers (100) for one, (100,0) for two, (99,0,1) for three, (99,0,1,0) for four, and (98,0,1,0,1) for five. Changing the voting threshold changes the answer.",
+      "prompt": "Five ranked pirates divide 100 coins. Highest rank proposes; rejection kills the proposer. At least half the living pirates must approve, including the proposer. What is the optimal offer?",
+      "answer": "By backward induction, ordered from highest surviving rank to lowest, offers are (100), (100,0), (99,0,1), (99,0,1,0), then (98,0,1,0,1). The proposer buys the cheapest votes that improve those pirates over rejecting. This depends on the stated at-least-half threshold and tie preferences.",
       "area": "Logic & puzzles",
       "sources": [
         {
@@ -13762,7 +13762,8 @@
           "location": "External practice derived from technical references"
         }
       ],
-      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question."
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "clarification": "Pirates know all ranks and are rational: survival first, then their own coin count, then rejecting on equal outcomes. Voting and tie rules are essential."
     },
     {
       "id": "practice-da7098a55115",
@@ -14845,6 +14846,234 @@
         {
           "title": "Candidate interview account",
           "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-software-engineer-role-on-campus-placements/"
+        }
+      ]
+    },
+    {
+      "id": "practice-d4224fb9fb2c",
+      "prompt": "A positive-size realloc fails after assigning its result directly to the only owning pointer. What was lost?",
+      "answer": "The allocation remains valid on failure, but overwriting its only pointer with NULL leaks ownership. Store the result in a temporary and replace the owner only after success. Handle a zero requested size separately.",
+      "area": "C & C++",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "practiceKind": "Original potential interview question added after the quality audit; not a claim of a previously asked company question.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Quality-audit gap filling"
+        }
+      ],
+      "references": [
+        {
+          "title": "Primary technical documentation",
+          "url": "https://man7.org/linux/man-pages/man3/realloc.3.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-06c4f83de80e",
+      "prompt": "A parser allocates count * sizeof(record) bytes using an untrusted count. What must be checked before multiplication?",
+      "answer": "Reject count greater than SIZE_MAX / sizeof(record), validate application limits and handle allocation failure. Otherwise wrapping can allocate a smaller block than the later loop expects. calloc detects multiplication overflow on the documented Linux implementation.",
+      "area": "C & C++",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "practiceKind": "Original potential interview question added after the quality audit; not a claim of a previously asked company question.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Quality-audit gap filling"
+        }
+      ],
+      "references": [
+        {
+          "title": "Primary technical documentation",
+          "url": "https://man7.org/linux/man-pages/man3/realloc.3.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-b45c4c53d18d",
+      "prompt": "A C structure is written directly to a network socket. Why might a different machine decode it incorrectly?",
+      "answer": "Padding, integer widths, alignment and byte order are ABI properties, not a wire contract. Serialize explicitly into a specified format with bounded lengths; avoid transmitting padding or process pointers.",
+      "area": "C & C++",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "practiceKind": "Original potential interview question added after the quality audit; not a claim of a previously asked company question.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Quality-audit gap filling"
+        }
+      ]
+    },
+    {
+      "id": "practice-4e641a2eda7c",
+      "prompt": "A successful write transfers fewer bytes than requested. Design a correct retry loop.",
+      "answer": "Advance the buffer and reduce the remaining count after positive progress. Retry EINTR under policy; wait for readiness on EAGAIN for nonblocking descriptors. Handle errors and unexpected zero progress without an infinite loop.",
+      "area": "Linux & OS",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "practiceKind": "Original potential interview question added after the quality audit; not a claim of a previously asked company question.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Quality-audit gap filling"
+        }
+      ],
+      "references": [
+        {
+          "title": "Primary technical documentation",
+          "url": "https://man7.org/linux/man-pages/man2/write.2.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-a832868c4ee8",
+      "prompt": "Does a successful write prove that a saved configuration survives a power failure?",
+      "answer": "No. Successful write can leave data in volatile caches. Use the required fsync/fdatasync contract, check errors and include directory synchronization when a directory entry is created or replaced. Storage and filesystem guarantees still matter.",
+      "area": "Linux & OS",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "practiceKind": "Original potential interview question added after the quality audit; not a claim of a previously asked company question.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Quality-audit gap filling"
+        }
+      ],
+      "references": [
+        {
+          "title": "Primary technical documentation",
+          "url": "https://man7.org/linux/man-pages/man2/fsync.2.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-cc863acf1ae0",
+      "prompt": "On a Linux local filesystem, how would you replace a configuration file while avoiding partially written contents after a crash?",
+      "answer": "Create a temporary file in the same directory, write and validate it, synchronize the file, rename it over the target, then synchronize the directory. Check each result. Rename gives atomic visibility; persistence requires the synchronization contract.",
+      "area": "Linux & OS",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "practiceKind": "Original potential interview question added after the quality audit; not a claim of a previously asked company question.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Quality-audit gap filling"
+        }
+      ],
+      "references": [
+        {
+          "title": "Primary technical documentation",
+          "url": "https://man7.org/linux/man-pages/man2/rename.2.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-f053521e3626",
+      "prompt": "A thread locks the same pthread mutex twice. Must it always deadlock?",
+      "answer": "The mutex type matters: NORMAL self-locking deadlocks; ERRORCHECK reports an error; RECURSIVE increments its lock count. DEFAULT behavior is not a portable promise. Prefer clear ownership over changing the type blindly.",
+      "area": "Linux & OS",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "practiceKind": "Original potential interview question added after the quality audit; not a claim of a previously asked company question.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Quality-audit gap filling"
+        }
+      ],
+      "references": [
+        {
+          "title": "Primary technical documentation",
+          "url": "https://man7.org/linux/man-pages/man3/pthread_mutex_lock.3p.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-b776966e2030",
+      "prompt": "Build an LRU cache with expected O(1) get and put. What invariants must every operation preserve?",
+      "answer": "Use a hash map from keys to nodes and a doubly linked list ordered by recency. Keep map/list membership identical; move hits to the front and evict the tail when over capacity. Define zero capacity, updates and ownership.",
+      "area": "DSA & programming",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "practiceKind": "Original potential interview question added after the quality audit; not a claim of a previously asked company question.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Quality-audit gap filling"
+        }
+      ]
+    },
+    {
+      "id": "practice-d5cf9a89ddb7",
+      "prompt": "Merge overlapping intervals. Do touching endpoints count as overlap?",
+      "answer": "Define closed versus half-open intervals first. Sort by start, then extend the current interval when the next overlaps; otherwise emit it. O(n log n) time. Test empty input, containment, equal starts and touching endpoints.",
+      "area": "DSA & programming",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "practiceKind": "Original potential interview question added after the quality audit; not a claim of a previously asked company question.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Quality-audit gap filling"
+        }
+      ]
+    },
+    {
+      "id": "practice-c25658753643",
+      "prompt": "Return the product of every array element except the current one without division. How do zeros affect the solution?",
+      "answer": "Build prefix products into the output, then multiply by a rolling suffix product. This naturally handles one or multiple zeros. O(n) time and O(1) auxiliary space excluding output; specify overflow behavior and the empty-product convention.",
+      "area": "DSA & programming",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "practiceKind": "Original potential interview question added after the quality audit; not a claim of a previously asked company question.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Quality-audit gap filling"
+        }
+      ]
+    },
+    {
+      "id": "practice-0421d47aef2e",
+      "prompt": "Clone an acyclic next-linked list whose nodes also have random pointers into the same list or NULL. How do you avoid leaving pointers into the original?",
+      "answer": "Map each original node to a new node, then assign both next and random through the map. This uses O(n) extra space. An interleaving technique saves auxiliary space but temporarily mutates the original; clarify mutation and failure-cleanup requirements.",
+      "area": "DSA & programming",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "practiceKind": "Original potential interview question added after the quality audit; not a claim of a previously asked company question.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Quality-audit gap filling"
+        }
+      ]
+    },
+    {
+      "id": "practice-ce77500097bc",
+      "prompt": "A timer callback cancels itself and registers another timer. What design avoids deadlock and use-after-free?",
+      "answer": "Do not invoke callbacks under the registry lock. Separate cancellation from reclamation, define whether cancel waits for an executing callback, and avoid self-wait. Retain callback state until its active invocation finishes; test reentrancy and shutdown races.",
+      "area": "Linux & OS",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "practiceKind": "Original potential interview question added after the quality audit; not a claim of a previously asked company question.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Quality-audit gap filling"
         }
       ]
     }

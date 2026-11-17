@@ -90,7 +90,7 @@ test('the published dam implementation matches all linked examples and brute-for
 
 test('external exercises have the common tag and remain separately filterable', () => {
   const questions = filterFolderQuestions({ company: 'qualcomm', status: 'practice' });
-  assert.equal(questions.length, 126);
+  assert.equal(questions.length, 137);
   assert.ok(questions.every((q) => q.tag === 'External practice' && q.answer && q.sources.length));
   assert.ok(!questions.some((q) => q.status === 'reported'));
 });
@@ -138,4 +138,24 @@ test('new C11 quizzes distinguish defined output from undefined behavior', async
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
+});
+
+test('shortest-window explanation and implementation agree with exhaustive small arrays', async () => {
+  const { spawnSync } = await import('node:child_process');
+  const q = folderQuestions.find((q) => q.id === 'practice-d6df3b226ec3');
+  const script = `${q.code}\nfrom itertools import product\nfor n in range(7):\n    for a in product(range(3), repeat=n):\n        for k in range(1,5):\n            exact=[j-i for i in range(n) for j in range(i+1,n+1) if len(set(a[i:j]))==k]\n            atleast=[j-i for i in range(n) for j in range(i+1,n+1) if len(set(a[i:j]))>=k]\n            expected=min(exact,default=-1)\n            assert expected==min(atleast,default=-1)\n            assert shortest_exact_k(a,k)==expected,(a,k)\ntry:\n    shortest_exact_k([1],0)\n    raise AssertionError('accepted invalid k')\nexcept ValueError:\n    pass\n`;
+  const result = spawnSync('python', ['-c', script], { encoding: 'utf8', timeout: 10000 });
+  assert.equal(result.status, 0, result.stderr);
+});
+
+test('ambiguous topic words do not misfile systems and C questions', () => {
+  for (const [id, area] of [
+    ['online-ad7c76244646', 'Linux & OS'],
+    ['online-41b04cfc2d01', 'Linux & OS'],
+    ['online-efbec3dc3b7a', 'Linux & OS'],
+    ['online-9e801976e345', 'DSA & programming'],
+    ['online-48c28d5bdca9', 'Logic & puzzles'],
+  ]) assert.equal(folderQuestions.find((q) => q.id === id).area, area, id);
+  const switchQuestion = folderQuestions.find((q) => /difference between switch and else-if/i.test(q.prompt));
+  assert.equal(switchQuestion.area, 'C & C++');
 });

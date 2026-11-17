@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { filterFolderQuestions, folderQuestions, folderSources, folderSourceById } from '../data/folderInterviewQuestions.js';
 import { topicById } from '../data/curriculum.js';
 
-const labels = { 'reported-online': 'Reported online · candidate account', practice: 'External practice', reported: 'Reported prompt', 'topic-only': 'Topic recollection', clarify: 'Clarify the constraints', 'user-recalled': 'User recollection · company unconfirmed' };
+const labels = { 'reported-online': 'Reported online · candidate account', practice: 'Potential interview question', reported: 'Reported prompt', 'topic-only': 'Topic recollection', clarify: 'Clarify the constraints', 'user-recalled': 'User recollection · company unconfirmed' };
 
 export default function FolderInterviewView({ company, onBack, onOpenLesson, onOpenCompany }) {
   const [query, setQuery] = useState('');
@@ -55,6 +55,7 @@ export default function FolderInterviewView({ company, onBack, onOpenLesson, onO
                 {question.practiceKind && <p>{question.practiceKind}</p>}
                 {question.clarification && <p className="folder-clarification"><strong>Clarification:</strong> {question.clarification}</p>}
                 {question.answer && <section><h2>Reasoning and answer</h2><p>{question.answer}</p></section>}
+                {question.expectedOutput !== undefined && <section><h2>Expected output</h2><pre><code>{question.expectedOutput}</code></pre></section>}
                 {question.status === 'topic-only' && <p>The source records a topic rather than a complete question. Use the related lesson to prepare; the original constraints were not supplied.</p>}
                 {topic && <button type="button" className="text-back" onClick={() => onOpenLesson(topic.id)}>Study related lesson: {topic.title} ↗</button>}
                 <details className="folder-provenance"><summary>Question sources ({question.sources.length})</summary><ul>{question.sources.map((citation, i) => <li key={`${citation.sourceId}-${i}`}>{folderSourceById.get(citation.sourceId)?.path} · {citation.location}</li>)}</ul></details>

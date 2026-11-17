@@ -30,7 +30,7 @@
 
 ## External research expansion — November 17, 2026
 
-- Current bank: **902 prompts**, comprising the original 733, **126 potential interview exercises**, and **43 online candidate-reported Qualcomm prompts**. All 169 outside additions show the common **External practice** badge.
+- Current bank: **913 prompts**, comprising the original 733, **137 potential interview exercises**, and **43 online candidate-reported Qualcomm prompts**. All 180 outside additions show the common **External practice** badge.
 - Potential exercises cover C ownership, concurrency, Linux/processes, DMA/drivers, TCP/network debugging, UART/I2C/SPI, DSA, puzzles, camera testing and project discussion. Each has editorial reasoning; related variants are not counted as independent interview evidence.
 - Candidate-reported questions have their own **Reported online · candidate account** statement filter, source link, role context and explicit unofficial status. Article update dates are distinguished from interview dates.
 - Ten detailed Qualcomm candidate accounts were used. These establish reported topics and prompts, not verified company policy or future-question probabilities:
@@ -181,3 +181,18 @@ Additional candidate accounts (unofficial; update date is not interview date):
 The 12 defined C programs are compiled in strict C11 mode and run at both -O0 and -O2 against their published answers. Compiler output is supporting evidence on this toolchain; the explanations distinguish language guarantees from undefined behavior.
 
 Validation for this batch: all 17 test files and all 10 focused bank checks pass. All 24 defined-C executions match expected output. Production build, PWA cache generation and git diff whitespace check pass; the existing large-bundle warning remains. This batch changes data, tests and documentation; no new browser layout check was performed.
+
+## Quality audit and targeted gap filling
+
+- Audited provenance and status structure across all 913 records; reviewed the worked answers and outside additions for substantive errors, assumptions and overlap. This is not a claim that the 138 topic-only recollections have complete reconstructed statements or new answers.
+- Revised 10 question entries: the exact-k versus at-least-k minimum-window relationship (with executable solution), C volatile data-race semantics, DMA stack-memory eligibility, NAPI budget completion, pirate voting assumptions, three cube-count answers, the two-wheeler tyre answer, and the missing pattern sample.
+- Three more original statements now require clarification: memory queue terminology, unknown 2D-array layout, and unnamed four communication protocols. There are now 25 clarification entries. Original file provenance is retained.
+- Removed one redundant outside nine-heavier-coins exercise; original source-file variants remain.
+- Fixed topic-rule collisions affecting MMU/mutex role wording, binary semaphores, C switch/else-if, compilation, data structures and several newly sourced algorithms/puzzles.
+- C quizzes now visibly display their tested expected output. Undefined-behavior examples still have no numerical output claim. The practice statement filter now reads Potential interview question while retaining the common External practice badge. Browser verification confirmed the visible sizeof answer is 1 3.
+- Added 12 original potential questions to fill gaps: realloc ownership, allocation-size overflow, ABI versus wire representation, partial writes, write durability, crash-aware file replacement, mutex types, LRU invariants, interval endpoint semantics, product-except-self, random-pointer list cloning and reentrant timer callbacks. They are not claimed as previously asked company questions.
+- Exact-k window implementation and equality of optimal lengths were checked against exhaustive arrays over three symbols through length six for k=1..4, plus invalid k. Defined C examples remain checked at two optimization levels.
+
+Known limits: candidate reports remain unofficial; original reworded/topic-only records remain visible for provenance; this audit does not verify every future interview possibility or original account with an employer.
+
+Audit validation: all 17 test files pass, with 12 focused question-bank checks. Production build and PWA cache generation pass; existing bundle-size warning remains. All citations and source-to-question IDs resolve; every potential question has reasoning and the common external badge.

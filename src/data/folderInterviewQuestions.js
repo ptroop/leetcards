@@ -5,6 +5,18 @@ export const folderSourceById = new Map(folderSources.map((source) => [source.id
 export const normalizeQuestionText = (value = '') => value.normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 
 const topicRules = [
+  [/bitwise recurrence/, 'DSA & programming', 'qualcomm-problem-bitwise-recurrence'],
+  [/binary semaphore|mutex implementation/, 'Linux & OS', 'qualcomm-linux-synchronization'],
+  [/mmu|tlb/, 'Linux & OS', 'qualcomm-linux-kernel-vm'],
+  [/switch.*else.if|else.if.*switch/, 'C & C++', 'qualcomm-c-output-semantics'],
+  [/compilation process|compil.*c program/, 'C & C++', 'qualcomm-c-macros-build'],
+  [/tree data structure|linked list.*binary search tree/, 'DSA & programming', 'qualcomm-dsa-trees-convolution'],
+  [/data structures/, 'DSA & programming', 'qualcomm-dsa-complexity-search'],
+  [/binary search|binary searching/, 'DSA & programming', 'qualcomm-dsa-complexity-search'],
+  [/chessboard|hundred doors|torch.and.bridge/, 'Logic & puzzles', 'qualcomm-puzzles-logic'],
+  [/n.queens|backtracking|railway platforms|missing value/, 'DSA & programming', 'qualcomm-dsa-complexity-search'],
+  [/watchdog/, 'Embedded & electronics', 'qualcomm-embedded-rtos-interrupts'],
+  [/memory copying|memcpy|memmove/, 'C & C++', 'qualcomm-c-pointers-arrays'],
   [/pthread/, 'Linux & OS', 'qualcomm-linux-processes-signals'],
   [/bitewise recurrence/, 'DSA & programming', 'qualcomm-problem-bitwise-recurrence'],
   [/memory structure of c/, 'C & C++', 'qualcomm-c-storage-lifetime'],
@@ -69,7 +81,7 @@ const topicRules = [
   [/basket|coconut|one stroke|one-stroke|series.*20|three copies|make six/, 'Logic & puzzles', 'qualcomm-puzzles-logic'],
   [/camera|headphone|black.box.*white.box|test cases|test.*device|watch|carrom/, 'Testing & debugging', 'qualcomm-testing-devices'],
   [/project|inverted search|mini shell|car black box/, 'Projects & interview', 'qualcomm-project-explanation'],
-  [/introduc|yourself|hobbies|why qualcomm|why.*chelsio|about.*company|role|resume|emertxe|job|organization|feel down|find solution|what.*looking|coding\?|did.*appl|device drivers, why/, 'Projects & interview', 'qualcomm-behavioral-rounds'],
+  [/introduc|yourself|hobbies|why qualcomm|why.*chelsio|about.*company|your role|job role|resume|emertxe|job|organization|feel down|find solution|what.*looking|coding\?|did.*appl|device drivers, why/, 'Projects & interview', 'qualcomm-behavioral-rounds'],
   [/three.way|3.way|tcp.*handshake|tcp.*reliab/, 'Networking', 'net-tcp'],
   [/termination.*tcp|tcp.*clos|tcp.*termin|server crashes/, 'Networking', 'net-timewait'],
   [/arp|rarp|icmp/, 'Networking', 'net-arp'],
