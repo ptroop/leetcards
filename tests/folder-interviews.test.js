@@ -5,7 +5,7 @@ import { topicById } from '../src/data/curriculum.js';
 import { parseRoute, routeForFolderQuestions } from '../src/data/routes.js';
 
 test('folder provenance accounts for all 64 files and the four nested screenshots', () => {
-  const files = folderSources.filter((s) => s.id !== 'U001');
+  const files = folderSources.filter((s) => s.sha256);
   assert.equal(files.length, 64);
   assert.equal(new Set(files.map((s) => s.path)).size, 64);
   const archive = files.find((s) => s.kind === 'nested-archive');
@@ -83,4 +83,11 @@ test('the published dam implementation matches all linked examples and brute-for
   const script = `${dam.code}\nimport json\nexamples = json.loads(${JSON.stringify(JSON.stringify(dam.examples))})\nfor e in examples:\n    assert max_mud_height(e['positions'],e['heights']) == e['expected']\nfor a in range(9):\n    for b in range(9):\n        for distance in range(1,13):\n            expected = max((min(a+t,b+distance-t) for t in range(1,distance)), default=0)\n            assert max_mud_height([0,distance],[a,b]) == expected\nassert max_mud_height([],[]) == 0\nassert max_mud_height([5],[9]) == 0\nassert max_mud_height([10,1],[5,1]) == 7\ntry:\n    max_mud_height([1,1],[2,3])\n    raise AssertionError('duplicate positions accepted')\nexcept ValueError:\n    pass\n`;
   const result = spawnSync('python', ['-c', script], { encoding: 'utf8', timeout: 10000 });
   assert.equal(result.status, 0, result.stderr);
+});
+
+test('external exercises have the common tag and remain separately filterable', () => {
+  const questions = filterFolderQuestions({ company: 'qualcomm', status: 'practice' });
+  assert.ok(questions.length >= 50);
+  assert.ok(questions.every((q) => q.tag === 'External practice' && q.answer && q.sources.length));
+  assert.ok(!questions.some((q) => q.status === 'reported'));
 });

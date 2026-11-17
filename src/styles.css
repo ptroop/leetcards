@@ -3791,3 +3791,5 @@ kbd {
 .folder-examples th, .folder-examples td { padding: 10px; border: 1px solid #d8cdc1; text-align: left; }
 .folder-examples caption { text-align: left; margin-bottom: 8px; }
 .folder-question-body svg { display: block; max-width: 360px; width: 100%; margin: 16px 0; }
+
+.external-practice-tag { display: inline-block; margin-left: 10px; padding: 2px 8px; border: 1px solid #a6543c; border-radius: 4px; color: #81412e; font: 12px/1.6 sans-serif; vertical-align: middle; }

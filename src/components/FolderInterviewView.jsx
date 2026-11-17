@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { filterFolderQuestions, folderQuestions, folderSources, folderSourceById } from '../data/folderInterviewQuestions.js';
 import { topicById } from '../data/curriculum.js';
 
-const labels = { reported: 'Reported prompt', 'topic-only': 'Topic recollection', clarify: 'Clarify the constraints', 'user-recalled': 'User recollection · company unconfirmed' };
+const labels = { practice: 'External practice', reported: 'Reported prompt', 'topic-only': 'Topic recollection', clarify: 'Clarify the constraints', 'user-recalled': 'User recollection · company unconfirmed' };
 
 export default function FolderInterviewView({ company, onBack, onOpenLesson, onOpenCompany }) {
   const [query, setQuery] = useState('');
@@ -46,11 +46,13 @@ export default function FolderInterviewView({ company, onBack, onOpenLesson, onO
           const topic = topicById.get(question.topicId);
           return (
             <details className="folder-question" key={question.id} id={question.id}>
-              <summary><span className="eyebrow">{question.area} · {labels[question.status]}</span><span className="folder-question-title">{question.prompt}</span></summary>
+              <summary><span className="eyebrow">{question.area} · {labels[question.status]}</span><span className="folder-question-title">{question.prompt}{question.tag && <span className="external-practice-tag">{question.tag}</span>}</span></summary>
               <div className="folder-question-body">
                 {question.examples && <table className="folder-examples"><caption>Dam Design examples checked against the linked post</caption><thead><tr><th scope="col">Wall positions</th><th scope="col">Wall heights</th><th scope="col">Maximum mud height</th></tr></thead><tbody>{question.examples.map((example) => <tr key={example.positions.join(',')}><td>{example.positions.join(', ')}</td><td>{example.heights.join(', ')}</td><td>{example.expected}</td></tr>)}</tbody></table>}
                 {question.diagram === 'five-regions' && <svg viewBox="0 0 360 200" role="img" aria-label="Rectangle with three upper regions and two lower regions"><path d="M20 20H340V180H20ZM20 100H340M125 20V100M235 20V100M180 100V180" fill="none" stroke="currentColor" strokeWidth="3" /></svg>}
                 {question.code && <pre><code>{question.code}</code></pre>}
+                {question.followUp && <p><strong>Follow-up:</strong> {question.followUp}</p>}
+                {question.practiceKind && <p>{question.practiceKind}</p>}
                 {question.clarification && <p className="folder-clarification"><strong>Clarification:</strong> {question.clarification}</p>}
                 {question.answer && <section><h2>Reasoning and answer</h2><p>{question.answer}</p></section>}
                 {question.status === 'topic-only' && <p>The source records a topic rather than a complete question. Use the related lesson to prepare; the original constraints were not supplied.</p>}

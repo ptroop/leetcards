@@ -1601,6 +1601,70 @@
       ],
       "kind": "questions",
       "visualCount": 0
+    },
+    {
+      "id": "P001",
+      "path": "External practice derived from technical references",
+      "sha256": null,
+      "bytes": 0,
+      "visualCount": 0,
+      "kind": "practice",
+      "questionIds": [
+        "practice-a669f2b97981",
+        "practice-c6b65e38f096",
+        "practice-f423f742dc06",
+        "practice-6b4a2f412545",
+        "practice-3d8e54402622",
+        "practice-ad102f6f7606",
+        "practice-99a57745612b",
+        "practice-60cddfe42adf",
+        "practice-de467dac5269",
+        "practice-24da2c2c18e0",
+        "practice-a5a1c7d90ed2",
+        "practice-8e2de1b3ea35",
+        "practice-8d93a2c5e791",
+        "practice-3df63c41a156",
+        "practice-b199c233e9d8",
+        "practice-4fff81af019e",
+        "practice-a5443bd23a00",
+        "practice-a2ec01e37f9f",
+        "practice-3635868bf230",
+        "practice-ccd2f5b0d29c",
+        "practice-6ea88c54b40c",
+        "practice-cac8a052753f",
+        "practice-8c1dc71a1d70",
+        "practice-826a788f35f6",
+        "practice-c4a340bd21d0",
+        "practice-f74e86e23546",
+        "practice-879c29343046",
+        "practice-b3b05e04dc05",
+        "practice-3b2b49408372",
+        "practice-db85af44b80a",
+        "practice-8a8b7dd065f1",
+        "practice-e1494677cda6",
+        "practice-b552f388bd8e",
+        "practice-7a165b4a5352",
+        "practice-ac7c0d692ebc",
+        "practice-1d861df7aa0f",
+        "practice-276d71587871",
+        "practice-37cdd6f320d8",
+        "practice-64f0197df16b",
+        "practice-315f6d4474cb",
+        "practice-078e59671e9d",
+        "practice-c0a1ade6ed3b",
+        "practice-d6df3b226ec3",
+        "practice-57c7695b6e44",
+        "practice-e132e51a5f81",
+        "practice-f0862f37a4b2",
+        "practice-4f28092692e6",
+        "practice-575c62c935b8",
+        "practice-067eac8a3ed8",
+        "practice-013809a3e997",
+        "practice-7556c7dada8b",
+        "practice-08432ae8ad26",
+        "practice-65bde50e42d0",
+        "practice-b0b5470066a8"
+      ]
     }
   ],
   "questions": [
@@ -11171,6 +11235,1086 @@
       ],
       "status": "clarify",
       "clarification": "The source has no expression or diagram attached to this line. It is retained as an unresolved fragment; there is no reliable question or answer to reconstruct."
+    },
+    {
+      "id": "practice-a669f2b97981",
+      "company": "shared",
+      "prompt": "A producer and consumer share a queue. Why must the consumer recheck the queue predicate after pthread_cond_wait returns?",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Original related practice"
+        }
+      ],
+      "status": "practice",
+      "answer": "A wakeup does not guarantee the queue is nonempty: another consumer may have removed the item or the wakeup may be spurious. Lock the mutex, wait in a while loop while the queue is empty, remove an item while still holding the lock, then unlock. Test multiple consumers and shutdown.",
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-c6b65e38f096",
+      "company": "shared",
+      "prompt": "After fork(), a parent and child both write to the same inherited file descriptor. Do they have independent offsets?",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Original related practice"
+        }
+      ],
+      "status": "practice",
+      "answer": "The descriptors refer to the same open file description and share its file offset and status flags. Separate open calls create separate open file descriptions. Test with a temporary file and waitpid; user-space stdio buffers inherited across fork add another source of duplicate output.",
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-f423f742dc06",
+      "company": "shared",
+      "prompt": "A TCP client sends 100 bytes in one send call. Must the server receive all 100 in one recv call?",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Original related practice"
+        }
+      ],
+      "status": "practice",
+      "answer": "No. TCP is a byte stream; recv can return a partial record or several records together. Define framing, accumulate bytes, handle EOF and errors, and test fragmented headers, split payloads and multiple records in one read.",
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-6b4a2f412545",
+      "company": "shared",
+      "prompt": "A C function returns the address of a local array. Why is using it after return unsafe, and how can it be fixed?",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Original related practice"
+        }
+      ],
+      "status": "practice",
+      "answer": "The array has automatic storage duration and its lifetime ends when the function returns. The pointer becomes invalid. Have the caller provide a buffer, return allocated memory with clear ownership, or use an appropriate static object with documented concurrency limits.",
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-3d8e54402622",
+      "company": "shared",
+      "prompt": "A linked list may contain a cycle. How can you identify the cycle entry in O(1) extra space?",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Original related practice"
+        }
+      ],
+      "status": "practice",
+      "answer": "Use Floyd’s slow and fast pointers. If they meet, reset one pointer to the head and advance both one step at a time; their meeting point is the entry. Test empty lists, one-node self-loops, cycles starting at the head and acyclic lists.",
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-ad102f6f7606",
+      "company": "shared",
+      "prompt": "Two eggs and 36 floors: what is the minimum worst-case number of drops needed to find the highest safe floor?",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Original related practice"
+        }
+      ],
+      "status": "practice",
+      "answer": "Eight. Choose decreasing intervals 8, 7, 6 and so on; eight drops cover 8+7+…+1=36 floors. With seven drops, the maximum coverage is 28 floors, so seven cannot guarantee the answer. Assume identical eggs and a monotonic break threshold.",
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-99a57745612b",
+      "company": "shared",
+      "prompt": "A UART receiver works at low baud rates but corrupts bytes at higher rates. What should you check first?",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Original related practice"
+        }
+      ],
+      "status": "practice",
+      "answer": "Compare baud rate and clock error at both ends, framing parameters, signal levels and ground, then capture the waveform with a logic analyzer. Check edge quality, sampling margin, FIFO overrun and ISR latency. Reproduce with a known byte pattern and vary one condition at a time.",
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-60cddfe42adf",
+      "company": "shared",
+      "prompt": "How would you test a camera when storage becomes full during video recording?",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Original related practice"
+        }
+      ],
+      "status": "practice",
+      "answer": "Start a recording with limited free space, fill the storage during capture, and observe the error, UI state and resulting file. Verify the app does not crash, preserves previously completed recordings, releases the device, and can record again after space is freed. Define expected partial-file behavior before testing.",
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-de467dac5269",
+      "company": "shared",
+      "prompt": "A network driver unloads while work and interrupts are still pending. What race can occur?",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Original related practice"
+        }
+      ],
+      "status": "practice",
+      "answer": "A pending interrupt or work item can access freed driver state. Stop new device activity, disable and synchronize interrupt handling, cancel or flush deferred work, and release resources only after all users are quiescent. Test repeated load/unload under traffic with kernel diagnostics enabled.",
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-24da2c2c18e0",
+      "company": "shared",
+      "prompt": "An array contains every integer twice except one. How can the singleton be found with constant extra space?",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Original related practice"
+        }
+      ],
+      "status": "practice",
+      "answer": "XOR every value: equal pairs cancel and zero is the identity, leaving the singleton. This relies on exactly one odd-occurrence value and every other value occurring an even number of times. Test negative values, a one-element array and invalid assumptions separately.",
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-a5a1c7d90ed2",
+      "company": "shared",
+      "prompt": "Why can printf inside a signal handler deadlock even in a single-threaded program?",
+      "answer": "The handler can interrupt stdio while its internal state is inconsistent. Use an async-signal-safe operation or notify the main loop; ordinary thread safety does not imply signal safety.",
+      "followUp": "Explain how you would defer logging to the main loop.",
+      "area": "Linux & OS",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/pthreads.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-8e2de1b3ea35",
+      "company": "shared",
+      "prompt": "A multithreaded process forks while another thread owns a mutex. What can the child safely do before exec?",
+      "answer": "Only the calling thread survives, but copied locks may remain owned by vanished threads. Restrict the child to async-signal-safe operations until exec; design fork/exec handling deliberately.",
+      "followUp": "Why does creating another thread in the child not repair the copied lock?",
+      "area": "Linux & OS",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/pthreads.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-8d93a2c5e791",
+      "company": "shared",
+      "prompt": "A child exits but remains listed as a zombie. Which resource is waiting to be collected?",
+      "answer": "Its exit status and accounting information remain until reaped. The parent should use wait or waitpid; sending SIGKILL cannot kill an already exited child.",
+      "followUp": "How would you reap several children without blocking indefinitely?",
+      "area": "Linux & OS",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/pthreads.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-3df63c41a156",
+      "company": "shared",
+      "prompt": "Two threads increment a volatile counter. Why can the final value be too small?",
+      "answer": "Volatile provides neither atomic read-modify-write nor interthread synchronization. Use an atomic operation or a mutex and establish the required memory ordering.",
+      "followUp": "Distinguish a lost update from a C data race.",
+      "area": "Linux & OS",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/pthreads.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-b199c233e9d8",
+      "company": "shared",
+      "prompt": "A thread repeatedly checks a flag while holding its mutex. Why can the producer never make progress?",
+      "answer": "The producer needs the same mutex to change the predicate. A condition-variable wait releases the mutex while waiting and reacquires it before returning.",
+      "followUp": "Trace the lock ownership through one successful handoff.",
+      "area": "Linux & OS",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/pthreads.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-4fff81af019e",
+      "company": "shared",
+      "prompt": "When should a semaphore be preferred to a mutex in a bounded buffer?",
+      "answer": "Use semaphore counts for available items or slots, and a mutex for shared queue mutation. A mutex has ownership; a semaphore can signal availability across threads.",
+      "followUp": "What happens if a producer posts before publishing an item?",
+      "area": "Linux & OS",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/pthreads.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-a5443bd23a00",
+      "company": "shared",
+      "prompt": "A high-priority thread waits for a lock held by a low-priority thread. How can a medium-priority thread make this worse?",
+      "answer": "The medium-priority thread can delay the lock holder, indirectly blocking the high-priority waiter. Priority inheritance can temporarily raise the holder's priority.",
+      "followUp": "Which blocking time remains even with priority inheritance?",
+      "area": "Linux & OS",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/pthreads.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-a2ec01e37f9f",
+      "company": "shared",
+      "prompt": "Why is disabling interrupts on one CPU insufficient to protect shared data on another CPU?",
+      "answer": "It controls local interrupt delivery, not execution on other processors. Use the appropriate inter-CPU synchronization and interrupt-context discipline.",
+      "followUp": "When is raw_spinlock_t needed instead of a sleeping lock?",
+      "area": "Linux & OS",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/pthreads.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-3635868bf230",
+      "company": "shared",
+      "prompt": "A process has low CPU use but high latency. What evidence distinguishes blocking from CPU starvation?",
+      "answer": "Inspect thread states, scheduling delay, wait channels and syscall traces. Low CPU use alone cannot distinguish waiting for I/O from waiting to be scheduled.",
+      "followUp": "Which observation would disprove your first hypothesis?",
+      "area": "Linux & OS",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/pthreads.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-ccd2f5b0d29c",
+      "company": "shared",
+      "prompt": "Can increasing thread count make a program slower?",
+      "answer": "Yes: contention, scheduling overhead, cache traffic and oversubscription can outweigh parallel work. Measure throughput and latency while varying workers and workload.",
+      "followUp": "How would you identify a serial bottleneck?",
+      "area": "Linux & OS",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/pthreads.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-6ea88c54b40c",
+      "company": "shared",
+      "prompt": "A pipe reader never sees EOF after the writer exits. What should you inspect?",
+      "answer": "EOF requires every write-end reference to be closed. An inherited or duplicated descriptor in another process can keep the pipe logically open.",
+      "followUp": "Draw the descriptor ownership after fork.",
+      "area": "Linux & OS",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/pthreads.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-cac8a052753f",
+      "company": "shared",
+      "prompt": "A TCP connection succeeds, but a request sometimes stalls. How would you separate framing, flow-control and application problems?",
+      "answer": "Inspect byte counts and framing first, then socket state, packet captures and peer processing. Successful connect proves a transport handshake, not application readiness.",
+      "followUp": "What does a successful send actually guarantee?",
+      "area": "Networking",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/tcp.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-8c1dc71a1d70",
+      "company": "shared",
+      "prompt": "Why can an application receive zero bytes from recv on a connected TCP socket?",
+      "answer": "For a nonzero requested length, zero indicates orderly peer shutdown after queued data is consumed. Handle it as EOF rather than retrying forever.",
+      "followUp": "Can the local endpoint still send after receiving EOF?",
+      "area": "Networking",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/tcp.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-826a788f35f6",
+      "company": "shared",
+      "prompt": "Why does retrying an entire application request after a timeout risk duplicate work?",
+      "answer": "The peer may have processed it before the response was lost. Use request identifiers, idempotent operations or a deduplication contract.",
+      "followUp": "Separate transport retransmission from application retry.",
+      "area": "Networking",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/tcp.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-c4a340bd21d0",
+      "company": "shared",
+      "prompt": "A server uses one recv call for a length header. What tests expose the bug?",
+      "answer": "Split the header across several sends, close mid-header, and combine multiple records in one write. The parser must accumulate bytes and bound declared lengths.",
+      "followUp": "How should an oversized length be rejected before allocation?",
+      "area": "Networking",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/tcp.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-f74e86e23546",
+      "company": "shared",
+      "prompt": "When does adding threads fail to improve a network server's throughput?",
+      "answer": "A shared lock, single hot queue, memory bandwidth or network limit may dominate. Measure queue delay and per-stage service time before adding workers.",
+      "followUp": "How would you distinguish CPU saturation from lock contention?",
+      "area": "Networking",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/tcp.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-879c29343046",
+      "company": "shared",
+      "prompt": "Why can a small TCP write have unexpectedly high latency?",
+      "answer": "Buffering, delayed acknowledgments, congestion, scheduling and application batching can all matter. Correlate timestamps and captures instead of attributing every delay to one TCP option.",
+      "followUp": "What experiment isolates application buffering?",
+      "area": "Networking",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/tcp.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-b3b05e04dc05",
+      "company": "shared",
+      "prompt": "An application sees repeated connection resets. What should you verify?",
+      "answer": "Identify which endpoint sends RST and correlate with socket lifetime, protocol errors and abortive closes. A reset is a symptom, not proof of a network outage.",
+      "followUp": "How does a reset differ from orderly EOF?",
+      "area": "Networking",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/tcp.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-3b2b49408372",
+      "company": "shared",
+      "prompt": "How would you debug a host that can reach an IP address but cannot resolve a hostname?",
+      "answer": "Inspect resolver configuration, DNS requests and responses, routing to the resolver and application caching. IP reachability does not establish DNS service availability.",
+      "followUp": "How do you test whether the failure is local or upstream?",
+      "area": "Networking",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/tcp.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-db85af44b80a",
+      "company": "shared",
+      "prompt": "What changes when a protocol runs over UDP instead of TCP?",
+      "answer": "The application receives datagrams rather than a reliable byte stream. Define loss, duplication, reordering, payload sizing and retry behavior explicitly.",
+      "followUp": "Which application messages can safely be retried?",
+      "area": "Networking",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://man7.org/linux/man-pages/man7/tcp.7.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-8a8b7dd065f1",
+      "company": "shared",
+      "prompt": "Why must a driver distinguish CPU virtual addresses from DMA addresses?",
+      "answer": "Devices use a bus address space that can differ from CPU physical and virtual addresses. Obtain device-visible addresses through the DMA API and obey mapping lifetime rules.",
+      "followUp": "How can an IOMMU change the mapping?",
+      "area": "Embedded & electronics",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://docs.kernel.org/core-api/dma-api-howto.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-e1494677cda6",
+      "company": "shared",
+      "prompt": "Why can coherent DMA memory still require ordering barriers?",
+      "answer": "Cache coherence does not make descriptor writes occur in the order required by a device. Publish descriptor fields before transferring ownership using the platform's required ordering primitives.",
+      "followUp": "Trace the ownership bit and payload publication.",
+      "area": "Embedded & electronics",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://docs.kernel.org/core-api/dma-api-howto.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-b552f388bd8e",
+      "company": "shared",
+      "prompt": "A device writes stale data into a reused DMA buffer. What ownership mistake might explain it?",
+      "answer": "The CPU and device may access the buffer without the required synchronization or completion protocol. Verify direction, mapping lifetime, completion and CPU/device ownership transitions.",
+      "followUp": "What evidence separates a cache issue from a device-length bug?",
+      "area": "Embedded & electronics",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://docs.kernel.org/core-api/dma-api-howto.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-7a165b4a5352",
+      "company": "shared",
+      "prompt": "Why is passing a stack buffer to an asynchronous device operation unsafe?",
+      "answer": "The operation can outlive the function and the stack object. Allocate storage whose lifetime covers completion and cancellation, then release it only after users are quiescent.",
+      "followUp": "What must cancellation guarantee before freeing the buffer?",
+      "area": "Embedded & electronics",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://docs.kernel.org/core-api/dma-api-howto.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-ac7c0d692ebc",
+      "company": "shared",
+      "prompt": "A probe routine fails after acquiring several resources. How should cleanup be designed?",
+      "answer": "Track acquisition order and release successfully acquired resources in reverse order. Managed resources help with lifetime cleanup but do not replace device-specific shutdown requirements.",
+      "followUp": "Inject failure after each acquisition and explain the expected state.",
+      "area": "Embedded & electronics",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://docs.kernel.org/core-api/dma-api-howto.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-1d861df7aa0f",
+      "company": "shared",
+      "prompt": "Why should an interrupt handler avoid long polling loops?",
+      "answer": "It can delay other interrupt work and increase latency. Acknowledge the cause, capture bounded state and defer work to an appropriate context.",
+      "followUp": "How would you measure worst-case handler duration?",
+      "area": "Embedded & electronics",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://docs.kernel.org/core-api/dma-api-howto.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-276d71587871",
+      "company": "shared",
+      "prompt": "A driver works until suspend and resume. What state might be missing after resume?",
+      "answer": "Clocks, power domains, registers, DMA state or interrupt configuration may have been lost. Re-establish the device contract in the required order.",
+      "followUp": "Which register reads would verify restoration?",
+      "area": "Embedded & electronics",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://docs.kernel.org/core-api/dma-api-howto.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-37cdd6f320d8",
+      "company": "shared",
+      "prompt": "A device intermittently disappears during heavy traffic. How would you investigate?",
+      "answer": "Correlate reset reasons, power integrity, error counters, interrupt behavior and driver logs. Choose a measurement that distinguishes electrical, firmware and software causes.",
+      "followUp": "Which fault would you reproduce first and why?",
+      "area": "Embedded & electronics",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://docs.kernel.org/core-api/dma-api-howto.html"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-64f0197df16b",
+      "company": "shared",
+      "prompt": "Find the middle of a singly linked list while defining the even-length convention.",
+      "answer": "Advance slow by one and fast by two. The initialization and loop condition determine whether an even list returns the first or second middle; specify that contract before coding.",
+      "followUp": "Trace lists of zero through four nodes.",
+      "area": "DSA & programming",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-315f6d4474cb",
+      "company": "shared",
+      "prompt": "Delete a list node when you have no head pointer. When is the usual copy-next trick invalid?",
+      "answer": "It cannot delete the tail and may violate node identity or ownership requirements. Copying successor data and removing the successor changes which node survives.",
+      "followUp": "What changes if external pointers identify nodes?",
+      "area": "DSA & programming",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-078e59671e9d",
+      "company": "shared",
+      "prompt": "Find all distinct pairs summing to a target without reporting duplicates.",
+      "answer": "Sort and use two pointers, skipping repeated values after a match, or use a hash-based scheme with explicit deduplication. Clarify value-pairs versus index-pairs.",
+      "followUp": "How many index-pairs arise from four equal values?",
+      "area": "DSA & programming",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-c0a1ade6ed3b",
+      "company": "shared",
+      "prompt": "Design a circular queue whose head and tail indices can be equal.",
+      "answer": "Reserve one slot or track a count/full flag. Define empty/full behavior and capacity carefully; concurrency additionally needs a publication protocol.",
+      "followUp": "Test wraparound with capacity one.",
+      "area": "DSA & programming",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-d6df3b226ec3",
+      "company": "shared",
+      "prompt": "Find the shortest subarray with exactly k distinct values. How does it differ from at least k?",
+      "answer": "Track frequencies and shrink only while preserving the required distinct count; discard excess distinct values first. The invariant must distinguish exactly k from at least k.",
+      "followUp": "What is the result when k exceeds the array's distinct count?",
+      "area": "DSA & programming",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-57c7695b6e44",
+      "company": "shared",
+      "prompt": "How would you detect whether a hash table's worst-case behavior matters for your input?",
+      "answer": "Analyze adversarial collisions, load factor, resizing and key distribution. Expected constant-time operations do not imply a constant worst case.",
+      "followUp": "When would a sorted structure be preferable?",
+      "area": "DSA & programming",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-e132e51a5f81",
+      "company": "shared",
+      "prompt": "With two eggs and ten floors, can four drops identify the safe threshold?",
+      "answer": "Yes: decreasing intervals 4,3,2,1 cover ten floors. Three drops cover only six, so four are necessary under the monotonic threshold model.",
+      "followUp": "Give the actual drop sequence after each possible break.",
+      "area": "Logic & puzzles",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://leetcode.com/problems/super-egg-drop/description/"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-f0862f37a4b2",
+      "company": "shared",
+      "prompt": "With one egg and n floors, why is binary search inappropriate?",
+      "answer": "A break destroys the only egg, leaving untested lower floors unresolved. Sequential testing from the bottom guarantees identification in at most n drops.",
+      "followUp": "Which assumption would allow binary search?",
+      "area": "Logic & puzzles",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://leetcode.com/problems/super-egg-drop/description/"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-4f28092692e6",
+      "company": "shared",
+      "prompt": "With unlimited eggs, how many drops distinguish a threshold among n floors?",
+      "answer": "There are n+1 possible thresholds, including zero safe floors. Binary outcomes require at least ceil(log2(n+1)) drops, attainable with balanced threshold tests.",
+      "followUp": "Check n equal to one, two and three.",
+      "area": "Logic & puzzles",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://leetcode.com/problems/super-egg-drop/description/"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-575c62c935b8",
+      "company": "shared",
+      "prompt": "How can you verify an egg-drop recurrence rather than memorizing a formula?",
+      "answer": "With e eggs and m moves, coverage equals coverage with e-1 eggs and m-1 moves, plus the tested floor, plus coverage with e eggs and m-1 moves.",
+      "followUp": "Explain the break and survival branches separately.",
+      "area": "Logic & puzzles",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "references": [
+        {
+          "title": "Technical background for this exercise",
+          "url": "https://leetcode.com/problems/super-egg-drop/description/"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-067eac8a3ed8",
+      "company": "shared",
+      "prompt": "How would you test whether a camera leaks resources after repeated open and close?",
+      "answer": "Repeat lifecycle operations while monitoring descriptors, memory and device availability. Add failures during initialization and capture, and verify resources return to baseline.",
+      "followUp": "Which metric distinguishes a leak from allocator caching?",
+      "area": "Testing & debugging",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-013809a3e997",
+      "company": "shared",
+      "prompt": "A UART parser receives a truncated frame. What should its test assert?",
+      "answer": "It should reject or await completion according to its timeout/framing contract, never read beyond available data, and recover for a subsequent valid frame.",
+      "followUp": "Test truncation at every byte boundary.",
+      "area": "Testing & debugging",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-7556c7dada8b",
+      "company": "shared",
+      "prompt": "How would you test a queue under concurrent producers and consumers?",
+      "answer": "Track unique item identifiers, verify no loss or duplication, enforce capacity and shutdown behavior, and run race detection. A passing stress run alone is not a proof of correctness.",
+      "followUp": "Which small deterministic schedule exposes a lost wakeup?",
+      "area": "Testing & debugging",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-08432ae8ad26",
+      "company": "shared",
+      "prompt": "What tests distinguish endian conversion from reversing an arbitrary byte buffer?",
+      "answer": "Use fixed-width numeric values with asymmetric bytes, zero, all ones and single-bit cases. Check round-trip conversion and avoid relying on host representation assumptions.",
+      "followUp": "Why is a byte swap not always the same as host-to-network conversion?",
+      "area": "Testing & debugging",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-65bde50e42d0",
+      "company": "shared",
+      "prompt": "How would you defend an architectural decision when the interviewer removes your preferred library?",
+      "answer": "State the required contract, explain which guarantees the library supplied, and rebuild those responsibilities explicitly. Discuss the cost and evidence behind the replacement.",
+      "followUp": "Which guarantee is hardest to reproduce correctly?",
+      "area": "Projects & interview",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "tag": "External practice"
+    },
+    {
+      "id": "practice-b0b5470066a8",
+      "company": "shared",
+      "prompt": "How do you explain a performance improvement without overstating it?",
+      "answer": "Provide workload, baseline, measurement method, distribution of results and tradeoffs. Distinguish throughput, latency and resource usage; disclose limits and regressions.",
+      "followUp": "Which benchmark would invalidate your claim?",
+      "area": "Projects & interview",
+      "status": "practice",
+      "practiceKind": "Original exercise informed by external references; not a verified company report",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "Related practice"
+        }
+      ],
+      "tag": "External practice"
     }
   ]
 }

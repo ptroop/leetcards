@@ -112,7 +112,7 @@ const topicRules = [
 
 export const folderQuestions = bank.questions.map((question) => {
   const rule = topicRules.find(([pattern]) => new RegExp(`\\b(?:${pattern.source})(?:s|es|ed|ing|tion|ization|isation)?\\b`, 'i').test(question.prompt));
-  return { ...question, area: rule?.[1] ?? 'Other reported topics', topicId: rule?.[2] ?? null };
+  return { ...question, area: question.area ?? rule?.[1] ?? 'Other reported topics', topicId: rule?.[2] ?? null };
 });
 
 export function filterFolderQuestions({ company, query = '', area = '', sourceId = '', status = '' }) {
