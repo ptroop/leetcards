@@ -30,10 +30,10 @@
 
 ## External research expansion — November 17, 2026
 
-- Current bank: **838 prompts**, comprising the original 733, **74 potential interview exercises**, and **31 online candidate-reported Qualcomm prompts**. All 105 outside additions show the common **External practice** badge.
+- Current bank: **902 prompts**, comprising the original 733, **126 potential interview exercises**, and **43 online candidate-reported Qualcomm prompts**. All 169 outside additions show the common **External practice** badge.
 - Potential exercises cover C ownership, concurrency, Linux/processes, DMA/drivers, TCP/network debugging, UART/I2C/SPI, DSA, puzzles, camera testing and project discussion. Each has editorial reasoning; related variants are not counted as independent interview evidence.
 - Candidate-reported questions have their own **Reported online · candidate account** statement filter, source link, role context and explicit unofficial status. Article update dates are distinguished from interview dates.
-- Six detailed Qualcomm candidate accounts were used. These establish reported topics and prompts, not verified company policy or future-question probabilities:
+- Ten detailed Qualcomm candidate accounts were used. These establish reported topics and prompts, not verified company policy or future-question probabilities:
   - [Senior Engineer / Hyderabad Linux Kernel team](https://www.reddit.com/r/qualcomm/comments/1x9u673/qualcomm_interview_experience_for_senior_engineer/)
   - [SDE off-campus 2023 / Chennai](https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-sde-off-campus-2023/)
   - [Associate Engineer](https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-associate-engineer-full-time/)
@@ -44,7 +44,7 @@
 - Technical background for new scenarios includes the [Linux NAPI API](https://docs.kernel.org/networking/napi.html), [memory barriers](https://docs.kernel.org/core-api/wrappers/memory-barriers.html), [I2C protocol](https://docs.kernel.org/i2c/i2c-protocol.html), [SPI API](https://docs.kernel.org/driver-api/spi.html), and [TCP RFC 9293](https://www.rfc-editor.org/rfc/rfc9293.html). These documents support concepts; they do not claim the exercises appeared in interviews.
 - The original 64-file inventory remains intact. Online sources have no fabricated local-file hashes. Shared practice and user recollections are available in both company source filters.
 
-- Latest research pass: all 17 test files pass; all nine focused folder-bank tests pass, including all 31 online reports and 74 practice entries. Production build and PWA cache generation pass. The large-bundle warning remains.
+- Latest research pass: all 17 test files pass; all nine focused folder-bank tests pass, including the then-current 31 online reports and 74 practice entries. Production build and PWA cache generation pass. The large-bundle warning remains.
 
 ## Files accounted for
 
@@ -161,3 +161,23 @@
   The number of eggs is missing. With two eggs, choose decreasing intervals 14,13,12,… so the first drops are at floors 14,27,39,…; after a break, linearly test the previous interval using the remaining egg. At most 14 drops suffice because 14×15/2≥100.
 - **Incomplete mathematical prompt: the source says “What is ?”.**
   The source has no expression or diagram attached to this line. It is retained as an unresolved fragment; there is no reliable question or answer to reconstruct.
+
+## Additional puzzles, Linux/OS, C quizzes and Qualcomm DSA
+
+This expansion adds 64 entries: 16 puzzles, 20 Linux/OS scenarios, 16 original C11 code quizzes and 12 Qualcomm DSA prompts from four additional candidate accounts. All carry the External practice badge. The original folder inventory is unchanged; repeated interview topics may have independent source variants and are not claimed as unique problems.
+
+- Puzzles: coloring invariants, information bounds, pooled binary testing, conditional probability, fair randomness from a biased coin, lamp protocols, backward induction, exact weighing, Ramsey reasoning, circular-route invariants and a magic square. The apple/orange-box puzzle already in the folder bank was not duplicated. Assumptions are stated, including initial lamp state, host policy and voting threshold.
+- Linux internals and OS: exec image replacement, close-on-exec races, signal disposition/masks, mmap copy-on-write and SIGBUS, minor faults, edge-triggered/one-shot epoll, futex comparison/wakeup, short reads, EINTR, unlink lifetime and waitpid. Each has a direct Linux manual-page reference.
+- C11 quizzes: sizeof side effects, array parameter adjustment, sequencing, unsigned wraparound, initialization, string terminators, array pointers, static state, macro precedence, dangling else and designated initializers. Four undefined-behavior examples explicitly have no expected output; they are never executed as answer validation. The snippets are original practice, not alleged recovered Qualcomm quizzes.
+- Reported DSA: cycle length, kth-from-end, hash tables, tree left view, tree node distance, substring/word matching, linked stacks, BFS, tree deletion constraints, climbing-stairs DP, in-place word reversal and cycle removal.
+
+Additional candidate accounts (unofficial; update date is not interview date):
+
+- [Associate Software Engineer off-campus](https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-associate-software-engineer-off-campus/): interview date unspecified; article updated July 2025.
+- [Experienced Associate Software Engineer](https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-set-8-experienced/): Hyderabad F2F January 7, 2017; article updated July 2025.
+- [Off-campus referral](https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-off-campus/): interview date unspecified; article updated July 2025.
+- [Software Engineer / BITS Goa](https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-software-engineer-role-on-campus-placements/): interview August 3, 2026; article updated August 22, 2026.
+
+The 12 defined C programs are compiled in strict C11 mode and run at both -O0 and -O2 against their published answers. Compiler output is supporting evidence on this toolchain; the explanations distinguish language guarantees from undefined behavior.
+
+Validation for this batch: all 17 test files and all 10 focused bank checks pass. All 24 defined-C executions match expected output. Production build, PWA cache generation and git diff whitespace check pass; the existing large-bundle warning remains. This batch changes data, tests and documentation; no new browser layout check was performed.

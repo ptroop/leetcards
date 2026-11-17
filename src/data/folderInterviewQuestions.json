@@ -1683,7 +1683,59 @@
         "practice-a7db3087d6b4",
         "practice-a07de1730991",
         "practice-26f1195b6a66",
-        "practice-ad436e821035"
+        "practice-ad436e821035",
+        "practice-4969ad2ccf13",
+        "practice-71380650cd95",
+        "practice-d36ca911dcdb",
+        "practice-1b055bb08188",
+        "practice-92f9fb03b380",
+        "practice-7e2d26e63720",
+        "practice-34e7a8dbfab3",
+        "practice-c0389e3c2ca3",
+        "practice-abc143bfd77e",
+        "practice-ca0d18374af3",
+        "practice-72d0649682c7",
+        "practice-da7098a55115",
+        "practice-c09fb3853b3d",
+        "practice-9819e28694b5",
+        "practice-b654cdf08da9",
+        "practice-a823ef1dd82b",
+        "practice-a511271eba2d",
+        "practice-c8538536b928",
+        "practice-c2b1c24e1705",
+        "practice-d61e3ae669d0",
+        "practice-a14afe181a0d",
+        "practice-fb88138ad8b7",
+        "practice-0a08786a6947",
+        "practice-4818130bc26d",
+        "practice-559d52142172",
+        "practice-d12c6f0eca6a",
+        "practice-ce7558ae164e",
+        "practice-87823a59375e",
+        "practice-df5b05755d43",
+        "practice-94219db4ce86",
+        "practice-c71a25994d6e",
+        "practice-56d89315f03a",
+        "practice-dbc39bc11c27",
+        "practice-98ae10ce7347",
+        "practice-4deb2eb141a2",
+        "practice-b1167598c333",
+        "practice-38e06871cba7",
+        "practice-284a38afa22f",
+        "practice-7b123579b2b4",
+        "practice-ebc8d750d630",
+        "practice-ddcb55ae686e",
+        "practice-f170d6dcdd64",
+        "practice-ad239a81f291",
+        "practice-18cb063e6b52",
+        "practice-f082ef20878a",
+        "practice-57f6984879e6",
+        "practice-077e3627e62a",
+        "practice-0e2c48319ebc",
+        "practice-9c394109d0db",
+        "practice-7b46ccd96426",
+        "practice-dbbf455e31ff",
+        "practice-463b4a6677d8"
       ]
     },
     {
@@ -1774,6 +1826,58 @@
         "online-c5c50befca8f",
         "online-e3e21d85a8c1",
         "online-114d41575eb7"
+      ],
+      "visualCount": 0
+    },
+    {
+      "id": "R007",
+      "path": "Qualcomm/Online reports/Associate Software Engineer off-campus — date unspecified; article updated July 2025",
+      "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-associate-software-engineer-off-campus/",
+      "kind": "candidate-report",
+      "sha256": null,
+      "questionIds": [
+        "online-6c9dbc5368b2",
+        "online-2401adff5560",
+        "online-2f261e4219f5"
+      ],
+      "visualCount": 0
+    },
+    {
+      "id": "R008",
+      "path": "Qualcomm/Online reports/Experienced Associate Software Engineer — Hyderabad F2F January 7 2017; article updated July 2025",
+      "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-set-8-experienced/",
+      "kind": "candidate-report",
+      "sha256": null,
+      "questionIds": [
+        "online-08ca9ef1b567",
+        "online-1ddf60f60e59",
+        "online-f2dee7ff5e72"
+      ],
+      "visualCount": 0
+    },
+    {
+      "id": "R009",
+      "path": "Qualcomm/Online reports/Off-campus referral / Hyderabad — interview date unspecified; article updated July 2025",
+      "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-off-campus/",
+      "kind": "candidate-report",
+      "sha256": null,
+      "questionIds": [
+        "online-d702abe5ae3c",
+        "online-352faa4588c9",
+        "online-1fda2eae0086"
+      ],
+      "visualCount": 0
+    },
+    {
+      "id": "R010",
+      "path": "Qualcomm/Online reports/Software Engineer on-campus / BITS Goa — interview August 3 2026; article updated August 22 2026",
+      "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-software-engineer-role-on-campus-placements/",
+      "kind": "candidate-report",
+      "sha256": null,
+      "questionIds": [
+        "online-344093348720",
+        "online-7964abf1941a",
+        "online-508a7b526c0a"
       ],
       "visualCount": 0
     }
@@ -13482,6 +13586,1267 @@
       ],
       "references": [],
       "area": "Logic & puzzles"
+    },
+    {
+      "id": "practice-4969ad2ccf13",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "A chessboard loses two diagonally opposite corner squares. Can 31 dominoes cover the remainder?",
+      "answer": "No. Opposite corners have the same color. Removing them leaves 30 squares of one color and 32 of the other; each domino covers one of each.",
+      "area": "Logic & puzzles",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question."
+    },
+    {
+      "id": "practice-71380650cd95",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Three ants start at the vertices of a triangle and independently choose a direction around its edges. What is the probability of a collision?",
+      "answer": "Assume equal speeds, independent equally likely clockwise/counterclockwise choices and point ants. Only all-clockwise or all-counterclockwise avoid collision: 2 of 8 outcomes. Thus collision probability is 3/4.",
+      "area": "Logic & puzzles",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question."
+    },
+    {
+      "id": "practice-d36ca911dcdb",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Two guards know the exit; one always lies and one always tells the truth. What single yes/no question finds the exit?",
+      "answer": "Ask either guard whether the other guard would say the left door is safe. A yes means choose right; a no means choose left. Assume exactly one safe door and both guards know both roles.",
+      "area": "Logic & puzzles",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question."
+    },
+    {
+      "id": "practice-1b055bb08188",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "One of eight coins is lighter. How many balance weighings guarantee finding it?",
+      "answer": "Two. Weigh three against three; a balanced result leaves two candidates, otherwise the lighter triple contains it. A second one-against-one weighing resolves either case. One weighing has only three outcomes.",
+      "area": "Logic & puzzles",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question."
+    },
+    {
+      "id": "practice-92f9fb03b380",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "One of nine balls is either heavier or lighter, with direction unknown. Why are two balance weighings insufficient?",
+      "answer": "There are 18 possible identities/directions but only nine two-weighing outcome sequences. Three suffice: weigh three against three. A balanced result leaves three unknown-direction candidates and known genuine balls; an unbalanced result leaves three heavy-or-three-light hypotheses. Two adaptive weighings distinguish either set.",
+      "area": "Logic & puzzles",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "followUp": "Construct the three-weighing strategy. If the first 3-vs-3 balances, use genuine balls to test two of the remaining three against two genuine balls. Otherwise let the heavy-pan candidates be A,B,C and light-pan candidates D,E,F; weigh A+D against B+E. Its outcomes leave {A heavy,E light}, {B heavy,D light}, or {C heavy,F light}; one final candidate-vs-genuine weighing distinguishes the pair."
+    },
+    {
+      "id": "practice-7e2d26e63720",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "One poisoned bottle is among 1000 bottles. Ten binary tests give results after one fixed waiting period. Is one round enough?",
+      "answer": "Yes, if pooled testing is allowed and a test is positive exactly when its pool includes poison. Number bottles 0..999; test j pools bottles with bit j set. The ten-bit result identifies one of 1024 codes. No positive tests identifies bottle 0 under the exactly-one assumption.",
+      "area": "Logic & puzzles",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question."
+    },
+    {
+      "id": "practice-34e7a8dbfab3",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "You choose one of three doors; a host who knows the prize always opens an unchosen losing door and offers a switch. Should you switch?",
+      "answer": "Yes, winning probability becomes 2/3. Your initial choice wins with probability 1/3; switching wins precisely when that initial choice was wrong. The host policy is essential.",
+      "area": "Logic & puzzles",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question."
+    },
+    {
+      "id": "practice-c0389e3c2ca3",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "A fair coin is tossed until the first head. What is the expected number of tosses?",
+      "answer": "Let E be the expectation. After one toss, probability 1/2 requires starting again: E=1+E/2, so E=2. This counts the final head.",
+      "area": "Logic & puzzles",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question."
+    },
+    {
+      "id": "practice-abc143bfd77e",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "A biased coin has independent tosses with fixed unknown head probability strictly between zero and one. Generate a fair bit.",
+      "answer": "Toss twice: map HT and TH to different outputs; discard HH and TT and repeat. The accepted patterns each have probability p(1-p). Independence and a constant bias are required.",
+      "area": "Logic & puzzles",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question."
+    },
+    {
+      "id": "practice-ca0d18374af3",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "One hundred prisoners toggle a lamp, initially off, under a fair visitation schedule. How can one certify everyone has visited?",
+      "answer": "Choose a counter. Each other prisoner switches the lamp on exactly once, only when off. The counter turns it off and counts; 99 counted signals certify all others visited. No finite completion bound follows without a bounded schedule.",
+      "area": "Logic & puzzles",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question."
+    },
+    {
+      "id": "practice-72d0649682c7",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Five pirates divide 100 coins; a proposal passes with at least half the living pirates voting yes, including the proposer. What does the strongest pirate offer?",
+      "answer": "Assume survival first, coins second, and rejecting on equal payoff. Backward induction gives offers (100) for one, (100,0) for two, (99,0,1) for three, (99,0,1,0) for four, and (98,0,1,0,1) for five. Changing the voting threshold changes the answer.",
+      "area": "Logic & puzzles",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question."
+    },
+    {
+      "id": "practice-da7098a55115",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Ten bags contain coins of 10 g, except one bag whose coins weigh 9 g. Identify it with one exact digital weighing.",
+      "answer": "Take i coins from bag i for i=1..10. Genuine total is 550 g. The deficit in grams is the bad bag index. Assume enough coins, one counterfeit bag and exact weights.",
+      "area": "Logic & puzzles",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question."
+    },
+    {
+      "id": "practice-c09fb3853b3d",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "At a party of six people, must three be mutual acquaintances or mutual strangers?",
+      "answer": "Yes. Pick a person; at least three others share the same relationship to them. Among that triple, one matching edge creates the desired triangle with the chosen person; if none match, the triple forms the opposite triangle.",
+      "area": "Logic & puzzles",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question."
+    },
+    {
+      "id": "practice-9819e28694b5",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "A circular route has petrol at stations and travel costs. When does total petrol guarantee a feasible starting station?",
+      "answer": "For nonnegative supplies/costs and an unlimited tank, total supply at least total cost suffices. Start just after a minimum cumulative net-balance point. A finite tank invalidates that sufficiency.",
+      "area": "Logic & puzzles",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question."
+    },
+    {
+      "id": "practice-b654cdf08da9",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Two trains approach across 120 km at 40 and 20 km/h. A bird flies between them at 60 km/h until they meet. How far does it travel?",
+      "answer": "The trains meet after 120/(40+20)=2 hours. The bird travels 120 km. Assume constant speeds and instantaneous turns; summing the individual bird legs is unnecessary.",
+      "area": "Logic & puzzles",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question."
+    },
+    {
+      "id": "practice-a823ef1dd82b",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Can a 3 by 3 grid hold the numbers 1 through 9 with every row, column and diagonal summing to 15?",
+      "answer": "Yes: rows 8 1 6 / 3 5 7 / 4 9 2. The total is 45, so each row must sum to 15. The center is 5 and opposite cells sum to 10; check all eight lines.",
+      "area": "Logic & puzzles",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question."
+    },
+    {
+      "id": "practice-a511271eba2d",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Does a successful execve create a new PID? Which program state changes?",
+      "answer": "No new PID is created. The program image is replaced; successful execve does not return. Distinguish replacement of code, stack and data from creation of a process.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux execve.2 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man2/execve.2.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-c8538536b928",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "A secret file descriptor leaks into a helper launched with exec. What should be set at creation?",
+      "answer": "Use close-on-exec, preferably atomically at descriptor creation, such as O_CLOEXEC. Setting FD_CLOEXEC later can race with another thread spawning a child.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux execve.2 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man2/execve.2.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-c2b1c24e1705",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "After execve, what happens to installed signal handlers and ignored signals?",
+      "answer": "Caught signal dispositions reset to default; ignored dispositions generally remain ignored, subject to documented exceptions. The signal mask is preserved. Do not assume every signal attribute resets.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux execve.2 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man2/execve.2.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-d61e3ae669d0",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Does writing through MAP_PRIVATE update the underlying file?",
+      "answer": "No. It provides a private copy-on-write mapping; writes are not propagated to the file. MAP_SHARED has different semantics. Neither name removes the need for synchronization.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux mmap.2 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man2/mmap.2.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-a14afe181a0d",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "A mapped file is truncated while a process reads a page beyond the new end. What failure is possible?",
+      "answer": "The access can raise SIGBUS. A valid virtual mapping does not ensure the backing file still supplies the requested page. Coordinate file lifetime and size changes.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux mmap.2 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man2/mmap.2.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-fb88138ad8b7",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Why can touching a newly mapped page cause a page fault without any disk I/O?",
+      "answer": "Demand-zero allocation, copy-on-write or other minor faults can be resolved without reading storage. A page fault is an address-translation/protection event, not synonymous with disk access.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux mmap.2 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man2/mmap.2.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-0a08786a6947",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "An edge-triggered epoll server reads only part of a socket buffer and stalls. Why?",
+      "answer": "Use nonblocking I/O and drain available data until EAGAIN. An unread buffer may not produce the new edge on which the application is waiting.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux epoll.7 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man7/epoll.7.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-4818130bc26d",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Does an epoll readiness event guarantee the next read cannot block?",
+      "answer": "Do not rely on that guarantee. Another consumer or a state change can consume readiness; nonblocking descriptors let the operation return EAGAIN instead of unexpectedly blocking.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux epoll.7 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man7/epoll.7.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-559d52142172",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "After an EPOLLONESHOT event, why does a socket stop producing notifications?",
+      "answer": "The descriptor must be rearmed with EPOLL_CTL_MOD. Coordinate rearming with the worker and current readiness to avoid losing progress or concurrent handling.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux epoll.7 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man7/epoll.7.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-d12c6f0eca6a",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "If ten ordinary SIGUSR1 signals arrive while blocked, must the handler run ten times?",
+      "answer": "No. Standard signals do not queue separate instances; multiple pending occurrences can coalesce. Real-time signals provide queueing semantics with limits.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux signal.7 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man7/signal.7.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-ce7558ae164e",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Can different threads block different signals while sharing the same handler?",
+      "answer": "Yes. Signal disposition is process-wide, while each thread has its own signal mask. Distinguish process-directed from thread-directed delivery.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux signal.7 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man7/signal.7.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-87823a59375e",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Why can an uncontended mutex avoid a system call?",
+      "answer": "A userspace atomic fast path can acquire it. A futex-based implementation enters the kernel when it needs to wait or wake; a futex is not itself the complete mutex protocol.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux futex.2 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man2/futex.2.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-df5b05755d43",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "How does futex waiting avoid sleeping after the condition already changed?",
+      "answer": "The wait operation atomically compares the futex value with the expected value and blocks only if it still matches. The surrounding condition protocol must still recheck predicates.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux futex.2 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man2/futex.2.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-94219db4ce86",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Does a futex wake transfer ownership of a userspace lock?",
+      "answer": "No. Waking makes waiters eligible to run. They must retry the protocol and acquire ownership; a wake does not prove the predicate is now true.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux futex.2 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man2/futex.2.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-c71a25994d6e",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "A read requests 4096 bytes and returns 37. Is that necessarily an error?",
+      "answer": "No. Short reads are valid. Process those 37 bytes and continue according to the framing contract; distinguish a zero result and a negative error result.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux read.2 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man2/read.2.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-56d89315f03a",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "How should a read loop handle EINTR without duplicating already processed bytes?",
+      "answer": "If read returns -1 with EINTR, retry according to cancellation policy. If it returns a positive byte count, consume that count and advance the destination/remaining count.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux read.2 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man2/read.2.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-dbc39bc11c27",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Is reading zero bytes a reliable test for EOF?",
+      "answer": "No. A request with count zero normally returns zero without establishing end-of-file. Use a positive requested count and interpret results for the descriptor type.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux read.2 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man2/read.2.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-98ae10ce7347",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "A process deletes a large log, but free disk space does not increase. What could retain it?",
+      "answer": "An open file descriptor can retain the unlinked file. Storage is reclaimed after the final link and final open reference are gone; inspect processes retaining deleted files.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux unlink.2 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man2/unlink.2.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-4deb2eb141a2",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Can another process continue reading an already open file after its pathname is unlinked?",
+      "answer": "Yes. Removing the directory entry does not invalidate existing open references. New opens by the removed path fail unless a new file is created there.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux unlink.2 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man2/unlink.2.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-b1167598c333",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Does kill(pid, 0) prove a child has not exited? How should child completion be checked?",
+      "answer": "No. Existence and permissions are not a child-reaping protocol, and zombies may still exist. Use waitpid or waitid; WNOHANG can check without blocking.",
+      "area": "Linux & OS",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question.",
+      "references": [
+        {
+          "title": "Linux wait.2 manual · technical background",
+          "url": "https://man7.org/linux/man-pages/man2/wait.2.html"
+        }
+      ]
+    },
+    {
+      "id": "practice-38e06871cba7",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "C11 quiz: sizeof side effects. Predict the output or identify why no portable output exists.",
+      "answer": "For this non-VLA operand, sizeof does not evaluate x++.",
+      "area": "C & C++",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question. C11 rules apply; the snippet is original, not a recovered company quiz.",
+      "code": "#include <stdio.h>\n#include <stddef.h>\n#include <limits.h>\n#include <string.h>\nint main(void) { int x=3; printf(\"%zu %d\\n\", sizeof(x++)/sizeof(int), x); return 0; }\n",
+      "expectedOutput": "1 3\n",
+      "quizKind": "defined"
+    },
+    {
+      "id": "practice-284a38afa22f",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "C11 quiz: array decay at a function boundary. Predict the output or identify why no portable output exists.",
+      "answer": "An array parameter declaration is adjusted to a pointer parameter.",
+      "area": "C & C++",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question. C11 rules apply; the snippet is original, not a recovered company quiz.",
+      "code": "#include <stdio.h>\n#include <stddef.h>\n#include <limits.h>\n#include <string.h>\nstatic size_t f(int a[10]) { return sizeof(a)==sizeof(int *); }\nint main(void) { int a[10]; printf(\"%zu\\n\",f(a)); }\n",
+      "expectedOutput": "1\n",
+      "quizKind": "defined"
+    },
+    {
+      "id": "practice-7b123579b2b4",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "C11 quiz: short-circuit side effects. Predict the output or identify why no portable output exists.",
+      "answer": "The false left operand suppresses evaluation of the right operand.",
+      "area": "C & C++",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question. C11 rules apply; the snippet is original, not a recovered company quiz.",
+      "code": "#include <stdio.h>\n#include <stddef.h>\n#include <limits.h>\n#include <string.h>\nint main(void) { int x=0; int r=x && ++x; printf(\"%d %d\\n\",r,x); return 0; }\n",
+      "expectedOutput": "0 0\n",
+      "quizKind": "defined"
+    },
+    {
+      "id": "practice-ebc8d750d630",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "C11 quiz: comma operator sequencing. Predict the output or identify why no portable output exists.",
+      "answer": "The comma operator sequences the left operand before the right.",
+      "area": "C & C++",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question. C11 rules apply; the snippet is original, not a recovered company quiz.",
+      "code": "#include <stdio.h>\n#include <stddef.h>\n#include <limits.h>\n#include <string.h>\nint main(void) { int x=1; int y=(x++,x+2); printf(\"%d %d\\n\",x,y); return 0; }\n",
+      "expectedOutput": "2 4\n",
+      "quizKind": "defined"
+    },
+    {
+      "id": "practice-ddcb55ae686e",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "C11 quiz: unsigned subtraction. Predict the output or identify why no portable output exists.",
+      "answer": "Unsigned arithmetic wraps modulo one more than the maximum.",
+      "area": "C & C++",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question. C11 rules apply; the snippet is original, not a recovered company quiz.",
+      "code": "#include <stdio.h>\n#include <stddef.h>\n#include <limits.h>\n#include <string.h>\nint main(void) { unsigned x=0; printf(\"%d\\n\", x-1u==UINT_MAX); return 0; }\n",
+      "expectedOutput": "1\n",
+      "quizKind": "defined"
+    },
+    {
+      "id": "practice-f170d6dcdd64",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "C11 quiz: partial array initialization. Predict the output or identify why no portable output exists.",
+      "answer": "The remaining array elements are initialized to zero.",
+      "area": "C & C++",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question. C11 rules apply; the snippet is original, not a recovered company quiz.",
+      "code": "#include <stdio.h>\n#include <stddef.h>\n#include <limits.h>\n#include <string.h>\nint main(void) { int a[4]={7}; printf(\"%d %d\\n\",a[0],a[3]); return 0; }\n",
+      "expectedOutput": "7 0\n",
+      "quizKind": "defined"
+    },
+    {
+      "id": "practice-ad239a81f291",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "C11 quiz: a string terminator in sizeof. Predict the output or identify why no portable output exists.",
+      "answer": "sizeof includes the terminator; strlen counts preceding characters.",
+      "area": "C & C++",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question. C11 rules apply; the snippet is original, not a recovered company quiz.",
+      "code": "#include <stdio.h>\n#include <stddef.h>\n#include <limits.h>\n#include <string.h>\nint main(void) { char s[]=\"abc\"; printf(\"%zu %zu\\n\",sizeof s,strlen(s)); return 0; }\n",
+      "expectedOutput": "4 3\n",
+      "quizKind": "defined"
+    },
+    {
+      "id": "practice-18cb063e6b52",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "C11 quiz: pointer to a whole array. Predict the output or identify why no portable output exists.",
+      "answer": "p points to an array; pointer subtraction counts arrays.",
+      "area": "C & C++",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question. C11 rules apply; the snippet is original, not a recovered company quiz.",
+      "code": "#include <stdio.h>\n#include <stddef.h>\n#include <limits.h>\n#include <string.h>\nint main(void) { int a[3]={4,5,6}; int (*p)[3]=&a; printf(\"%d %td\\n\",(*p)[1],(p+1)-p); return 0; }\n",
+      "expectedOutput": "5 1\n",
+      "quizKind": "defined"
+    },
+    {
+      "id": "practice-f082ef20878a",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "C11 quiz: independent static state. Predict the output or identify why no portable output exists.",
+      "answer": "The static local retains its value between calls.",
+      "area": "C & C++",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question. C11 rules apply; the snippet is original, not a recovered company quiz.",
+      "code": "#include <stdio.h>\n#include <stddef.h>\n#include <limits.h>\n#include <string.h>\nstatic int next(void){static int n; return ++n;}\nint main(void){int a=next();int b=next();printf(\"%d %d\\n\",a,b);}\n",
+      "expectedOutput": "1 2\n",
+      "quizKind": "defined"
+    },
+    {
+      "id": "practice-57f6984879e6",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "C11 quiz: macro precedence. Predict the output or identify why no portable output exists.",
+      "answer": "ADD expands without parentheses to 2*3+4.",
+      "area": "C & C++",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question. C11 rules apply; the snippet is original, not a recovered company quiz.",
+      "code": "#include <stdio.h>\n#include <stddef.h>\n#include <limits.h>\n#include <string.h>\n#define ADD(a,b) a+b\nint main(void) { int r=2*ADD(3,4); printf(\"%d\\n\",r); return 0; }\n",
+      "expectedOutput": "10\n",
+      "quizKind": "defined"
+    },
+    {
+      "id": "practice-077e3627e62a",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "C11 quiz: dangling else binding. Predict the output or identify why no portable output exists.",
+      "answer": "The else binds to the nearest unmatched if.",
+      "area": "C & C++",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question. C11 rules apply; the snippet is original, not a recovered company quiz.",
+      "code": "#include <stdio.h>\n#include <stddef.h>\n#include <limits.h>\n#include <string.h>\nint main(void) { int x=1,y=0,z=9; if(x) if(y) z=1; else z=2; printf(\"%d\\n\",z); return 0; }\n",
+      "expectedOutput": "2\n",
+      "quizKind": "defined"
+    },
+    {
+      "id": "practice-0e2c48319ebc",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "C11 quiz: designated initializer indices. Predict the output or identify why no portable output exists.",
+      "answer": "Initialization continues after the explicit index; other elements become zero.",
+      "area": "C & C++",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question. C11 rules apply; the snippet is original, not a recovered company quiz.",
+      "code": "#include <stdio.h>\n#include <stddef.h>\n#include <limits.h>\n#include <string.h>\nint main(void) { int a[5]={[3]=8,9}; printf(\"%d %d %d\\n\",a[0],a[3],a[4]); return 0; }\n",
+      "expectedOutput": "0 8 9\n",
+      "quizKind": "defined"
+    },
+    {
+      "id": "practice-9c394109d0db",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "C11 quiz: unsequenced function arguments. Predict the output or identify why no portable output exists.",
+      "answer": "Undefined behavior in C11: the two modifications are unsequenced.",
+      "area": "C & C++",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question. C11 rules apply; the snippet is original, not a recovered company quiz.",
+      "code": "#include <stdio.h>\n#include <stddef.h>\n#include <limits.h>\n#include <string.h>\nint main(void) { int i=1; printf(\"%d %d\\n\",i++,i++); return 0; }\n",
+      "quizKind": "undefined"
+    },
+    {
+      "id": "practice-7b46ccd96426",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "C11 quiz: signed integer overflow. Predict the output or identify why no portable output exists.",
+      "answer": "Undefined behavior: signed overflow has no portable wraparound result.",
+      "area": "C & C++",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question. C11 rules apply; the snippet is original, not a recovered company quiz.",
+      "code": "#include <stdio.h>\n#include <stddef.h>\n#include <limits.h>\n#include <string.h>\nint main(void) { int x=INT_MAX; printf(\"%d\\n\",x+1); return 0; }\n",
+      "quizKind": "undefined"
+    },
+    {
+      "id": "practice-dbbf455e31ff",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "C11 quiz: modifying a string literal. Predict the output or identify why no portable output exists.",
+      "answer": "Undefined behavior: a string literal must not be modified.",
+      "area": "C & C++",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question. C11 rules apply; the snippet is original, not a recovered company quiz.",
+      "code": "#include <stdio.h>\n#include <stddef.h>\n#include <limits.h>\n#include <string.h>\nint main(void) { char *s=\"abc\"; s[0]='A'; puts(s); return 0; }\n",
+      "quizKind": "undefined"
+    },
+    {
+      "id": "practice-463b4a6677d8",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "C11 quiz: one-past pointer dereference. Predict the output or identify why no portable output exists.",
+      "answer": "Forming the one-past pointer is valid; dereferencing it is undefined.",
+      "area": "C & C++",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "practiceKind": "Original potential interview exercise; not a claim that Qualcomm or Chelsio asked this question. C11 rules apply; the snippet is original, not a recovered company quiz.",
+      "code": "#include <stdio.h>\n#include <stddef.h>\n#include <limits.h>\n#include <string.h>\nint main(void) { int a[2]={1,2}; int *p=a+2; printf(\"%d\\n\",*p); return 0; }\n",
+      "quizKind": "undefined"
+    },
+    {
+      "id": "online-6c9dbc5368b2",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Find the length of a cycle in a singly linked list.",
+      "answer": "Use Floyd detection. From a meeting point, walk once around the cycle counting steps until returning there. No meeting means length zero. O(n) time, O(1) extra space.",
+      "area": "DSA & programming",
+      "sources": [
+        {
+          "sourceId": "R007",
+          "location": "Qualcomm/Online reports/Associate Software Engineer off-campus — date unspecified; article updated July 2025"
+        }
+      ],
+      "practiceKind": "Paraphrased unofficial candidate report; explanation and any clarified assumptions are editorial.",
+      "references": [
+        {
+          "title": "Candidate interview account",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-associate-software-engineer-off-campus/"
+        }
+      ]
+    },
+    {
+      "id": "online-2401adff5560",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Return the kth node from the end of a singly linked list using two approaches.",
+      "answer": "Define k as one-based and reject k<=0. Either count length then advance length-k steps, or keep two pointers k nodes apart. Detect k greater than length; both take O(n) time.",
+      "area": "DSA & programming",
+      "sources": [
+        {
+          "sourceId": "R007",
+          "location": "Qualcomm/Online reports/Associate Software Engineer off-campus — date unspecified; article updated July 2025"
+        }
+      ],
+      "practiceKind": "Paraphrased unofficial candidate report; explanation and any clarified assumptions are editorial.",
+      "references": [
+        {
+          "title": "Candidate interview account",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-associate-software-engineer-off-campus/"
+        }
+      ]
+    },
+    {
+      "id": "online-2f261e4219f5",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Implement a hash table and explain collision handling.",
+      "answer": "Choose chaining or open addressing; specify key equality, capacity and load factor. Expected lookup is O(1) under suitable hashing, not a worst-case guarantee. Test collisions, duplicate keys, deletion and resizing.",
+      "area": "DSA & programming",
+      "sources": [
+        {
+          "sourceId": "R007",
+          "location": "Qualcomm/Online reports/Associate Software Engineer off-campus — date unspecified; article updated July 2025"
+        }
+      ],
+      "practiceKind": "Paraphrased unofficial candidate report; explanation and any clarified assumptions are editorial.",
+      "references": [
+        {
+          "title": "Candidate interview account",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-associate-software-engineer-off-campus/"
+        }
+      ]
+    },
+    {
+      "id": "online-08ca9ef1b567",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Print the left view of a binary tree.",
+      "answer": "Use level-order traversal and output the first node at each level, enqueuing left before right. Alternatively traverse left first and record the first node at each depth. O(n) time.",
+      "area": "DSA & programming",
+      "sources": [
+        {
+          "sourceId": "R008",
+          "location": "Qualcomm/Online reports/Experienced Associate Software Engineer — Hyderabad F2F January 7 2017; article updated July 2025"
+        }
+      ],
+      "practiceKind": "Paraphrased unofficial candidate report; explanation and any clarified assumptions are editorial.",
+      "references": [
+        {
+          "title": "Candidate interview account",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-set-8-experienced/"
+        }
+      ]
+    },
+    {
+      "id": "online-1ddf60f60e59",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Find the edge distance between two nodes in a binary tree.",
+      "answer": "Use identities or unique keys. Find the lowest common ancestor, then sum its distances to both targets. Verify both exist. A general tree gives O(n) work for a single query.",
+      "area": "DSA & programming",
+      "sources": [
+        {
+          "sourceId": "R008",
+          "location": "Qualcomm/Online reports/Experienced Associate Software Engineer — Hyderabad F2F January 7 2017; article updated July 2025"
+        }
+      ],
+      "practiceKind": "Paraphrased unofficial candidate report; explanation and any clarified assumptions are editorial.",
+      "references": [
+        {
+          "title": "Candidate interview account",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-set-8-experienced/"
+        }
+      ]
+    },
+    {
+      "id": "online-f2dee7ff5e72",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Count substring matches and then whole-word matches in the same paragraph.",
+      "answer": "Specify case, overlapping matches and word boundaries. A sliding scan handles substrings; whole-word matching additionally checks both boundaries. Punctuation rules need an explicit definition.",
+      "area": "DSA & programming",
+      "sources": [
+        {
+          "sourceId": "R008",
+          "location": "Qualcomm/Online reports/Experienced Associate Software Engineer — Hyderabad F2F January 7 2017; article updated July 2025"
+        }
+      ],
+      "practiceKind": "Paraphrased unofficial candidate report; explanation and any clarified assumptions are editorial.",
+      "references": [
+        {
+          "title": "Candidate interview account",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-set-8-experienced/"
+        }
+      ]
+    },
+    {
+      "id": "online-d702abe5ae3c",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Implement a stack using a linked list.",
+      "answer": "Push and pop at the head in O(1); define empty-pop behavior and ownership. In C, handle allocation failure before changing head and release each removed node.",
+      "area": "DSA & programming",
+      "sources": [
+        {
+          "sourceId": "R009",
+          "location": "Qualcomm/Online reports/Off-campus referral / Hyderabad — interview date unspecified; article updated July 2025"
+        }
+      ],
+      "practiceKind": "Paraphrased unofficial candidate report; explanation and any clarified assumptions are editorial.",
+      "references": [
+        {
+          "title": "Candidate interview account",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-off-campus/"
+        }
+      ]
+    },
+    {
+      "id": "online-352faa4588c9",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Perform level-order traversal of a binary tree.",
+      "answer": "Use a FIFO queue. Each node is enqueued once and its children are enqueued after it is removed. O(n) time and O(w) auxiliary space for maximum width w.",
+      "area": "DSA & programming",
+      "sources": [
+        {
+          "sourceId": "R009",
+          "location": "Qualcomm/Online reports/Off-campus referral / Hyderabad — interview date unspecified; article updated July 2025"
+        }
+      ],
+      "practiceKind": "Paraphrased unofficial candidate report; explanation and any clarified assumptions are editorial.",
+      "references": [
+        {
+          "title": "Candidate interview account",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-off-campus/"
+        }
+      ]
+    },
+    {
+      "id": "online-1fda2eae0086",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Delete a node from a tree after clarifying what type of tree is intended.",
+      "answer": "The account leaves the tree contract unclear. For an editorial BST variant, handle zero, one or two children; use an inorder successor or predecessor for two. Specify duplicate-key policy and free only the removed allocation.",
+      "area": "DSA & programming",
+      "sources": [
+        {
+          "sourceId": "R009",
+          "location": "Qualcomm/Online reports/Off-campus referral / Hyderabad — interview date unspecified; article updated July 2025"
+        }
+      ],
+      "practiceKind": "Paraphrased unofficial candidate report; explanation and any clarified assumptions are editorial.",
+      "references": [
+        {
+          "title": "Candidate interview account",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-off-campus/"
+        }
+      ]
+    },
+    {
+      "id": "online-344093348720",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Count ways to climb ten stairs using steps of one or two.",
+      "answer": "Set ways(0)=1 and ways(1)=1, then sum the previous two counts. The answer for ten is 89. An iterative solution uses O(n) time and O(1) extra space.",
+      "area": "DSA & programming",
+      "sources": [
+        {
+          "sourceId": "R010",
+          "location": "Qualcomm/Online reports/Software Engineer on-campus / BITS Goa — interview August 3 2026; article updated August 22 2026"
+        }
+      ],
+      "practiceKind": "Paraphrased unofficial candidate report; explanation and any clarified assumptions are editorial.",
+      "references": [
+        {
+          "title": "Candidate interview account",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-software-engineer-role-on-campus-placements/"
+        }
+      ]
+    },
+    {
+      "id": "online-7964abf1941a",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Reverse word order in a mutable sentence in place, with single spaces between words.",
+      "answer": "Reverse all characters, then reverse each word span. For example, one two three becomes three two one. This uses O(n) time and O(1) extra space; clarify leading/trailing spaces and encoding.",
+      "area": "DSA & programming",
+      "sources": [
+        {
+          "sourceId": "R010",
+          "location": "Qualcomm/Online reports/Software Engineer on-campus / BITS Goa — interview August 3 2026; article updated August 22 2026"
+        }
+      ],
+      "practiceKind": "Paraphrased unofficial candidate report; explanation and any clarified assumptions are editorial.",
+      "references": [
+        {
+          "title": "Candidate interview account",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-software-engineer-role-on-campus-placements/"
+        }
+      ]
+    },
+    {
+      "id": "online-508a7b526c0a",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Remove a detected cycle from a singly linked list.",
+      "answer": "Find the cycle entry, walk within the cycle to its predecessor and set that predecessor next to NULL. This handles a cycle beginning at the head and a self-loop without discarding nodes.",
+      "area": "DSA & programming",
+      "sources": [
+        {
+          "sourceId": "R010",
+          "location": "Qualcomm/Online reports/Software Engineer on-campus / BITS Goa — interview August 3 2026; article updated August 22 2026"
+        }
+      ],
+      "practiceKind": "Paraphrased unofficial candidate report; explanation and any clarified assumptions are editorial.",
+      "references": [
+        {
+          "title": "Candidate interview account",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-software-engineer-role-on-campus-placements/"
+        }
+      ]
     }
   ]
 }

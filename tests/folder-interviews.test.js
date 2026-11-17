@@ -90,7 +90,7 @@ test('the published dam implementation matches all linked examples and brute-for
 
 test('external exercises have the common tag and remain separately filterable', () => {
   const questions = filterFolderQuestions({ company: 'qualcomm', status: 'practice' });
-  assert.equal(questions.length, 74);
+  assert.equal(questions.length, 126);
   assert.ok(questions.every((q) => q.tag === 'External practice' && q.answer && q.sources.length));
   assert.ok(!questions.some((q) => q.status === 'reported'));
 });
@@ -98,11 +98,44 @@ test('external exercises have the common tag and remain separately filterable', 
 
 test('online reports have explicit provenance and a separate statement filter', () => {
   const entries = filterFolderQuestions({ company: 'qualcomm', status: 'reported-online' });
-  assert.equal(entries.length, 31);
+  assert.equal(entries.length, 43);
   for (const q of entries) {
     assert.equal(q.tag, 'External practice');
     assert.ok(q.references.length && q.answer);
     assert.equal(folderSourceById.get(q.sources[0].sourceId).kind, 'candidate-report');
   }
   assert.equal(filterFolderQuestions({ company: 'chelsio', status: 'reported-online' }).length, 0);
+});
+
+test('new C11 quizzes distinguish defined output from undefined behavior', async () => {
+  const { mkdtempSync, writeFileSync, rmSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const { spawnSync } = await import('node:child_process');
+  const quizzes = folderQuestions.filter((q) => q.quizKind);
+  assert.equal(quizzes.length, 16);
+  const dir = mkdtempSync(join(tmpdir(), 'leetcards-c-quizzes-'));
+  try {
+    for (const q of quizzes) {
+      assert.equal(q.area, 'C & C++');
+      assert.equal(q.tag, 'External practice');
+      if (q.quizKind === 'undefined') {
+        assert.equal(q.expectedOutput, undefined);
+        assert.match(q.answer, /undefined/i);
+        continue; // An observed output cannot validate undefined behavior.
+      }
+      const source = join(dir, 'quiz.c');
+      const binary = join(dir, 'quiz');
+      writeFileSync(source, q.code);
+      for (const optimization of ['-O0', '-O2']) {
+        const compile = spawnSync('cc', ['-std=c11', '-pedantic-errors', optimization, source, '-o', binary], { encoding: 'utf8', timeout: 10000 });
+        assert.equal(compile.status, 0, `${q.prompt}: ${compile.stderr}`);
+        const run = spawnSync(binary, [], { encoding: 'utf8', timeout: 2000 });
+        assert.equal(run.status, 0, q.prompt);
+        assert.equal(run.stdout, q.expectedOutput, `${q.prompt}: ${optimization}`);
+      }
+    }
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
 });
