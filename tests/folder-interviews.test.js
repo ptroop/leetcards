@@ -75,6 +75,9 @@ test('topic matching does not mistake literals, swapping or context switching fo
   assert.equal(find('Explain context switching in detail.').topicId, 'os-scheduling');
   assert.equal(find('What is swapping? Explain with details').topicId, 'qualcomm-linux-kernel-vm');
   assert.equal(find('Compare returning a pointer to a string literal with a pointer to a local array.').area, 'C & C++');
+  const switches = folderQuestions.find((q) => q.prompt.startsWith('Three switches control three incandescent bulbs'));
+  assert.equal(switches.area, 'Logic & puzzles');
+  assert.notEqual(switches.topicId, 'net-ethernet');
 });
 
 test('the published dam implementation matches all linked examples and brute-force height bounds', async () => {
@@ -87,7 +90,19 @@ test('the published dam implementation matches all linked examples and brute-for
 
 test('external exercises have the common tag and remain separately filterable', () => {
   const questions = filterFolderQuestions({ company: 'qualcomm', status: 'practice' });
-  assert.ok(questions.length >= 50);
+  assert.equal(questions.length, 74);
   assert.ok(questions.every((q) => q.tag === 'External practice' && q.answer && q.sources.length));
   assert.ok(!questions.some((q) => q.status === 'reported'));
+});
+
+
+test('online reports have explicit provenance and a separate statement filter', () => {
+  const entries = filterFolderQuestions({ company: 'qualcomm', status: 'reported-online' });
+  assert.equal(entries.length, 31);
+  for (const q of entries) {
+    assert.equal(q.tag, 'External practice');
+    assert.ok(q.references.length && q.answer);
+    assert.equal(folderSourceById.get(q.sources[0].sourceId).kind, 'candidate-report');
+  }
+  assert.equal(filterFolderQuestions({ company: 'chelsio', status: 'reported-online' }).length, 0);
 });

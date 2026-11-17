@@ -11,21 +11,40 @@
 
 - 64 extracted source files: 20 Chelsio files and 44 Qualcomm files, including the nested archive and its four screenshots.
 - 49 text extractions; OCR and visual review across 73 document images, photographs and rendered PDF pages.
-- 733 prompt entries: 411 Chelsio, 320 Qualcomm, and two user recollections shown in both company views.
+- Original folder import: 733 prompt entries: 411 Chelsio, 320 Qualcomm, and two user recollections shown in both company views.
 - Counts include reworded variants and topic recollections; they are not a count of unique coding problems or company interview frequency.
-- 90 entries contain standalone reasoning/answers. The remaining entries link to related existing lessons; this is not a claim that all 733 entries have new standalone answers.
+- The original import has 90 entries containing standalone reasoning/answers. The remaining entries link to related existing lessons; this is not a claim that all 733 entries have new standalone answers.
 - 138 entries preserve topic-only recollections. 22 entries explicitly flag missing or conflicting constraints. Empty or vague reports were not expanded into invented exact questions.
 - The original source PDFs, documents and photographs are retained locally and are not included in the web app.
 
 ## Verification
 
 - 156 tests: 155 passed, one pre-existing local-folder check skipped because `Downloads/qual` is absent. The new ledger was separately checked against all 64 actual source-file hashes.
-- All seven new tests passed: provenance completeness, nested-source mapping, filtering, company isolation, routes, image code preservation, topic matching and Dam Design correctness.
+- Initial seven focused checks passed: provenance completeness, nested-source mapping, filtering, company isolation, routes, image code preservation, topic matching and Dam Design correctness.
 - Dam Design checked against all three post examples and 972 independent small-gap height bounds, plus empty/single/unsorted/duplicate-position cases.
 - Authored curriculum, writing-quality and code-quality audits passed.
 - Focused DSA C/C++ verification and 10 college DSA C compilation checks passed.
 - Production build and PWA cache generation passed. Vite reports a large main JavaScript bundle; the site already bundles a substantial curriculum.
 - Desktop and 390px mobile layouts inspected in the ChatGPT browser; camera search, company switching, Dam Design rendering, table and code overflow verified.
+
+
+## External research expansion — November 17, 2026
+
+- Current bank: **838 prompts**, comprising the original 733, **74 potential interview exercises**, and **31 online candidate-reported Qualcomm prompts**. All 105 outside additions show the common **External practice** badge.
+- Potential exercises cover C ownership, concurrency, Linux/processes, DMA/drivers, TCP/network debugging, UART/I2C/SPI, DSA, puzzles, camera testing and project discussion. Each has editorial reasoning; related variants are not counted as independent interview evidence.
+- Candidate-reported questions have their own **Reported online · candidate account** statement filter, source link, role context and explicit unofficial status. Article update dates are distinguished from interview dates.
+- Six detailed Qualcomm candidate accounts were used. These establish reported topics and prompts, not verified company policy or future-question probabilities:
+  - [Senior Engineer / Hyderabad Linux Kernel team](https://www.reddit.com/r/qualcomm/comments/1x9u673/qualcomm_interview_experience_for_senior_engineer/)
+  - [SDE off-campus 2023 / Chennai](https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-sde-off-campus-2023/)
+  - [Associate Engineer](https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-associate-engineer-full-time/)
+  - [Embedded Software Engineer / June 2025](https://leetcode.com/discuss/post/6831002/)
+  - [Embedded SW application developer / C and RTOS](https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-set-2/)
+  - [Embedded System / architecture and puzzles](https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-embedded-system/)
+- [Chelsio candidate accounts](https://www.glassdoor.com/Interview/Chelsio-Communications-Interview-Questions-E261022.htm) were checked for C pointers, allocation, synchronization and networking coverage. Their incomplete bitwise/rotation descriptions were not presented as reconstructed exact questions.
+- Technical background for new scenarios includes the [Linux NAPI API](https://docs.kernel.org/networking/napi.html), [memory barriers](https://docs.kernel.org/core-api/wrappers/memory-barriers.html), [I2C protocol](https://docs.kernel.org/i2c/i2c-protocol.html), [SPI API](https://docs.kernel.org/driver-api/spi.html), and [TCP RFC 9293](https://www.rfc-editor.org/rfc/rfc9293.html). These documents support concepts; they do not claim the exercises appeared in interviews.
+- The original 64-file inventory remains intact. Online sources have no fabricated local-file hashes. Shared practice and user recollections are available in both company source filters.
+
+- Latest research pass: all 17 test files pass; all nine focused folder-bank tests pass, including all 31 online reports and 74 practice entries. Production build and PWA cache generation pass. The large-bundle warning remains.
 
 ## Files accounted for
 

@@ -111,7 +111,7 @@ const topicRules = [
 ];
 
 export const folderQuestions = bank.questions.map((question) => {
-  const rule = topicRules.find(([pattern]) => new RegExp(`\\b(?:${pattern.source})(?:s|es|ed|ing|tion|ization|isation)?\\b`, 'i').test(question.prompt));
+  const rule = topicRules.find(([pattern, area]) => (!question.area || question.area === area) && new RegExp(`\\b(?:${pattern.source})(?:s|es|ed|ing|tion|ization|isation)?\\b`, 'i').test(question.prompt));
   return { ...question, area: question.area ?? rule?.[1] ?? 'Other reported topics', topicId: rule?.[2] ?? null };
 });
 

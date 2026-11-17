@@ -1663,8 +1663,119 @@
         "practice-7556c7dada8b",
         "practice-08432ae8ad26",
         "practice-65bde50e42d0",
-        "practice-b0b5470066a8"
+        "practice-b0b5470066a8",
+        "practice-593b9685bf76",
+        "practice-33ece67e050e",
+        "practice-1e02c82a59e2",
+        "practice-5bb70d7cc9a5",
+        "practice-928f2157d683",
+        "practice-d454ce63637e",
+        "practice-06ec23bec748",
+        "practice-e466faef8ff0",
+        "practice-59aff9dd1295",
+        "practice-ce110fd75e0b",
+        "practice-37901c990290",
+        "practice-5d250ed59071",
+        "practice-9a7b94face06",
+        "practice-25e9f700ba2a",
+        "practice-88090a73cfbd",
+        "practice-1617667e2e18",
+        "practice-a7db3087d6b4",
+        "practice-a07de1730991",
+        "practice-26f1195b6a66",
+        "practice-ad436e821035"
       ]
+    },
+    {
+      "id": "R001",
+      "path": "Qualcomm/Online reports/Qualcomm Senior Engineer / Linux Kernel team / Hyderabad — firsthand community account; exact interview date unavailable",
+      "url": "https://www.reddit.com/r/qualcomm/comments/1x9u673/qualcomm_interview_experience_for_senior_engineer/",
+      "kind": "candidate-report",
+      "sha256": null,
+      "questionIds": [
+        "online-ad7c76244646",
+        "online-a1534a87f396",
+        "online-3feb3e2a1b78",
+        "online-d88977714539",
+        "online-e64fa28bb39f",
+        "online-76756b016d59",
+        "online-36cc0a90ee05",
+        "online-efbec3dc3b7a"
+      ],
+      "visualCount": 0
+    },
+    {
+      "id": "R002",
+      "path": "Qualcomm/Online reports/Qualcomm SDE off-campus 2023 — Chennai; candidate account, article updated July 2025",
+      "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-sde-off-campus-2023/",
+      "kind": "candidate-report",
+      "sha256": null,
+      "questionIds": [
+        "online-c2ca0e749ceb",
+        "online-74485e9b77a9",
+        "online-4c822bca7a5a",
+        "online-790128eabe5b",
+        "online-cfda63c48401",
+        "online-6eb93531ecf5"
+      ],
+      "visualCount": 0
+    },
+    {
+      "id": "R003",
+      "path": "Qualcomm/Online reports/Qualcomm Associate Engineer — candidate account; article updated July 2025",
+      "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-associate-engineer-full-time/",
+      "kind": "candidate-report",
+      "sha256": null,
+      "questionIds": [
+        "online-9ce0ec078f93",
+        "online-8eed446ab76c"
+      ],
+      "visualCount": 0
+    },
+    {
+      "id": "R004",
+      "path": "Qualcomm/Online reports/Qualcomm Embedded Software Engineer — firsthand account published June 10 2025",
+      "url": "https://leetcode.com/discuss/post/6831002/",
+      "kind": "candidate-report",
+      "sha256": null,
+      "questionIds": [
+        "online-a6ae932f3a01",
+        "online-41b04cfc2d01",
+        "online-eb007dcba0c4"
+      ],
+      "visualCount": 0
+    },
+    {
+      "id": "R005",
+      "path": "Qualcomm/Online reports/Embedded SW application developer, C/RTOS/telecom — candidate account; interview date unspecified, article updated July 2025",
+      "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-set-2/",
+      "kind": "candidate-report",
+      "sha256": null,
+      "questionIds": [
+        "online-aff60ea0cd21",
+        "online-ec829f4a2cb9",
+        "online-9e801976e345",
+        "online-efec781ee7cb",
+        "online-c99344c11148",
+        "online-56cc80152082",
+        "online-3085ed3a819e",
+        "online-c2ad7e6f6092"
+      ],
+      "visualCount": 0
+    },
+    {
+      "id": "R006",
+      "path": "Qualcomm/Online reports/Embedded System — candidate account; interview date unspecified, article updated July 2025",
+      "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-embedded-system/",
+      "kind": "candidate-report",
+      "sha256": null,
+      "questionIds": [
+        "online-48c28d5bdca9",
+        "online-c5c50befca8f",
+        "online-e3e21d85a8c1",
+        "online-114d41575eb7"
+      ],
+      "visualCount": 0
     }
   ],
   "questions": [
@@ -12315,6 +12426,1062 @@
         }
       ],
       "tag": "External practice"
+    },
+    {
+      "id": "online-ad7c76244646",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Explain the MMU’s role in translating a process address to memory.",
+      "answer": "Trace virtual page number, TLB lookup, page-table walk, permissions and physical offset. Distinguish a TLB miss from a page fault; the latter may require OS handling.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R001",
+          "location": "Qualcomm Senior Engineer / Linux Kernel team / Hyderabad — firsthand community account; exact interview date unavailable"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm Senior Engineer / Linux Kernel team / Hyderabad — firsthand community account; exact interview date unavailable",
+          "url": "https://www.reddit.com/r/qualcomm/comments/1x9u673/qualcomm_interview_experience_for_senior_engineer/"
+        }
+      ]
+    },
+    {
+      "id": "online-a1534a87f396",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Why are both a TLB and a data cache needed?",
+      "answer": "The TLB caches translations and permissions; the data cache stores memory contents. A translation hit says nothing about whether requested data is cached.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R001",
+          "location": "Qualcomm Senior Engineer / Linux Kernel team / Hyderabad — firsthand community account; exact interview date unavailable"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm Senior Engineer / Linux Kernel team / Hyderabad — firsthand community account; exact interview date unavailable",
+          "url": "https://www.reddit.com/r/qualcomm/comments/1x9u673/qualcomm_interview_experience_for_senior_engineer/"
+        }
+      ]
+    },
+    {
+      "id": "online-3feb3e2a1b78",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Implement multiplication without * while handling signed inputs and overflow.",
+      "answer": "State the integer width and overflow policy. Accumulate using unsigned magnitudes with checked additions and bounded shifts; avoid negating the most negative signed value. Test zero, opposite signs, minimum value and overflow boundaries.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R001",
+          "location": "Qualcomm Senior Engineer / Linux Kernel team / Hyderabad — firsthand community account; exact interview date unavailable"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm Senior Engineer / Linux Kernel team / Hyderabad — firsthand community account; exact interview date unavailable",
+          "url": "https://www.reddit.com/r/qualcomm/comments/1x9u673/qualcomm_interview_experience_for_senior_engineer/"
+        }
+      ]
+    },
+    {
+      "id": "online-d88977714539",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Explain static across two C translation units and a shared header.",
+      "answer": "A file-scope static object has internal linkage; defining it in a header creates separate objects in including translation units. Use one external definition plus an extern declaration for shared state. Function-local static controls lifetime, not cross-file linkage.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R001",
+          "location": "Qualcomm Senior Engineer / Linux Kernel team / Hyderabad — firsthand community account; exact interview date unavailable"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm Senior Engineer / Linux Kernel team / Hyderabad — firsthand community account; exact interview date unavailable",
+          "url": "https://www.reddit.com/r/qualcomm/comments/1x9u673/qualcomm_interview_experience_for_senior_engineer/"
+        }
+      ]
+    },
+    {
+      "id": "online-e64fa28bb39f",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Convert byte order without bitwise operators.",
+      "answer": "For a value-based conversion, use division and remainder by 256 to extract bytes and checked multiplication/addition to rebuild a fixed-width unsigned value. Clarify numeric transformation versus changing an object’s byte representation.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R001",
+          "location": "Qualcomm Senior Engineer / Linux Kernel team / Hyderabad — firsthand community account; exact interview date unavailable"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm Senior Engineer / Linux Kernel team / Hyderabad — firsthand community account; exact interview date unavailable",
+          "url": "https://www.reddit.com/r/qualcomm/comments/1x9u673/qualcomm_interview_experience_for_senior_engineer/"
+        }
+      ]
+    },
+    {
+      "id": "online-76756b016d59",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Rotate an array left and right by a supplied distance.",
+      "answer": "Normalize the distance only when length is nonzero. Use reversals or cycles for in-place rotation, define negative distances, and test zero length, distance zero and distances larger than the length.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R001",
+          "location": "Qualcomm Senior Engineer / Linux Kernel team / Hyderabad — firsthand community account; exact interview date unavailable"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm Senior Engineer / Linux Kernel team / Hyderabad — firsthand community account; exact interview date unavailable",
+          "url": "https://www.reddit.com/r/qualcomm/comments/1x9u673/qualcomm_interview_experience_for_senior_engineer/"
+        }
+      ]
+    },
+    {
+      "id": "online-36cc0a90ee05",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Choose sorting algorithms for linked lists versus arrays.",
+      "answer": "Merge sort fits sequential linked-list access and can relink nodes. Array algorithms can exploit random access and locality. Discuss stability, worst-case time, allocation and input characteristics before choosing.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R001",
+          "location": "Qualcomm Senior Engineer / Linux Kernel team / Hyderabad — firsthand community account; exact interview date unavailable"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm Senior Engineer / Linux Kernel team / Hyderabad — firsthand community account; exact interview date unavailable",
+          "url": "https://www.reddit.com/r/qualcomm/comments/1x9u673/qualcomm_interview_experience_for_senior_engineer/"
+        }
+      ]
+    },
+    {
+      "id": "online-efbec3dc3b7a",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Compare a binary semaphore with a mutex, including ownership.",
+      "answer": "A mutex protects a critical section and has owner semantics; a semaphore represents availability or signaling and can be posted by another participant. A count of one does not make their contracts interchangeable.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R001",
+          "location": "Qualcomm Senior Engineer / Linux Kernel team / Hyderabad — firsthand community account; exact interview date unavailable"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm Senior Engineer / Linux Kernel team / Hyderabad — firsthand community account; exact interview date unavailable",
+          "url": "https://www.reddit.com/r/qualcomm/comments/1x9u673/qualcomm_interview_experience_for_senior_engineer/"
+        }
+      ]
+    },
+    {
+      "id": "online-c2ca0e749ceb",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Trace what happens from a keyboard event to a userspace program reading input.",
+      "answer": "Trace the device/controller event, interrupt or polling path, input subsystem, buffering and consumer wakeup. The exact path depends on device and terminal setup; avoid assuming every key directly invokes the target process.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R002",
+          "location": "Qualcomm SDE off-campus 2023 — Chennai; candidate account, article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm SDE off-campus 2023 — Chennai; candidate account, article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-sde-off-campus-2023/"
+        }
+      ]
+    },
+    {
+      "id": "online-74485e9b77a9",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Design a representation for twelve bits of data.",
+      "answer": "Clarify arithmetic range, wire format and packing. A uint16_t with a validated 0..4095 range is simple for a value; C bit-field layout is not a portable network format. Specify serialization separately.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R002",
+          "location": "Qualcomm SDE off-campus 2023 — Chennai; candidate account, article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm SDE off-campus 2023 — Chennai; candidate account, article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-sde-off-campus-2023/"
+        }
+      ]
+    },
+    {
+      "id": "online-4c822bca7a5a",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Find the minimum number of railway platforms from arrival and departure times.",
+      "answer": "Sort events and sweep occupancy. Define whether a departure at the same timestamp frees a platform before an arrival; that tie rule changes the result. Check malformed intervals and trains spanning midnight.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R002",
+          "location": "Qualcomm SDE off-campus 2023 — Chennai; candidate account, article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm SDE off-campus 2023 — Chennai; candidate account, article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-sde-off-campus-2023/"
+        }
+      ]
+    },
+    {
+      "id": "online-790128eabe5b",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Divide an integer by four without the division operator.",
+      "answer": "For unsigned integers, a right shift by two gives floor division. Signed negative division needs an explicit rounding contract; do not assume a signed right shift has C division’s truncation-toward-zero behavior on every targeted language version.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R002",
+          "location": "Qualcomm SDE off-campus 2023 — Chennai; candidate account, article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm SDE off-campus 2023 — Chennai; candidate account, article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-sde-off-campus-2023/"
+        }
+      ]
+    },
+    {
+      "id": "online-cfda63c48401",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Implement merge sort and defend its time and space costs.",
+      "answer": "Split, recursively sort and merge while preserving ordering. Explain O(n log n) time, auxiliary-storage policy and stable tie handling. For linked lists, split with slow/fast pointers and merge by relinking.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R002",
+          "location": "Qualcomm SDE off-campus 2023 — Chennai; candidate account, article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm SDE off-campus 2023 — Chennai; candidate account, article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-sde-off-campus-2023/"
+        }
+      ]
+    },
+    {
+      "id": "online-6eb93531ecf5",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Reverse a doubly linked list and preserve both link directions.",
+      "answer": "Swap next and previous for every node while saving traversal progress; then exchange head and tail. Test empty, singleton and multi-node lists and validate forward and reverse traversal.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R002",
+          "location": "Qualcomm SDE off-campus 2023 — Chennai; candidate account, article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm SDE off-campus 2023 — Chennai; candidate account, article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-sde-off-campus-2023/"
+        }
+      ]
+    },
+    {
+      "id": "online-9ce0ec078f93",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "After toggling each of one hundred doors on multiples of each pass number, which doors stay open?",
+      "answer": "A door toggles once per divisor. Divisors pair except at perfect squares, so square-numbered doors toggle an odd number of times. Starting closed, ten doors remain open: 1² through 10².",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R003",
+          "location": "Qualcomm Associate Engineer — candidate account; article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm Associate Engineer — candidate account; article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-associate-engineer-full-time/"
+        }
+      ]
+    },
+    {
+      "id": "online-8eed446ab76c",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Solve N-Queens using backtracking and explain pruning.",
+      "answer": "Place one queen per row. Track occupied columns and both diagonal families; reject conflicts before recursion. Undo each placement on return and clarify whether to return one solution, all solutions or a count.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R003",
+          "location": "Qualcomm Associate Engineer — candidate account; article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm Associate Engineer — candidate account; article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-associate-engineer-full-time/"
+        }
+      ]
+    },
+    {
+      "id": "online-a6ae932f3a01",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Explain virtual versus physical memory in a multithreaded process.",
+      "answer": "Threads normally share the process address space while having distinct execution state and stacks. Virtual addresses are translated and permission-checked; distinct virtual mappings can refer to shared physical storage.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R004",
+          "location": "Qualcomm Embedded Software Engineer — firsthand account published June 10 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm Embedded Software Engineer — firsthand account published June 10 2025",
+          "url": "https://leetcode.com/discuss/post/6831002/"
+        }
+      ]
+    },
+    {
+      "id": "online-41b04cfc2d01",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Explain mutex implementation concepts and the role of atomic operations.",
+      "answer": "An uncontended path may claim ownership atomically; contention requires a defined wait/wakeup protocol. Avoid claiming a spin loop alone provides fairness or efficient blocking, and distinguish a userspace mutex from kernel lock implementations.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R004",
+          "location": "Qualcomm Embedded Software Engineer — firsthand account published June 10 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm Embedded Software Engineer — firsthand account published June 10 2025",
+          "url": "https://leetcode.com/discuss/post/6831002/"
+        }
+      ]
+    },
+    {
+      "id": "online-eb007dcba0c4",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Explain how you would implement a stack and a queue under the stated constraints.",
+      "answer": "Define capacity, overflow/underflow behavior and ownership before choosing representation. A stack is LIFO; a queue is FIFO. Specify whether thread safety is required rather than adding unsynchronized shared state.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial and not a prediction of future questions. The explanation is editorial.",
+      "sources": [
+        {
+          "sourceId": "R004",
+          "location": "Qualcomm Embedded Software Engineer — firsthand account published June 10 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Qualcomm Embedded Software Engineer — firsthand account published June 10 2025",
+          "url": "https://leetcode.com/discuss/post/6831002/"
+        }
+      ]
+    },
+    {
+      "id": "online-aff60ea0cd21",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Design a timer service that invokes callbacks for multiple clients.",
+      "answer": "Define one-shot/periodic semantics, a monotonic clock and cancellation ownership. A min-heap orders deadlines; dispatch callbacks outside the timer lock. Test equal deadlines, cancellation during execution and callback reentrancy.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial. Constraints and explanation below are editorial additions where the account is incomplete.",
+      "sources": [
+        {
+          "sourceId": "R005",
+          "location": "Qualcomm/Online reports/Embedded SW application developer, C/RTOS/telecom — candidate account; interview date unspecified, article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Candidate account · telecom — candidate account; interview date unspecified, article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-set-2/"
+        }
+      ]
+    },
+    {
+      "id": "online-ec829f4a2cb9",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Delete a node from a circular singly linked list given only that node.",
+      "answer": "Clarify whether node identity must be preserved. Copy-next changes identity; otherwise walk the ring to find the predecessor. Handle a singleton and any external head pointer explicitly.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial. Constraints and explanation below are editorial additions where the account is incomplete.",
+      "sources": [
+        {
+          "sourceId": "R005",
+          "location": "Qualcomm/Online reports/Embedded SW application developer, C/RTOS/telecom — candidate account; interview date unspecified, article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Candidate account · telecom — candidate account; interview date unspecified, article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-set-2/"
+        }
+      ]
+    },
+    {
+      "id": "online-9e801976e345",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Convert a singly linked list into a binary search tree.",
+      "answer": "Ask whether the list is sorted and whether balance is required. For a sorted list, count nodes and build by in-order consumption in O(n) time, O(log n) recursion for a balanced tree. An unsorted list needs a different contract.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial. Constraints and explanation below are editorial additions where the account is incomplete.",
+      "sources": [
+        {
+          "sourceId": "R005",
+          "location": "Qualcomm/Online reports/Embedded SW application developer, C/RTOS/telecom — candidate account; interview date unspecified, article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Candidate account · telecom — candidate account; interview date unspecified, article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-set-2/"
+        }
+      ]
+    },
+    {
+      "id": "online-efec781ee7cb",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Implement substring search and discuss a worst-case efficient alternative.",
+      "answer": "Specify empty-pattern behavior. A naive scan can take O(nm); KMP preprocesses a prefix table and searches in O(n+m). Test overlapping prefixes and a pattern longer than the text.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial. Constraints and explanation below are editorial additions where the account is incomplete.",
+      "sources": [
+        {
+          "sourceId": "R005",
+          "location": "Qualcomm/Online reports/Embedded SW application developer, C/RTOS/telecom — candidate account; interview date unspecified, article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Candidate account · telecom — candidate account; interview date unspecified, article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-set-2/"
+        }
+      ]
+    },
+    {
+      "id": "online-c99344c11148",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "How would you use a software watchdog to detect lost progress?",
+      "answer": "Choose evidence of useful progress, rather than a timer that pets itself. Consider a stalled worker while other tasks remain alive, expiry logging, recovery policy and false alarms from legitimate long work.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial. Constraints and explanation below are editorial additions where the account is incomplete.",
+      "sources": [
+        {
+          "sourceId": "R005",
+          "location": "Qualcomm/Online reports/Embedded SW application developer, C/RTOS/telecom — candidate account; interview date unspecified, article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Candidate account · telecom — candidate account; interview date unspecified, article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-set-2/"
+        }
+      ]
+    },
+    {
+      "id": "online-56cc80152082",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "What happens when a C program requests more register variables than hardware registers?",
+      "answer": "The register storage-class specifier is a hint, not a hardware reservation. The compiler chooses placement and may spill values to memory; address-taking restrictions depend on the C language version.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial. Constraints and explanation below are editorial additions where the account is incomplete.",
+      "sources": [
+        {
+          "sourceId": "R005",
+          "location": "Qualcomm/Online reports/Embedded SW application developer, C/RTOS/telecom — candidate account; interview date unspecified, article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Candidate account · telecom — candidate account; interview date unspecified, article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-set-2/"
+        }
+      ]
+    },
+    {
+      "id": "online-3085ed3a819e",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Distinguish a library call from a system call using a concrete execution path.",
+      "answer": "A library function may compute entirely in userspace, wrap a system call, or buffer several operations. Explain the privilege transition only when the kernel is entered; avoid assuming every library call does so.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial. Constraints and explanation below are editorial additions where the account is incomplete.",
+      "sources": [
+        {
+          "sourceId": "R005",
+          "location": "Qualcomm/Online reports/Embedded SW application developer, C/RTOS/telecom — candidate account; interview date unspecified, article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Candidate account · telecom — candidate account; interview date unspecified, article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-set-2/"
+        }
+      ]
+    },
+    {
+      "id": "online-c2ad7e6f6092",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Implement memory copying and explain the contract for overlapping ranges.",
+      "answer": "memcpy requires non-overlapping regions. If overlap must be supported, implement memmove semantics, choosing a safe direction or temporary storage. Clarify valid ranges and avoid undefined pointer comparisons between unrelated objects.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial. Constraints and explanation below are editorial additions where the account is incomplete.",
+      "sources": [
+        {
+          "sourceId": "R005",
+          "location": "Qualcomm/Online reports/Embedded SW application developer, C/RTOS/telecom — candidate account; interview date unspecified, article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Candidate account · telecom — candidate account; interview date unspecified, article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-set-2/"
+        }
+      ]
+    },
+    {
+      "id": "online-48c28d5bdca9",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Count all axis-aligned squares on a chessboard, grouped by size.",
+      "answer": "For an n by n board, k by k squares number (n-k+1)^2. Summing gives n(n+1)(2n+1)/6; n=8 gives 204. This counts squares, not all rectangles.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial. Constraints and explanation below are editorial additions where the account is incomplete.",
+      "sources": [
+        {
+          "sourceId": "R006",
+          "location": "Qualcomm/Online reports/Embedded System — candidate account; interview date unspecified, article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Candidate account · Embedded System — candidate account; interview date unspecified, article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-embedded-system/"
+        }
+      ]
+    },
+    {
+      "id": "online-c5c50befca8f",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Solve a torch-and-bridge crossing puzzle after obtaining the crossing times and rules.",
+      "answer": "The account names the puzzle without parameters. For an editorial variant with times 1,2,5,10 and capacity two, a valid optimal schedule totals 17: 1+2 across, 1 back, 5+10 across, 2 back, 1+2 across.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial. Constraints and explanation below are editorial additions where the account is incomplete.",
+      "sources": [
+        {
+          "sourceId": "R006",
+          "location": "Qualcomm/Online reports/Embedded System — candidate account; interview date unspecified, article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Candidate account · Embedded System — candidate account; interview date unspecified, article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-embedded-system/"
+        }
+      ]
+    },
+    {
+      "id": "online-e3e21d85a8c1",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Find a missing value in an unsorted collection drawn from 1 through n.",
+      "answer": "First establish exactly one missing value, no duplicates, and n-1 inputs. XOR avoids sum overflow under that contract. Duplicate or out-of-range inputs require validation or a different approach.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial. Constraints and explanation below are editorial additions where the account is incomplete.",
+      "sources": [
+        {
+          "sourceId": "R006",
+          "location": "Qualcomm/Online reports/Embedded System — candidate account; interview date unspecified, article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Candidate account · Embedded System — candidate account; interview date unspecified, article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-embedded-system/"
+        }
+      ]
+    },
+    {
+      "id": "online-114d41575eb7",
+      "company": "qualcomm",
+      "status": "reported-online",
+      "tag": "External practice",
+      "prompt": "Choose a data structure for repeated searches in unsorted input.",
+      "answer": "Compare a hash table for expected constant-time lookup with O(n) extra space, a balanced search tree for worst-case logarithmic operations, and sorting plus binary search for static data. Include update and ordering requirements.",
+      "practiceKind": "Paraphrased candidate recollection; unofficial. Constraints and explanation below are editorial additions where the account is incomplete.",
+      "sources": [
+        {
+          "sourceId": "R006",
+          "location": "Qualcomm/Online reports/Embedded System — candidate account; interview date unspecified, article updated July 2025"
+        }
+      ],
+      "references": [
+        {
+          "title": "Candidate account · Embedded System — candidate account; interview date unspecified, article updated July 2025",
+          "url": "https://www.geeksforgeeks.org/interview-experiences/qualcomm-interview-experience-for-embedded-system/"
+        }
+      ]
+    },
+    {
+      "id": "practice-593b9685bf76",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Chelsio: packet throughput collapses under an interrupt storm. How would you investigate NAPI behavior?",
+      "answer": "Measure interrupt rate, poll work, CPU saturation and drops. Explain interrupt-to-poll transition and budget fairness before changing coalescing or ring sizes.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [
+        {
+          "title": "Linux NAPI documentation · technical background",
+          "url": "https://docs.kernel.org/networking/napi.html"
+        }
+      ],
+      "area": "Networking"
+    },
+    {
+      "id": "practice-33ece67e050e",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "A NAPI poll consumes its entire receive budget. When may it complete?",
+      "answer": "If more work remains, return the budget and stay scheduled. At the exact-budget boundary, distinguish drained from pending work and follow the documented completion/return convention.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [
+        {
+          "title": "Linux NAPI documentation · technical background",
+          "url": "https://docs.kernel.org/networking/napi.html"
+        }
+      ],
+      "area": "Linux & OS"
+    },
+    {
+      "id": "practice-1e02c82a59e2",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "A driver calls napi_disable twice during error cleanup and hangs. What ownership rule was violated?",
+      "answer": "NAPI control operations are not idempotent. Track enable state and unwind each successfully acquired state once. Avoid treating repeated disable as harmless cleanup.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [
+        {
+          "title": "Linux NAPI documentation · technical background",
+          "url": "https://docs.kernel.org/networking/napi.html"
+        }
+      ],
+      "area": "Linux & OS"
+    },
+    {
+      "id": "practice-5bb70d7cc9a5",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "A producer writes a payload then a ready flag. Why might another CPU observe stale payload data?",
+      "answer": "Specify the memory model. In kernel code, pair suitable release/acquire operations so payload publication is ordered; a compiler barrier alone does not provide inter-CPU ordering.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [
+        {
+          "title": "Linux kernel memory barriers · technical background",
+          "url": "https://docs.kernel.org/core-api/wrappers/memory-barriers.html"
+        }
+      ],
+      "area": "Linux & OS"
+    },
+    {
+      "id": "practice-928f2157d683",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Can a memory barrier repair two threads racing on a shared counter?",
+      "answer": "Ordering alone does not make a read-modify-write atomic. Use the appropriate atomic operation or lock; userspace C data races require language-level synchronization.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [
+        {
+          "title": "Linux kernel memory barriers · technical background",
+          "url": "https://docs.kernel.org/core-api/wrappers/memory-barriers.html"
+        }
+      ],
+      "area": "Linux & OS"
+    },
+    {
+      "id": "practice-d454ce63637e",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Why can a driver fail on a weakly ordered CPU after working on another architecture?",
+      "answer": "Audit ordering assumptions, accessors and ownership transitions. Separate compiler reordering, CPU ordering and device completion; apply the platform API rather than relying on observed machine behavior.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [
+        {
+          "title": "Linux kernel memory barriers · technical background",
+          "url": "https://docs.kernel.org/core-api/wrappers/memory-barriers.html"
+        }
+      ],
+      "area": "Linux & OS"
+    },
+    {
+      "id": "practice-06ec23bec748",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "An I2C register read works only when no STOP separates address selection and reading. What transaction is needed?",
+      "answer": "Use the device-required combined transfer with a repeated START. Check the peripheral datasheet and adapter capability rather than assuming separate send and receive operations are equivalent.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [
+        {
+          "title": "Linux I2C transaction protocol · technical background",
+          "url": "https://docs.kernel.org/i2c/i2c-protocol.html"
+        }
+      ],
+      "area": "Embedded & electronics"
+    },
+    {
+      "id": "practice-e466faef8ff0",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "An I2C peripheral NACKs its address. What would you capture before changing software?",
+      "answer": "Capture START, address, direction and ACK/NACK with a logic analyzer. Check the address convention, power/reset and bus electrical state; distinguish address rejection from a later data NACK.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [
+        {
+          "title": "Linux I2C transaction protocol · technical background",
+          "url": "https://docs.kernel.org/i2c/i2c-protocol.html"
+        }
+      ],
+      "area": "Embedded & electronics"
+    },
+    {
+      "id": "practice-59aff9dd1295",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "An SPI peripheral returns nonsense at every clock rate. How would you isolate a mode mismatch?",
+      "answer": "Compare the datasheet timing with captured clock polarity, sample edge, chip-select timing, bit order and word width. Confirm controller configuration before blaming throughput.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [
+        {
+          "title": "Linux SPI driver API · technical background",
+          "url": "https://docs.kernel.org/driver-api/spi.html"
+        }
+      ],
+      "area": "Embedded & electronics"
+    },
+    {
+      "id": "practice-ce110fd75e0b",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "A Linux SPI transfer completes after its submitting function returns. Which objects must remain alive?",
+      "answer": "The message, transfer descriptors and data buffers need valid lifetimes through completion. Define who owns and releases each object, including error and cancellation paths.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [
+        {
+          "title": "Linux SPI driver API · technical background",
+          "url": "https://docs.kernel.org/driver-api/spi.html"
+        }
+      ],
+      "area": "Embedded & electronics"
+    },
+    {
+      "id": "practice-37901c990290",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "A TCP peer closes its sending direction. Can the local endpoint still transmit?",
+      "answer": "TCP supports independent directions. A received FIN ends that byte stream; pending local transmission can continue until the application closes or an error intervenes.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [
+        {
+          "title": "TCP specification · RFC 9293 · technical background",
+          "url": "https://www.rfc-editor.org/rfc/rfc9293.html"
+        }
+      ],
+      "area": "Networking"
+    },
+    {
+      "id": "practice-5d250ed59071",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "What distinguishes TCP flow control from congestion control during a throughput investigation?",
+      "answer": "The receive window limits what the peer can buffer; congestion control limits outstanding network load. Inspect both before attributing slow transfer to bandwidth alone.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [
+        {
+          "title": "TCP specification · RFC 9293 · technical background",
+          "url": "https://www.rfc-editor.org/rfc/rfc9293.html"
+        }
+      ],
+      "area": "Networking"
+    },
+    {
+      "id": "practice-9a7b94face06",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Why does TCP use sequence numbers even though IP already delivers packets?",
+      "answer": "Sequence numbers support ordered byte-stream reconstruction and detection of missing or duplicate data. IP does not promise reliable ordered delivery.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [
+        {
+          "title": "TCP specification · RFC 9293 · technical background",
+          "url": "https://www.rfc-editor.org/rfc/rfc9293.html"
+        }
+      ],
+      "area": "Networking"
+    },
+    {
+      "id": "practice-25e9f700ba2a",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "A peripheral register has write-one-to-clear status bits. Why can read-modify-write clear the wrong event?",
+      "answer": "Reading set status bits and writing them back as ones can acknowledge unrelated events. Follow the register specification, construct the intended clear mask and test simultaneous events.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [],
+      "area": "Embedded & electronics"
+    },
+    {
+      "id": "practice-88090a73cfbd",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "A millisecond tick counter wraps. Design a timeout check and state its valid interval range.",
+      "answer": "Use defined unsigned arithmetic and a documented modular comparison policy. For ordering with a signed-difference convention, restrict intervals to less than half the counter range; test across wraparound.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [],
+      "area": "Embedded & electronics"
+    },
+    {
+      "id": "practice-1617667e2e18",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Design camera tests for frame timestamps when exposure settings change during recording.",
+      "answer": "Specify acceptable ordering, discontinuity and latency. Record frames across setting transitions; assert monotonic timestamps, allowed dropped-frame behavior and metadata consistency under the product contract.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [],
+      "area": "Testing & debugging"
+    },
+    {
+      "id": "practice-a7db3087d6b4",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "A terminal looks frozen after a program stops reading input. How would you distinguish flow control, deadlock and blocking?",
+      "answer": "Inspect process state and wait location, terminal flow-control settings and input/output behavior. Use a bounded reproducible test and a separate session for observation; do not infer the cause from an unresponsive screen alone.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [],
+      "area": "Testing & debugging"
+    },
+    {
+      "id": "practice-a07de1730991",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Nine coins contain one heavier counterfeit. Can two balance weighings identify it?",
+      "answer": "Weigh three against three. The heavier group, or the unweighed group after balance, contains the coin. Weigh one against one from that group. There are three outcomes per weighing and nine candidates.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [],
+      "area": "Logic & puzzles"
+    },
+    {
+      "id": "practice-26f1195b6a66",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "A bag has red and blue socks. How many blind draws guarantee a matching-color pair?",
+      "answer": "With at least three socks available and only two colors, three draws suffice by the pigeonhole principle. Two can differ. State whether matching means color only before solving.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [],
+      "area": "Logic & puzzles"
+    },
+    {
+      "id": "practice-ad436e821035",
+      "company": "shared",
+      "status": "practice",
+      "tag": "External practice",
+      "prompt": "Three switches control three incandescent bulbs in another room. You may enter once. How can you map them?",
+      "answer": "Under the assumptions that heat remains detectable and inspection is safe: heat one bulb then switch it off; leave another on. The lit, warm-unlit and cold-unlit bulbs identify the switches. This fails without the heat assumption.",
+      "practiceKind": "Original potential interview exercise, not a claim that a company asked it. Linked documents provide technical background.",
+      "sources": [
+        {
+          "sourceId": "P001",
+          "location": "External practice derived from technical references"
+        }
+      ],
+      "references": [],
+      "area": "Logic & puzzles"
     }
   ]
 }
