@@ -15,6 +15,9 @@ export function parseRoute(hash = '') {
   if (parts[0] === 'lesson' && parts.length === 2) {
     return { view: 'lesson', topicId: clean(parts[1]) };
   }
+  if (parts.length === 1 && ['chelsio', 'qualcomm-questions'].includes(parts[0])) {
+    return { view: 'folder-questions', company: parts[0] === 'chelsio' ? 'chelsio' : 'qualcomm' };
+  }
   if (parts[0] === 'questions' && parts.length === 1) {
     return { view: 'questions' };
   }
@@ -49,3 +52,5 @@ export const routeForAptitude = () => '#/aptitude';
 export const routeForQuestion = (questionId) => `#/question/${encodeURIComponent(questionId)}`;
 export const routeForProblem = (slug) => `#/problem/${encodeURIComponent(slug)}`;
 export const routeForCapture = (payload) => `#/capture/${encodeURIComponent(payload)}`;
+
+export const routeForFolderQuestions = (company) => company === 'chelsio' ? '#/chelsio' : '#/qualcomm-questions';

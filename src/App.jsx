@@ -1,3 +1,4 @@
+import FolderInterviewView from './components/FolderInterviewView.jsx';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import AptitudeView from './components/AptitudeView.jsx';
 import BrandMark from './components/BrandMark.jsx';
@@ -17,6 +18,7 @@ import { questionById } from './data/questionCards.js';
 import { getLeetcodeProblemLesson } from './data/leetcodeProblemLessons.js';
 import {
   parseRoute,
+  routeForFolderQuestions,
   routeForAptitude,
   routeForCommonInterviews,
   routeForCategory,
@@ -131,11 +133,14 @@ export default function App() {
   const openQuestions = () => navigate(routeForQuestions());
   const openInternetPrep = () => navigate(routeForInternet());
   const openCommonInterviews = () => navigate(routeForCommonInterviews());
+  const openFolderQuestions = (company) => navigate(routeForFolderQuestions(company));
   const openAptitude = () => navigate(routeForAptitude());
   const openQualcommPrep = () => navigate(routeForCategory('qualcomm-prep'));
   const openLibrary = () => navigate(routeForLibrary());
 
-  const pageContext = selectedTopic
+  const pageContext = route.view === 'folder-questions'
+    ? `${route.company === 'chelsio' ? 'Chelsio' : 'Qualcomm'} / folder questions`
+    : selectedTopic
     ? `${selectedTopic.sectionTitle} / ${selectedTopic.title}`
     : selectedQuestion
       ? `Questions / ${selectedQuestion.title}`
@@ -164,6 +169,7 @@ export default function App() {
         </button>
         <p className="topbar-context">{pageContext}</p>
         <div className="topbar-actions">
+          <button type="button" onClick={() => openFolderQuestions('chelsio')} aria-current={route.view === 'folder-questions' && route.company === 'chelsio' ? 'page' : undefined}>Chelsio</button>
           {route.view !== 'aptitude' && (
             <button type="button" onClick={openAptitude} aria-label="Aptitude and puzzles">
               <span className="topbar-label-wide">Aptitude & puzzles</span>
@@ -204,6 +210,9 @@ export default function App() {
       </header>
 
       <div className="page-surface" inert={glossaryOpen ? true : undefined} aria-hidden={glossaryOpen}>
+        {route.view === 'folder-questions' && (
+          <FolderInterviewView key={route.company} company={route.company} onBack={openLibrary} onOpenLesson={openLesson} onOpenCompany={openFolderQuestions} />
+        )}
         {route.view === 'library' && (
           <LibraryView
             curriculum={curriculum}
@@ -220,6 +229,7 @@ export default function App() {
         {route.view === 'category' && selectedCategory && (
           <CategoryView
             category={selectedCategory}
+            onOpenFolderQuestions={() => openFolderQuestions('qualcomm')}
             query={query}
             results={results}
             onQueryChange={setQuery}
@@ -310,6 +320,7 @@ export default function App() {
         )}
 
         {route.view !== 'library'
+          && route.view !== 'folder-questions'
           && route.view !== 'internet'
           && route.view !== 'common-interviews'
           && route.view !== 'aptitude'
